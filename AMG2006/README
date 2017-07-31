@@ -1,0 +1,7 @@
+To build, depending upon your host, type one of the following
+
+	make platform=vesta
+	make platform=cetus
+	make platform=theta
+
+OMPT support for OpenMP is available with gnu, clang, and intel compilers but not IBM's xl compilers

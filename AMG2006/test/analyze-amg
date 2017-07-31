@@ -1,0 +1,14 @@
+#!/bin/bash
+#BATCH --job-name=amg
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --exclusive
+#SBATCH --exclusive
+#SBATCH --time=00:1:00
+#SBATCH --export=ALL
+#SBATCH --partition=interactive
+
+module load OpenMPI
+
+hpcstruct amg2006 
+srun -n 4 hpcprof-mpi -S amg2006.hpcstruct hpctoolkit-all-measurements

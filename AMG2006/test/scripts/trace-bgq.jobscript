@@ -1,0 +1,14 @@
+PROJECT=Tools
+TIME=00:15:00
+PC=16
+MODE=c1
+NODES=16
+
+EVENT=WALLCLOCK@1000,OMP_IDLE
+ENVS="OMP_NUM_THREADS=8:HPCRUN_EVENT_LIST=${EVENT}:HPCRUN_TRACE=1"
+
+EXEC=./amg2006
+ARGS="-P  2 4 2  -r  8 8 8"
+
+echo qsub -A ${PROJECT} -env --env ${ENVS} -n ${NODES} --mode ${MODE} --proccount ${PC} --cwd `pwd` -t ${TIME} ${EXEC} ${ARGS}
+qsub -A ${PROJECT} -env --env ${ENVS} -n ${NODES} --mode ${MODE} --proccount ${PC} --cwd `pwd` -t ${TIME} ${EXEC} ${ARGS}

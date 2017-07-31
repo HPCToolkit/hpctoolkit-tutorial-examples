@@ -1,0 +1,64 @@
+#!/bin/sh
+
+#------------------------------------------------------------------------------------
+# a shell script to submit an hpcprof-mpi job to analyze a medium-sized performance 
+# database on theta.
+#------------------------------------------------------------------------------------
+usage()
+{
+echo "usage: theta-analyze <project> <executable-name> <measurements-jobid>"
+exit -1
+}
+if test -z "$1"; then
+usage
+fi
+
+PROJ=$1
+
+if test -z "$2"; then
+usage
+fi
+
+APPL=$2
+
+if test -z "$3"; then
+usage
+fi
+
+JID=$3
+
+S=${APPL}.hpcstruct
+
+if ! test -f ${S}; then
+  echo no structure file for the application \'${APPL}\'. 
+  echo please create one by running the command \'hpcstruct ${APPL}\'
+  echo aborting analysis.
+  exit -1
+fi
+
+M=hpctoolkit-${APPL}-measurements-${JID}
+
+if ! test -d ${M}; then
+  echo no measurements directory with the expected name \'${M}\'
+  echo aborting analysis.
+  exit -1
+fi
+
+
+cat <<EOF > $$.theta-analyze.jobscript
+#!/bin/sh
+#COBALT -A ${PROJ}
+#COBALT -t 20
+#COBALT -n 16
+
+ranks=32
+HPCT=/projects/Tools/hpctoolkit/pkgs-theta/hpctoolkit/bin
+
+echo ; echo "start:  `date`" ; echo
+ 
+aprun -n \${ranks}  -N 16  --cc none  \${HPCT}/hpcprof-mpi  -S  ${S}  -I  `pwd`/../+  ${M}
+
+echo ; echo "end:  `date`" ; echo
+EOF
+chmod +x $$.theta-analyze.jobscript
+qsub $$.theta-analyze.jobscript
