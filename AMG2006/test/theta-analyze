@@ -50,6 +50,7 @@ cat <<EOF > $$.theta-analyze.jobscript
 #COBALT -A ${PROJ}
 #COBALT -t 20
 #COBALT -n 16
+#COBALT -q training
 
 ranks=32
 HPCT=/projects/Tools/hpctoolkit/pkgs-theta/hpctoolkit/bin
