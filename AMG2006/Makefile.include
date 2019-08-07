@@ -10,24 +10,18 @@ ifndef platform
 failure2:
 	@echo "usage: "
 	@echo "    make platform=theta"
-	@echo "    make platform=vesta" 
-	@echo "    make platform=cetus"
-endif
-
-ifeq ($(platform),vesta)
-CC=mpicc
-platform_lib=vesta
-endif
-
-
-ifeq ($(platform),cetus)
-CC=mpicc
-platform_lib=mira
+	@echo "    make platform=cooley" 
 endif
 
 ifeq ($(platform),theta)
 CC=cc
 platform_lib=theta
+endif
+
+
+ifeq ($(platform),cooley)
+CC=mpicc
+platform_lib=cooley
 endif
 
 
@@ -70,11 +64,12 @@ COMPILER_LDFLAGS =
 
 # Dynamic LLVM OpenMP
 LLVM_OPENMP_LIBDIR=
-OMPT= -Wl,-rpath=$(LLVM_OPENMP_LIBDIR) -L $(LLVM_OPENMP_LIBDIR) -lomp
+# OMPT= -Wl,-rpath=$(LLVM_OPENMP_LIBDIR) -L $(LLVM_OPENMP_LIBDIR) -lomp
 COMPILER_LDFLAGS = $(OMPT)
 
 # Static LLVM OpenMP
-OMPT= -L/projects/Tools/hpctoolkit/pkgs-${platform_lib}/llvm-openmp/lib -lomp
+#OMPT= -L$(OMPT_ROOT)/pkgs-${platform_lib}/llvm-openmp/lib -lomp
+#OMPT= -L/projects/Tools/hpctoolkit/pkgs-${platform_lib}/llvm-openmp/lib -lomp
 COMPILER_LDFLAGS = $(OMPT)
 
 
