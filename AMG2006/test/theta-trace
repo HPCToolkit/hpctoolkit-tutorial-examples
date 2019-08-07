@@ -27,7 +27,7 @@ cat <<EOF > $$.theta-trace.jobscript
 #COBALT -A ${PROJ}
 #COBALT -t 20
 #COBALT -n 16
-#COBALT -q ATPESC2019
+#COBALT -q R.ATPESC2019
 
 DEPTH=64
 RANKS=16
