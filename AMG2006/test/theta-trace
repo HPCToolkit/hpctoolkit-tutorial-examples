@@ -41,12 +41,14 @@ EVENTS=REALTIME@300
 ENVS="-e OMP_NUM_THREADS=32 -e HPCRUN_EVENT_LIST=\${EVENTS} -e HPCRUN_TRACE=1"
 CPU_BINDING=none
 
+HPCRUN="/projects/Tools/hpctoolkit/pkgs-theta/hpctoolkit/bin/hpcrun -e REALTIME@300 -t"
+
 EXEC=./amg2006
 ARGS="-P 2 4 2   -r 8 8 8"
 
 echo ; echo "start:  \`date\`" \; echo
 
-aprun  -n \${RANKS} -N \${RANKS_PER_NODE} -d \${DEPTH} \${ENVS} -cc \${CPU_BINDING} \${EXEC} \${ARGS}
+aprun  -n \${RANKS} -N \${RANKS_PER_NODE} -d \${DEPTH} \${ENVS} -cc \${CPU_BINDING} \${HPCRUN} \${EXEC} \${ARGS}
 
 echo ; echo "end:  \`date\`" ; echo
 EOF

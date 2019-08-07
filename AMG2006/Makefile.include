@@ -62,19 +62,22 @@ COMPILER_LFLAGS = -blpdata -lxlf90 -lxlopt -lxlsmp  -lm
 # None
 COMPILER_LDFLAGS = 
 
+OMPT_ROOT=/projects/Tools/hpctoolkit/pkgs-${platform_lib}/llvm-openmp/lib
+
 # Dynamic LLVM OpenMP
+DYNAMIC=-dynamic
 LLVM_OPENMP_LIBDIR=
-# OMPT= -Wl,-rpath=$(LLVM_OPENMP_LIBDIR) -L $(LLVM_OPENMP_LIBDIR) -lomp
-COMPILER_LDFLAGS = $(OMPT)
+OMPT= -Wl,-rpath=$(OMPT_ROOT) -L $(OMPT_ROOT) -lomp
+# COMPILER_LDFLAGS =  -dynamic 
 
 # Static LLVM OpenMP
 #OMPT= -L$(OMPT_ROOT)/pkgs-${platform_lib}/llvm-openmp/lib -lomp
 #OMPT= -L/projects/Tools/hpctoolkit/pkgs-${platform_lib}/llvm-openmp/lib -lomp
-COMPILER_LDFLAGS = $(OMPT)
 
+COMPILER_LDFLAGS = $(OMPT) $(DYNAMIC)
 
 LIB_LDFLAGS = $(COMPILER_LDFLAGS) -lm
 INCLUDE_LFLAGS = $(OPT_FLAGS) $(OMP_FLAGS) $(LIB_LDFLAGS)
 
 HPCT=/projects/Tools/hpctoolkit/pkgs-${platform_lib}/hpctoolkit/bin
-HPCLINK=$(HPCT)/hpclink
+# HPCLINK=$(HPCT)/hpclink
