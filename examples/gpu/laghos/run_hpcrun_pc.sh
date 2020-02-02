@@ -5,6 +5,7 @@ PC_SAMPLING_DIR=build/cupti_test/cupti-preload/pc_sampling
 LAGHOS_DIR=build/Laghos/cuda
 EXEC=${LAGHOS_DIR}/laghos
 OUT=hpctoolkit-laghos-pc-measurements
+rm -f laghos
 ln -s $EXEC
 time mpirun -np 1 hpcrun -o $OUT -e gpu=nvidia,pc  ${LAGHOS_DIR}/laghos -p 0 -m ${LAGHOS_DIR}/../data/square01_quad.mesh -rs 1 -tf 0.05 -pa
 echo hpcstruct -j 16 laghos ...

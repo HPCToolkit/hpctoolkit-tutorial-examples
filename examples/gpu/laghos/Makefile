@@ -14,4 +14,4 @@ run-pc:
 	sh run_hpcrun_pc.sh
 
 clean:
-	/bin/rm -rf build
+	/bin/rm -rf build laghos
