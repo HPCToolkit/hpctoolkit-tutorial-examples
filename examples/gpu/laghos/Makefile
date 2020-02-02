@@ -1,8 +1,8 @@
 all:
-	echo specify one of the possible targets: 
-	echo \tbuild: build laghos and its supporting code
-	echo \trun:  use hpctoolkit to collect, analyze, and present information about gpu performance 
-	echo \trun-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance 
+	@echo specify one of the possible targets: 
+	@echo "	build: build laghos and its supporting code"
+	@echo "	trun:  use hpctoolkit to collect, analyze, and present information about gpu performance "
+	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 
 build:
 	sh build.sh
