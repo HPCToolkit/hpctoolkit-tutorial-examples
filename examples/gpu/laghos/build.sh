@@ -1,5 +1,7 @@
 #!/bin/bash
 
+date > .build_begin
+
 if [[ -z "$CUDA_HOME" ]] 
 then
     echo CUDA_HOME must be set
@@ -105,4 +107,6 @@ cd ..
 git clone https://github.com/Jokeren/Laghos.git
 cd Laghos/cuda
 make debug NV_ARCH=-arch=sm_70 CUDA_DIR=$CUDA_HOME MPI_HOME=$MPI_HOME -j8
-cd ../..
+cd ../../..
+
+date > .build_end

@@ -22,5 +22,5 @@ clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct laghos
 
 veryclean: clean
-	/bin/rm -rf build
+	/bin/rm -rf build .build_begin .build_end
 
