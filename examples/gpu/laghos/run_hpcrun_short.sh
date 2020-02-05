@@ -22,5 +22,5 @@ echo hpcstruct -j 16 $OUT.m ...
 hpcstruct -j 16 $OUT.m
 
 # combine the measurements with the program structure information
-echo mpirun -n 4  hpcprof-mpi --metric-db no -S laghos.hpcstruct -o $OUT.d $OUT.m
-mpirun -n 4  hpcprof-mpi --metric-db no -S laghos.hpcstruct -o $OUT.d $OUT.m
+echo mpirun -n 4  hpcprof-mpi -S laghos.hpcstruct -o $OUT.d $OUT.m
+mpirun -n 4  hpcprof-mpi -S laghos.hpcstruct -o $OUT.d $OUT.m
