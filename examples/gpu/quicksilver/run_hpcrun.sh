@@ -1,6 +1,13 @@
 EXEC=quicksilver/src/qs
 OUT=hpctoolkit-qs
 
+if [[ -z "`type -p hpcrun`" ]] 
+then
+    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
+    exit
+fi
+
+
 # link the executable in this directory for convenience
 rm -f qs
 ln -s $EXEC
@@ -17,7 +24,7 @@ echo ${STRUCT_QS} ...
 $STRUCT_QS
 
 # compute program structure information for the quicksilver cubins
-STRUCT_CUBIN="hpcstruct --gpucfg yes $OUT.m" 
+STRUCT_CUBIN="hpcstruct --gpucfg no $OUT.m" 
 echo ${STRUCT_CUBIN} ... "(note: no \"-j <n>\" for parallel analysis since the cubin is not large)"
 ${STRUCT_CUBIN}
 

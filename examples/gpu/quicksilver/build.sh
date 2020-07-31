@@ -2,6 +2,17 @@
 
 date > .build_begin
 
+if [[ ! -z "$CUDAPATH" ]] 
+then
+    export CUDA_HOME=$CUDAPATH
+fi
+
+
+if [[ ! -z "$MPI_ROOT" ]] 
+then
+    export MPI_HOME=$MPI_ROOT
+fi
+
 if [[ -z "$CUDA_HOME" ]] 
 then
     echo CUDA_HOME must be set
@@ -11,6 +22,13 @@ fi
 if [[ -z "$MPI_HOME" ]] 
 then
     echo MPI_HOME must be set
+    exit
+fi
+
+
+if [[ -z "`type -p cmake`" ]] 
+then
+    echo cmake version 3.3 or newer was not found in your PATH 
     exit
 fi
 
