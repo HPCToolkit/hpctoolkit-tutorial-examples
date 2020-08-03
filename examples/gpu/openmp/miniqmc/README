@@ -1,0 +1,4 @@
+Due to deficiencies in NVIDIA's nvdisasm in CUDA 10, we recommend using
+CUDA 11 for this example, which highlights HPCToolkit's ability to 
+recover approximate calling contexts and loop nesting structure in 
+optimized GPU code.

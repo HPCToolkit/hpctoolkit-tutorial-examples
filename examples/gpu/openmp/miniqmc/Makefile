@@ -1,0 +1,20 @@
+all:
+	@echo specify one of the possible targets: 
+	@echo "	build: build miniqmc"
+	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
+	@echo "	run: use hpctoolkit to collect, analyze, and present kernel-level information about gpu performance "
+	@echo "	clean: remove performance data"
+	@echo "	veryclean: remove build and performance data"
+
+build:
+	/bin/rm -rf miniqmc
+	time sh build.sh
+
+build-miniqmc:
+	make -C miniqmc/miniqmc-build
+
+run:
+	time sh run_hpcrun.sh
+
+clean:
+	/bin/rm -rf hpctoolkit* *.hpcstruct miniqmc info*.xml
