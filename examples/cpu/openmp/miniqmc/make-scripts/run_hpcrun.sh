@@ -17,9 +17,9 @@ echo ${RUN} ...
 ${RUN}
 
 # compute program structure information for the miniqmc binary
-STRUCT_QS="hpcstruct -j 8 ${EXEC}"
-echo ${STRUCT_QS} ... 
-$STRUCT_QS
+STRUCT="hpcstruct -j 8 ${EXEC}"
+echo ${STRUCT} ... 
+${STRUCT}
 
 # combine the measurements with the program structure information
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
