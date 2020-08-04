@@ -1,7 +1,7 @@
 BINARY=miniqmc
 EXEC=miniqmc/miniqmc-build/bin/${BINARY}
 
-OUT=hpctoolkit-miniqmc-gpu
+OUT=hpctoolkit-miniqmc-gpu-openmp
 
 if [[ -z "`type -p hpcrun`" ]] 
 then
@@ -21,14 +21,14 @@ echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"' ...
 OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
 
 # compute program structure information for the miniqmc binary
-STRUCT_MINI="hpcstruct -j 8 ${EXEC}"
-echo ${STRUCT_MINI} ... 
-$STRUCT_MINI
+STRUCT_CPU="hpcstruct -j 8 ${EXEC}"
+echo ${STRUCT_CPU} ... 
+${STRUCT_CPU}
 
 # compute program structure information for the miniqmc cuda binaries recorded during execution
-STRUCT_CUBIN="hpcstruct -j 8 $OUT.m"
-echo ${STRUCT_CUBIN} ... 
-$STRUCT_CUBIN
+STRUCT_GPU="hpcstruct -j 8 $OUT.m"
+echo ${STRUCT_GPU} ... 
+${STRUCT_GPU}
 
 # combine the measurements with the program structure information
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
