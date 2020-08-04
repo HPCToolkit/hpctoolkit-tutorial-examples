@@ -31,4 +31,4 @@ run:
 	time sh make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs
+	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs .build*
