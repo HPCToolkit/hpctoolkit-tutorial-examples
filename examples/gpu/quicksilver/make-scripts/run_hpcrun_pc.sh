@@ -1,6 +1,6 @@
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
-OUT=hpctoolkit-${BINARY}-pc
+OUT=hpctoolkit-${BINARY}-gpu-cuda-pc
 
 # link the executable in this directory for convenience
 rm -f qs

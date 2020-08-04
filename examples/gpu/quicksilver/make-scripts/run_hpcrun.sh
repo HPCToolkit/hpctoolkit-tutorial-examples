@@ -1,6 +1,6 @@
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
-OUT=hpctoolkit-${BINARY}
+OUT=hpctoolkit-${BINARY}-gpu-cuda
 
 if [[ -z "`type -p hpcrun`" ]] 
 then
