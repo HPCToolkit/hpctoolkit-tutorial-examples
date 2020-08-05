@@ -8,10 +8,11 @@
 ranks=8
 ranks_per_node=2
 
-#specially load this version of hpctoolkit, which has a version of the LLVM OMPT interface
-module load hpctoolkit
+export HPCTOOLKIT_PATH=/soft/perftools/hpctoolkit/spack-2020-08/packages/linux-rhel7-x86_64/gcc-8.2.0/hpctoolkit-2020.08.03-v5hh7hlsrvsqzqtalwk27freiuut2a55/bin
 
-mpirun -f ${COBALT_NODE_FILE} -n $ranks  -ppn $ranks_per_node  \
+export PATH=${HPCTOOLKIT_PATH}:${PATH}
+
+mpirun -f ${COBALT_NODEFILE} -n $ranks  -ppn $ranks_per_node  \
     hpcprof-mpi  \
     	-S amg2006.hpcstruct  \
     	-o hpctoolkit-amg2006.d \

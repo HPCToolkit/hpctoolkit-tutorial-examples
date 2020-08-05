@@ -32,8 +32,13 @@ export OMP_NUM_THREADS="$threads"
 export OMP_WAIT_POLICY=active
 export KMP_AFFINITY=none
 
-#specially load this version of hpctoolkit, which has a version of the LLVM OMPT interface
-module load hpctoolkit
+# module load hpctoolkit
+# export HPCTOOLKIT_PATH=/gpfs/mira-home/johnmc/atpesc2020-cooley/spack-cooley-2020-08/opt/spack/linux-rhel7-x86_64/gcc-8.2.0/hpctoolkit-2020.08.03-v5hh7hlsrvsqzqtalwk27freiuut2a55/bin
 
-mpirun -f ${COBALT_NODE_FILE} -n $ranks  -ppn $ranks_per_node  \
-    hpcrun ${HPCRUN_ARGS} AMG2006/test/amg2006  -P 2 2 2  -r  22 22 22
+export HPCTOOLKIT_PATH=/soft/perftools/hpctoolkit/spack-2020-08/packages/linux-rhel7-x86_64/gcc-8.2.0/hpctoolkit-2020.08.03-v5hh7hlsrvsqzqtalwk27freiuut2a55/bin
+
+export PATH=${HPCTOOLKIT_PATH}:${PATH}
+# export LD_LIBRARY_PATH=/soft/perftools/hpctoolkit/openmp-ompt/lib:$LD_LIBRARY_PATH
+
+mpirun -f ${COBALT_NODEFILE} -n $ranks  -ppn $ranks_per_node  \
+    hpcrun ${HPCRUN_ARGS} AMG2006/test/amg2006  -P 2 2 2  -r  20 20 20
