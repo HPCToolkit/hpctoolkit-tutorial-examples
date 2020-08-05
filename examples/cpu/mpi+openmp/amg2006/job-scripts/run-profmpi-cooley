@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Sample launch script for hpcprof-mpi.  Use hpcprof-mpi (on compute
+# nodes) instead of hpcprof (front-end) for (1) large runs with many
+# procs/threads, or (2) computing rank/thread level metrics for 
+# graphing and inspection.
+
+ranks=8
+ranks_per_node=2
+
+#specially load this version of hpctoolkit, which has a version of the LLVM OMPT interface
+module load hpctoolkit
+
+mpirun -f ${COBALT_NODE_FILE} -n $ranks  -ppn $ranks_per_node  \
+    hpcprof-mpi  \
+    	-S amg2006.hpcstruct  \
+    	-o hpctoolkit-amg2006.d \
+    	--metric-db  yes  \
+    	hpctoolkit-amg2006.m

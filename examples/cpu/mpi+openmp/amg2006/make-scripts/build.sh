@@ -6,14 +6,9 @@ STD_LDFLAGS=" -dynamic -fopenmp -lm"
 
 date > .build_begin
 
-if [[ ! -z "$MPI_ROOT" ]] 
+if [[ -z "$MPI_CC" ]] 
 then
-    export MPI_HOME=$MPI_ROOT
-fi
-
-if [[ -z "$MPI_HOME" ]] 
-then
-    echo MPI_HOME must be set
+    echo MPI_CC must be set
     exit
 fi
 

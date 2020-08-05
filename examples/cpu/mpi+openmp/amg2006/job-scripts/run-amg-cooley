@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Sample launch script for amg2006 + hpctoolkit on cray
+
+# Submit this with your job manager with arguments that specify
+#   time = 12 minutes
+#   nodes = 4
+
+ranks=8
+ranks_per_node=2
+threads=5
+
+# Hpcrun events to profile, separated by space.
+# See 'hpcrun -L' for a list of possible events.
+#export HPCRUN_EVENT_LIST='REALTIME@8000'
+
+# Turn tracing on.
+#export HPCRUN_TRACE=1
+
+export HPCRUN_ARGS="-o hpctoolkit-amg2006.m -e REALTIME@8000 -t"
+
+# Turn sampling off until started in the program.
+# Don't use this without hpctoolkit_sampling_start().
+# export HPCRUN_DELAY_SAMPLING=1
+
+# For large runs, use this to limit the total number of threads to at
+# most a few thousand (in this case, 10%).
+# export HPCRUN_PROCESS_FRACTION=0.10
+
+export OMP_NUM_THREADS="$threads"
+
+export OMP_WAIT_POLICY=active
+export KMP_AFFINITY=none
+
+#specially load this version of hpctoolkit, which has a version of the LLVM OMPT interface
+module load hpctoolkit
+
+mpirun -f ${COBALT_NODE_FILE} -n $ranks  -ppn $ranks_per_node  \
+    hpcrun ${HPCRUN_ARGS} AMG2006/test/amg2006  -P 2 2 2  -r  22 22 22
