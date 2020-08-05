@@ -10,8 +10,12 @@ MPI + OpenMP example: AMG2006 benchmark
 3. run the application and measure its performance: submit a measurement run to the job manager
 	make run
 
-4. analyze measurement data: submit an analysis run to the job manager
-	make analyze
+4.a analyze measurement data for a small experiment serially on the login node
+	make analyze 
+or
+
+4.b analyze measurement data for a larger experiment on the compute nodes
+	make analyze-parallel
 
 5. interactively explore traces with hpctraceviewer GUI
    	hpctraceviewer hpctoolkit-amg2006.d
