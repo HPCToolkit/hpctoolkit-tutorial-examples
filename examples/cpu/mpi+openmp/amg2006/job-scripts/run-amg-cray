@@ -33,8 +33,7 @@ export OMP_NUM_THREADS="$threads"
 export OMP_WAIT_POLICY=active
 export KMP_AFFINITY=none
 
-#specially load this version of hpctoolkit, which has a version of the LLVM OMPT interface
-module load hpctoolkit/2020.04.ompt
+module load hpctoolkit
 
 aprun  -n $ranks  -N $ranks_per_node  -d $depth  --cc none  \
     hpcrun ${HPCRUN_ARGS} AMG2006/test/amg2006  -P 2 2 2  -r  22 22 22
