@@ -2,6 +2,8 @@
 
 date > .build_begin
 
+MPI_ROOT=ignore
+
 if [[ ! -z "$CUDAPATH" ]] 
 then
     export CUDA_HOME=$CUDAPATH
