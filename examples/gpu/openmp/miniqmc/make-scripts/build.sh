@@ -2,6 +2,9 @@
 
 date > .build_begin
 
+MPI_ROOT=ignore
+CUDA_HOME=ignore
+
 if [[ ! -z "$CUDAPATH" ]] 
 then
     export CUDA_HOME=$CUDAPATH
@@ -64,7 +67,7 @@ popd
 mkdir miniqmc/miniqmc-build
 pushd miniqmc/miniqmc-build
 # cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LDFLAGS=-lessl ..
-cmake -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_OFFLOAD=1 ..
+cmake -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER} -DCMAKE_BUILD_TYPE=RelWithDebInfo ${MINIQMC_COMPILER_FLAGS} ..
 make -j VERBOSE=1
 
 date > .build_end
