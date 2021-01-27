@@ -1,7 +1,6 @@
 all:
 	@echo specify one of the possible targets: 
 	@echo "	build: build miniqmc"
-	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
 	@echo "	clean: remove build and performance data"
 
