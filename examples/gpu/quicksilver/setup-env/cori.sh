@@ -1,2 +1,2 @@
-module load cuda/11.0.2
+module load cuda/11.1.1
 export QS_LAUNCHER=srun
