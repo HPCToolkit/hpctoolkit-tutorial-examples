@@ -16,4 +16,7 @@ run:
 	time sh make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct miniqmc info*.xml .build*
+	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml
+
+veryclean: clean
+	/bin/rm -rf miniqmc .build*
