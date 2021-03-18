@@ -8,16 +8,16 @@ all:
 	@echo "	veryclean: remove build and performance data"
 
 build:
-	time sh build.sh
+	time sh make-scripts/build.sh
 
 run-short:
-	time sh run_hpcrun_short.sh
+	time sh make-scripts/run_hpcrun_short.sh
 
 run-long:
-	time sh run_hpcrun_long.sh
+	time sh make-scripts/run_hpcrun_long.sh
 
 run-pc:
-	time sh run_hpcrun_pc.sh
+	time sh make-scripts/run_hpcrun_pc.sh
 
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct laghos
