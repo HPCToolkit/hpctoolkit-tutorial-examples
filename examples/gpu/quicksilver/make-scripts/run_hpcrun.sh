@@ -10,7 +10,7 @@ fi
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 # measure an execution of quicksilver
-RUN="time ${QS_LAUNCHER} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
+RUN="time ${HPCTOOLKIT_LAUNCHER} -n 1 -g 1 -a 1 hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
 echo ${RUN} ...
 ${RUN}
 

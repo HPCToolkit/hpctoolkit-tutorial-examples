@@ -14,8 +14,8 @@ all:
 	@echo "	build: build quicksilver"
 	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
-	@echo "	run-pc: use hpctoolkit to collect and analyze detailed information about gpu performance "
-	@echo "	clean: remove build and performance data"
+	@echo "	clean: remove performance data"
+	@echo "	veryclean: remove build and performance data"
 
 build:
 	/bin/rm -rf quicksilver
@@ -31,4 +31,7 @@ run:
 	time sh make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs .build*
+	/bin/rm -rf hpctoolkit* *.hpcstruct qs
+
+veryclean:
+	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs build*
