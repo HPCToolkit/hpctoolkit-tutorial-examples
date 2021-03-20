@@ -48,9 +48,9 @@ mkdir build
 cd build
 
 # Tested for GCC >= 6.4.0, cmake >= 3.3
-git clone https://github.com/Jokeren/lammps.git
+git clone https://github.com/lammps/lammps.git
 cd lammps
 mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON -DKOKKOS_ARCH="Power9;Volta70" -DKOKKOS_ENABLE_CUDA=yes -DKOKKOS_ENABLE_OPENMP=yes -DCMAKE_CXX_COMPILER=`pwd`/../lib/kokkos/bin/nvcc_wrapper ../cmake
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON -DPKG_NAME=KOKKOS -DKokkos_ARCH_HOSTARCH=POWER9 -DKokkos_ARCH_GPUARCH=VOLTA70 -DKokkos_ENABLE_CUDA=yes -DKokkos_ENABLE_OPENMP=yes -DCMAKE_CXX_COMPILER=`pwd`/../lib/kokkos/bin/nvcc_wrapper ../cmake
 make -j16
 cd ../..
