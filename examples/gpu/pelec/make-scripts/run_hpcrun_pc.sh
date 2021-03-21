@@ -14,7 +14,7 @@ cd ${DIR}
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 # measure an execution of PeleC
-RUN="time ${QS_LAUNCHER} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}"
+RUN="time ${HPCTOOLKIT_LAUNCHER_SINGLE_GPU} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}"
 echo ${RUN} ...
 ${RUN}
 
