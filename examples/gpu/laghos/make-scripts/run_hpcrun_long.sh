@@ -11,8 +11,8 @@ rm -f laghos
 ln -s $EXEC
 
 # measure an execution of laghos
-echo "${HPCTOOLKIT_LAUNCHER} -n 4 -a 1 -g 1 hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t ${LAGHOS_DIR}/laghos -p 1 -dim 3 -rs 2 -tf 0.60 -pa -d cuda"
-time ${HPCTOOLKIT_LAUNCHER} -n 4 -a 1 -g 1 hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t ${LAGHOS_DIR}/laghos -p 1 -dim 3 -rs 2 -tf 0.60 -pa -d cuda
+echo "${HPCTOOLKIT_LAUNCHER_SINGLE_GPU} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t ${LAGHOS_DIR}/laghos -p 1 -dim 3 -rs 2 -tf 0.60 -pa -d cuda"
+time ${HPCTOOLKIT_LAUNCHER_SINGLE_GPU} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t ${LAGHOS_DIR}/laghos -p 1 -dim 3 -rs 2 -tf 0.60 -pa -d cuda
 
 # compute program structure information for the laghos binary
 echo hpcstruct -j 16 laghos ...
