@@ -26,13 +26,13 @@ echo using MPI_HOME=$MPI_HOME
 # download tar file
 mkdir tarfile
 pushd tarfile
-wget https://asc.llnl.gov/sequoia/benchmarks/AMG2006_v1.0.tar.gz
+wget http://hpctoolkit.org/sample-codes/amg2006.tgz
 popd
 
 # unpack tar file
-tar xzf tarfile/AMG2006_v1.0.tar.gz
+tar xzf tarfile/amg2006.tgz
 
 # build application
-make -j -C AMG2006 CC=${MPI_CC} INCLUDE_CFLAGS="${OMP_CFLAGS} ${STD_CFLAGS}" INCLUDE_LFLAGS="${STD_LDFLAGS}"
+make -j -C amg2006 CC=${MPI_CC} INCLUDE_CFLAGS="${OMP_CFLAGS} ${STD_CFLAGS}" INCLUDE_LFLAGS="${STD_LDFLAGS}"
 
 date > .build_end
