@@ -11,16 +11,16 @@ build:
 	time sh make-scripts/build.sh
 
 run-short:
-	time sh make-scripts/run_hpcrun_short.sh
+	JOBNAME=SHORT sh make-scripts/submit.sh make-scripts/run_hpcrun_short.sh
 
-run-long:
-	time sh make-scripts/run_hpcrun_long.sh
+run-long:	
+	JOBNAME=LONG sh make-scripts/submit.sh make-scripts/run_hpcrun_long.sh
 
 run-pc:
-	time sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct laghos
+	/bin/rm -rf hpctoolkit* *.hpcstruct laghos  error.* output.*
 
 veryclean: clean
 	/bin/rm -rf build .build_begin .build_end
