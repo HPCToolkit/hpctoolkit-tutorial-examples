@@ -10,13 +10,13 @@ build:
 	sh make-scripts/build.sh
 
 run:
-	sh make-scripts/run_hpcrun.sh
+	JOBNAME=RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
 
 run-pc:
-	sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 clean:
-	/bin/rm -rf hpctoolkit-* lmp.hpcstruct log.lammps
+	/bin/rm -rf hpctoolkit-* lmp.hpcstruct log.lammps output.* error.*
 
 veryclean: clean
 	/bin/rm -rf build lmp
