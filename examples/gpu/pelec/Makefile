@@ -10,10 +10,10 @@ build:
 	time sh make-scripts/build.sh
 
 run-pc:
-	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=PeleC-PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 run:
-	JOBNAME=RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
+	JOBNAME=PeleC-RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
 
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct error.* output.*

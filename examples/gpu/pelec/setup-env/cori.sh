@@ -4,4 +4,7 @@ module load hpctoolkit/2021.03-gpu
 module load cmake
 module load gcc
 module load openmpi
+
+unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
+export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=cori
 export HPCTOOLKIT_LAUNCHER_SINGLE_GPU="srun -n 1 -G 1"

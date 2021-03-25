@@ -14,8 +14,15 @@ cd ${DIR}
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 # measure an execution of PeleC
-echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}"  ...
-time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}
+if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]; then
+  echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}" ...
+  time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
+elif [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "cori" ]]; then
+  echo "srun -n 1 -G 1 hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}" ...
+  time srun -n 1 -G 1 hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
+else
+  echo "Please set environment variables using the platform script in the setup-env directory"
+fi
 
 # compute program structure information for the PeleC binary
 STRUCT_QS="hpcstruct -j 16 ${EXEC}"
