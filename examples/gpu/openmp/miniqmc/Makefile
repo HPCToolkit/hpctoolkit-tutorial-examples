@@ -13,10 +13,10 @@ build-miniqmc:
 	make -C miniqmc/miniqmc-build
 
 run:
-	time sh make-scripts/run_hpcrun.sh
+	JOBNAME=RUN sh make-scripts/submit.sh  make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml
+	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml error.* output.*
 
 veryclean: clean
 	/bin/rm -rf miniqmc .build*
