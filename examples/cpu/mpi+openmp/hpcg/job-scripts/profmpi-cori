@@ -1,4 +1,12 @@
 #!/bin/bash
+#SBATCH --qos=regular
+#SBATCH --time=10
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=16
+#SBATCH --cpus-per-task=1
+#SBATCH --constraint=knl
+
+
 
 module load hpctoolkit/2021.03.01
 

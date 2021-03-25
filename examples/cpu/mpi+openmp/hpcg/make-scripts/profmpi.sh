@@ -1,5 +1,5 @@
-BINARY=amg2013
-EXEC=AMG2013/test/${BINARY}
+BINARY=xhpcg
+EXEC=build/bin/${BINARY}
 
 if [[ -z "`type -p hpcprof-mpi`" ]] 
 then
@@ -16,5 +16,6 @@ echo ${STRUCT_BIN} ...
 ${STRUCT_BIN}
 
 # combine the measurements with the program structure information
-echo ${ANALYZE_CMD} ...
-${ANALYZE_CMD}
+echo analyzing xhpcg measurement data by running \'${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}\'
+${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}
+
