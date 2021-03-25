@@ -1,0 +1,13 @@
+#!/bin/bash
+
+module load hpctoolkit/2021.03.01
+
+hpcstruct -j 8 build/bin/xhpcg
+
+ranks=8
+
+srun -n $ranks  --cpu-bind=cores \
+    hpcprof-mpi -S xhpcg.hpcstruct \
+		--metric-db yes \
+		-o hpctoolkit-xhpcg.d \
+		hpctoolkit-xhpcg.m

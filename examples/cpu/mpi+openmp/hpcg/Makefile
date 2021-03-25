@@ -1,0 +1,33 @@
+all:
+	@echo ""
+	@echo specify one of the possible targets: 
+	@echo "	build: build amg2013"
+	@echo "	run: use hpctoolkit to collect measurements about the CPU performance of amg2013"
+	@echo "	analyze: use hpcprof to analyze performance measurements serially and attribute back to source code"
+	@echo "	analyze-parallel: use hpcprof-mpi to analyze performance measurements in parallel and attribute back to source code"
+	@echo "	view: invoke hpcviewer to inspect results of measurement and analysis"
+	@echo "	clean: remove build and performance data"
+	@echo ""
+	@echo "	NOTE: it is quicker to analyze the small measurement data on the login node using 'make analyze'"
+	@echo ""
+
+build:
+	/bin/rm -rf build src
+	time sh make-scripts/build.sh
+
+run:
+	sh make-scripts/xhpcg.sh
+
+analyze:
+	sh make-scripts/prof.sh
+
+analyze-parallel:
+	sh make-scripts/profmpi.sh
+
+view:
+	sh make-scripts/view.sh
+
+clean:
+	/bin/rm -rf hpctoolkit* *.hpcstruct src build
+	/bin/rm -rf  hpcg2*.txt HPCG-*.txt .build* *core* slurm*
+	$(CLEAN_CMD)
