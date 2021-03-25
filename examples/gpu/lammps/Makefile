@@ -10,10 +10,10 @@ build:
 	sh make-scripts/build.sh
 
 run:
-	JOBNAME=RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
+	JOBNAME=LAMMPS-RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
 
 run-pc:
-	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=LAMMPS-PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 clean:
 	/bin/rm -rf hpctoolkit-* lmp.hpcstruct log.lammps output.* error.*

@@ -11,13 +11,13 @@ build:
 	time sh make-scripts/build.sh
 
 run-short:
-	JOBNAME=SHORT sh make-scripts/submit.sh make-scripts/run_hpcrun_short.sh
+	JOBNAME=Laghos-SHORT sh make-scripts/submit.sh make-scripts/run_hpcrun_short.sh
 
 run-long:	
-	JOBNAME=LONG sh make-scripts/submit.sh make-scripts/run_hpcrun_long.sh
+	JOBNAME=Laghos-LONG sh make-scripts/submit.sh make-scripts/run_hpcrun_long.sh
 
 run-pc:
-	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=Laghos-PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct laghos  error.* output.*

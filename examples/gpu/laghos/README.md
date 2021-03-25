@@ -24,6 +24,7 @@ To build laghos:
 Instructions for this example on ORNL's ascent
 
 0. module purge
+
    this step is to avoid potential conflicts with modules already in your environment from other activities
 
 1. load a new release of hpctoolkit. one will be provided in the "modules" directory in your training project:
