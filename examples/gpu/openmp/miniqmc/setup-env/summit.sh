@@ -24,5 +24,5 @@ else
 
   export HPCTOOLKIT_TUTORIAL_BATCH=1
   export HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY=1
-  export HPCTOOLKIT_LAUNCHER_SINGLE_GPU="jsrun -n 1 -g 1 -a 1 -c 11"
+  export HPCTOOLKIT_LAUNCHER_SINGLE_GPU="jsrun -n 1 -g 1 -a 1 -c 11 -brs"
 fi
