@@ -1,6 +1,4 @@
-BINARY=amg2013
 DIR=AMG2013/test
-EXEC=${DIR}/${BINARY}
 INPUT=sstruct.in.MG.FD 
 
 OUT=hpctoolkit-amg2013
@@ -16,10 +14,6 @@ echo `pwd`
 ln -s ${DIR}/${INPUT}
 
 /bin/rm -rf ${OUT}.m 
+
 # measure an execution of amg2013
-echo executing amg2013 by running \'${HPCTOOLKIT_BATCH} ${RUN_CMD}\'
-${HPCTOOLKIT_BATCH} ${RUN_CMD}
-# -A ntrain --reservation=hpc1_knl -q regular
-# -A ntrain --reservation=hpc2_knl -q regular
-# -A ntrain --reservation=hpc1_gpu -q shared
-# -A m3502 --reservation=hpc2_gpu -q shared
+echo executing amg2013 by running \'${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_RUN_CMD}\'
