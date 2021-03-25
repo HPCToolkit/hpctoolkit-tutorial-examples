@@ -14,9 +14,8 @@ cd ${DIR}
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 # measure an execution of PeleC
-RUN="time ${HPCTOOLKIT_LAUNCHER_SINGLE_GPU} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"
-echo ${RUN} ...
-${RUN}
+echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"  ...
+time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
 
 # compute program structure information for the PeleC binary
 STRUCT_QS="hpcstruct -j 16 ${EXEC}"
