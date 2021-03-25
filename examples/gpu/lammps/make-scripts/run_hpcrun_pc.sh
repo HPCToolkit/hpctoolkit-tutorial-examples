@@ -8,8 +8,8 @@ ln -s $EXEC
 
 # measure an execution of laghos
 export OMP_NUM_THREADS=2
-echo "time ${HPCTOOLKIT_LAUNCHER} hpcrun -o $OUT.m -e gpu=nvidia,pc ./lmp -k on g 1 -sf kk -in build/lammps/bench/in.lj"
-time ${HPCTOOLKIT_LAUNCHER} hpcrun -o $OUT.m -e gpu=nvidia,pc ./lmp -k on g 1 -sf kk -in build/lammps/bench/in.lj
+echo "time ${HPCTOOLKIT_LAUNCHER} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ./lmp -k on g 1 -sf kk -in build/lammps/bench/in.lj"
+time ${HPCTOOLKIT_LAUNCHER} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ./lmp -k on g 1 -sf kk -in build/lammps/bench/in.lj
 
 # compute program structure information for the lammps binary
 echo hpcstruct -j 16 lmp ...
