@@ -1,5 +1,5 @@
 #!/bin/bash
-OUT=hpctoolkit-amg2013
+OUT=hpctoolkit-xhpcg
 
 module load hpcviewer 
 

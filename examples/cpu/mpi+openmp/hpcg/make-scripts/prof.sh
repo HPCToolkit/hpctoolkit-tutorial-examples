@@ -1,5 +1,5 @@
-BINARY=amg2013
-EXEC=AMG2013/test/${BINARY}
+BINARY=xhpcg
+EXEC=build/bin/${BINARY}
 
 if [[ -z "`type -p hpcprof`" ]] 
 then
@@ -12,8 +12,11 @@ STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 
+# remove any existing database
+/bin/rm -rf hpctoolkit-${BINARY}.d
+
 # combine the measurements with the program structure information
-ANALYZE_CMD="hpcprof -S ${BINARY}.hpcstruct -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
+ANALYZE_CMD="hpcprof -S ${BINARY}.hpcstruct -o hpctoolkit-${BINARY}.d hpctoolkit-${BINARY}.m"
  
 echo hpcprof ${ANALYZE_CMD} ...
 ${ANALYZE_CMD}

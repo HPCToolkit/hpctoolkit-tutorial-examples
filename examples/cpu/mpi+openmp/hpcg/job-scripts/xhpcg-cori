@@ -20,7 +20,7 @@ export OMP_WAIT_POLICY=active
 
 module load hpctoolkit/2021.03.01
 
-export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e REALTIME -t"
+export HPCRUN_ARGS="-o hpctoolkit-xhpcg.m -e CPUTIME -t"
 export ranks=16
 
 bind=--cpu-bind=cores 
