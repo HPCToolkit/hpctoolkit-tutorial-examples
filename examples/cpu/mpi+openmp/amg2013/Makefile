@@ -16,13 +16,13 @@ build:
 	time sh make-scripts/build.sh
 
 run:
-	sh make-scripts/run_amg.sh
+	sh make-scripts/amg2013.sh
 
 analyze:
-	sh make-scripts/run_prof.sh
+	sh make-scripts/prof.sh
 
 analyze-parallel:
-	sh make-scripts/run_profmpi.sh
+	sh make-scripts/profmpi.sh
 
 view:
 	sh make-scripts/view.sh

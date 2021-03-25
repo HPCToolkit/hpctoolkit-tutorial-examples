@@ -17,3 +17,4 @@ ln -s ${DIR}/${INPUT}
 
 # measure an execution of amg2013
 echo executing amg2013 by running \'${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_RUN_CMD}\'
+${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_RUN_CMD}

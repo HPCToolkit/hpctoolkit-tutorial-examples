@@ -8,7 +8,7 @@
 
 # use LLVM OpenMP Tools support
 module use /global/common/software/m1759/hpctoolkit-install/2021.03/modules
-module use openmp/ompt
+module load openmp/ompt
 
 module load hpctoolkit/2021.03.01
 

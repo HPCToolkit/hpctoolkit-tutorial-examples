@@ -1,0 +1,13 @@
+#!/bin/bash
+
+module load hpctoolkit/2021.03.01
+
+hpcstruct -j 8 AMG2013/test/amg2013
+
+ranks=8
+
+srun -n $ranks  --cpu-bind=cores \
+    hpcprof-mpi -S amg2013.hpcstruct \
+		--metric-db yes \
+		-o hpctoolkit-amg2013.d \
+		hpctoolkit-amg2013.m

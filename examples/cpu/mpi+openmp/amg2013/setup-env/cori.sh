@@ -24,9 +24,9 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
   export HPCTOOLKIT_MPI_CC=cc
-  export HPCTOOLKIT_RUN_CMD="job-scripts/run-amg-cori"
-  export HPCTOOLKIT_ANALYZE_CMD="job-scripts/run-profmpi-cori"
-  export HPCTOOLKIT_CLEAN_CMD="/bin/rm -rf *.output *.error *.cobaltlog"
+  export HPCTOOLKIT_RUN_CMD="job-scripts/amg2013-cori"
+  export HPCTOOLKIT_ANALYZE_CMD="job-scripts/profmpi-cori"
+  export HPCTOOLKIT_CLEAN_CMD="/bin/rm -rf *.output *.error"
   export HPCTOOLKIT_BATCH="sbatch $HPCTOOLKITL_PROJECTID $HPCTOOLKIT_RESERVATION" 
   export HPCTOOLKIT_SETUP=amg2013
   export HPCTOOLKIT_TUTORIAL_GPU_AMG2013_READY
