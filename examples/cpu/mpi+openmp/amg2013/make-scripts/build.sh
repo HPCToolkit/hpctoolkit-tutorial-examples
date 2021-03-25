@@ -26,13 +26,13 @@ echo using MPI_HOME=$MPI_HOME
 # download tar file
 mkdir tarfile
 pushd tarfile
-wget https://asc.llnl.gov/sites/asc/files/2021-01/amg2013_0.tgz
+wget http://hpctoolkit.org/sample-codes/amg2013.tgz
 popd
 
 # unpack tar file
-tar xzf tarfile/amg2013_0.tgz
+tar xzf tarfile/amg2013.tgz
 
 # build application
-make -j -C AMG2013 CC=${MPI_CC} INCLUDE_CFLAGS="${OMP_CFLAGS} ${STD_CFLAGS}" INCLUDE_LFLAGS="${STD_LDFLAGS}"
+make -j -C AMG2013 CC=${HPCTOOLKIT_MPI_CC} INCLUDE_CFLAGS="${OMP_CFLAGS} ${STD_CFLAGS}" INCLUDE_LFLAGS="${STD_LDFLAGS}"
 
 date > .build_end

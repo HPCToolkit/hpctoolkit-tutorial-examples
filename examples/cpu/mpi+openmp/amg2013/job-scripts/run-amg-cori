@@ -1,31 +1,32 @@
 #!/bin/bash
-#SBATCH --qos=debug
+#SBATCH --qos=regular
 #SBATCH --time=5
-#SBATCH --nodes=1
+#SBATCH --nodes=2
 #SBATCH --tasks-per-node=8
 #SBATCH --cpus-per-task=8
-#SBATCH --constraint=haswell
+#SBATCH --constraint=knl
+
+# use LLVM OpenMP Tools support
+module use /global/common/software/m1759/hpctoolkit-install/2021.03/modules
+module use openmp/ompt
+
+module load hpctoolkit/2021.03.01
 
 export OMP_PROC_BIND=true
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
 
 export OMP_WAIT_POLICY=active
-export KMP_AFFINITY=none
 
-module load /global/common/software/m1759/hpctoolkit-install/2021.03/modules/hpctoolkit/2021.03
+module load hpctoolkit/2021.03.01
 
 export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e REALTIME -t"
-export ranks=8
-export OMP_TOOL=disabled
+export ranks=16
+# export OMP_TOOL=disabled
 
-srun -C haswell  -n $ranks  --cpu-bind=cores \
-    hpcrun ${HPCRUN_ARGS} AMG2013/test/amg2013  -P 2 2 2  -r  22 22 22
+bind=--cpu-bind=cores 
 
-hpcstruct AMG2013/test/amg2013
+refine=20
 
-srun -C haswell -n $ranks  --cpu-bind=cores \
-    hpcprof-mpi -S amg2013.hpcstruct \
-		--metric-db yes \
-		-o hpctoolkit-amg2013.d \
-		hpctoolkit-amg2013.m
+srun -n $ranks $bind  \
+    hpcrun ${HPCRUN_ARGS} AMG2013/test/amg2013  -P 2 4 2  -r  $refine $refine $refine
