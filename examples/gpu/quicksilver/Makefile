@@ -25,13 +25,13 @@ build-quicksilver:
 	make -j -C quicksilver/src CXX="$(CXX)" CXXFLAGS="$(CXXFLAGS)" CUDA_LDFLAGS="$(CUDA_LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(CUDA_LDFLAGS)"
 
 run-pc:
-	time sh make-scripts/run_hpcrun_pc.sh
+	JOBNAME=PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 run:
-	time sh make-scripts/run_hpcrun.sh
+	JOBNAME=RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct qs
+	/bin/rm -rf hpctoolkit* *.hpcstruct qs error.* output.*
 
 veryclean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs build*
