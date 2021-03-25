@@ -6,9 +6,9 @@ STD_LDFLAGS=" -dynamic -fopenmp -lm"
 
 date > .build_begin
 
-if [[ -z "$MPI_CC" ]] 
+if [[ -z "$HPCTOOLKIT_MPI_CC" ]] 
 then
-    echo MPI_CC must be set
+    echo HPCTOOLKIT_MPI_CC must be set
     exit
 fi
 
