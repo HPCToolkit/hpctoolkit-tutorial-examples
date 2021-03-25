@@ -12,6 +12,9 @@ STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 
+# remove any old results directory to avoid trouble 
+rm -rf hpctoolkit-amg2013.d
+
 # combine the measurements with the program structure information
 ANALYZE_CMD="hpcprof -S ${BINARY}.hpcstruct -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
  

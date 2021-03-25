@@ -15,6 +15,5 @@ STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 
-# combine the measurements with the program structure information
 echo analyzing amg2013 measurement data by running \'${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}\'
-${HPCTOOLKIT_BATCH_CMD} ${HPCTOOLKIT_ANALYZE_CMD}
+${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}

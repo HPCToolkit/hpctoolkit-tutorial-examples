@@ -6,9 +6,22 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --constraint=knl
 
+#------------------------------------------------------------------------------
 # use LLVM OpenMP Tools support
+#------------------------------------------------------------------------------
 module use /global/common/software/m1759/hpctoolkit-install/2021.03/modules
 module load openmp/ompt
+
+#    if you comment out the use of the module openmp/ompt (which adds the LLVM 
+#    OpenMP runtime to your LD_LIBRARY_PATH and uses it instead of Intel's OpenMP 
+#    runtime), you will need to uncomment the line below to set OMP_TOOL=disabled. 
+#    Without turning off HPCToolkit's OMPT support, the application will encounter 
+#    an assert in HPCToolkit because Intel's implementation of OMPT doesn't meet 
+#    HPCToolkit's needs
+
+# export OMP_TOOL=disabled
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 module load hpctoolkit/2021.03.01
 
@@ -22,7 +35,6 @@ module load hpctoolkit/2021.03.01
 
 export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e CPUTIME -t"
 export ranks=16
-# export OMP_TOOL=disabled
 
 bind=--cpu-bind=cores 
 

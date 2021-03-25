@@ -28,6 +28,6 @@ view:
 	sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct AMG2013 sstruct.in.MG.FD slurm*
+	/bin/rm -rf hpctoolkit* *.hpcstruct AMG2013 sstruct.in.MG.FD slurm* *core*
 	/bin/rm -rf AMG2013 tarfile
 	$(CLEAN_CMD)
