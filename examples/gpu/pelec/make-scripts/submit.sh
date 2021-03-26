@@ -4,15 +4,4 @@ then
   exit
 fi
 
-if [ -z "$HPCTOOLKIT_TUTORIAL_BATCH" ]
-then
-  sh $1
-else
-  if [ $HPCTOOLKIT_TUTORIAL_RESERVATION == "default" ]
-  then
-     RESERVE=""
-  else
-     RESERVE="-U $HPCTOOLKIT_TUTORIAL_RESERVATION"
-  fi
-  bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $RESERVE -J $JOBNAME -o output.$JOBNAME -e error.$JOBNAME $1 
-fi
+$SUBMIT $1 

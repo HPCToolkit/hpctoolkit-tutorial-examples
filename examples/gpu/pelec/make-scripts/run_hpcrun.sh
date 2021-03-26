@@ -1,34 +1,30 @@
+#!/bin/bash
+
+${HPCTOOLKIT_PELEC_MODULES_BUILD}
+${HPCTOOLKIT_PELEC_MODULES_HPCTOOLKIT}
+
 BINARY=PeleC3d.gnu.CUDA.ex
 DIR=PeleC/Exec/RegTests/PMF
 EXEC=./${BINARY}
 INPUT=./inputs_ex
 OUT=hpctoolkit-${BINARY}-gpu-cuda
 
-if [[ -z "`type -p hpcrun`" ]] 
-then
-    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
-    exit
-fi
-
 cd ${DIR}
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
+
+# if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]; then
+#   echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"  ...
+#   time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
+
 # measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]; then
-  echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"  ...
-  time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
-elif [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "cori" ]]; then
-  echo "srun -n 1 -G 1 hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" ...
-  time srun -n 1 -G 1 hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
-else
-  echo "Please set environment variables using the platform script in the setup-env directory"
-  exit
-fi
+echo "${HPCRUN_PELEC_LAUNCH}hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" ...
+time ${HPCRUN_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
 
 # compute program structure information for the PeleC binary
-STRUCT_QS="hpcstruct -j 16 ${EXEC}"
-echo ${STRUCT_QS} ... 
-$STRUCT_QS
+STRUCT_PELEC="hpcstruct -j 16 ${EXEC}"
+echo ${STRUCT_PELEC} ... 
+$STRUCT_PELEC
 
 # compute program structure information for the PeleC cubins
 STRUCT_CUBIN="hpcstruct -j 16 --gpucfg no $OUT.m" 
