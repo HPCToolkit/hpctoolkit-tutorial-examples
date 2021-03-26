@@ -29,6 +29,7 @@ else
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_QS_BUILD="sh"
+  export HPCTOOLKIT_QS_LAUNCH="jsrun -n 1 -g 1 -a 1"
 
   # set flag for this example
   export HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY=1
