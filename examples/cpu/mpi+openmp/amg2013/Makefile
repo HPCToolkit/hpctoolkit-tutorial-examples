@@ -29,6 +29,6 @@ view:
 
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct AMG2013 sstruct.in.MG.FD slurm* *core*
-	/bin/rm -rf error.* output.*
+	/bin/rm -rf error.* output.* .build*
 	/bin/rm -rf AMG2013 tarfile
 	$(CLEAN_CMD)
