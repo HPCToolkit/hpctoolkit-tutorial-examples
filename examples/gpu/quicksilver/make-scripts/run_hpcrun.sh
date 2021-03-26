@@ -7,13 +7,9 @@ BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda
 
-if [[ -z "`type -p hpcrun`" ]] 
-then
-    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
-    exit
-fi
-
+# remove output directories to avoid conflicts
 /bin/rm -rf ${OUT}.m ${OUT}.d
+
 # measure an execution of quicksilver
 RUN="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
 echo ${RUN} ...

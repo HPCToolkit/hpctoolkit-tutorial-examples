@@ -7,7 +7,9 @@ BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda-pc
 
+# remove output directories to avoid conflicts
 /bin/rm -rf ${OUT}.m ${OUT}.d
+
 # measure an execution of quicksilver
 RUN="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC}"
 echo ${RUN} ...

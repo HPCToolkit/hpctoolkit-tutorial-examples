@@ -4,6 +4,11 @@ date > .build_begin
 
 $HPCTOOLKIT_QS_MODULES_BUILD
 
+if [ -z "$CUDA_HOME" ]
+then
+  export CUDA_HOME=$CUDA_DIR
+fi
+
 rm -rf quicksilver 
 
 # Quicksilver
