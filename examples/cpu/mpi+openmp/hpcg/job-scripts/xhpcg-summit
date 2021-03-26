@@ -1,0 +1,19 @@
+#!/bin/bash
+#BSUB -W 10
+#BSUB -nnodes 2
+#BSUB -J HPCG-RUN
+#BSUB -o output.HPCG-RUN
+#BSUB -e error.HPCG-RUN
+
+export OMP_NUM_THREADS=8
+
+export OMP_WAIT_POLICY=active
+
+export HPCRUN_ARGS="-o hpctoolkit-xhpcg.m -e CPUTIME -t"
+export ranks=16
+
+size=32
+
+jsrun -n $ranks -a 1 -c 4 -brs  \
+    hpcrun ${HPCRUN_ARGS} build/bin/xhpcg  --nx=$size --rt=30
+

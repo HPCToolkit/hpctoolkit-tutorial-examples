@@ -1,9 +1,9 @@
 #!/bin/bash
 #BSUB -W 5
 #BSUB -nnodes 1
-#BSUB -J PROFMPI
-#BSUB -o output.PROFMPI
-#BSUB -e error.PROFMPI
+#BSUB -J AMG2013-PROFMPI
+#BSUB -o output.AMG2013-PROFMPI
+#BSUB -e error.AMG2013-PROFMPI
 
 
 hpcstruct -j 8 AMG2013/test/amg2013

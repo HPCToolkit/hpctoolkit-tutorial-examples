@@ -1,9 +1,9 @@
 #!/bin/bash
 #BSUB -W 5
 #BSUB -nnodes 2
-#BSUB -J RUN
-#BSUB -o output.RUN
-#BSUB -e error.RUN
+#BSUB -J AMG2013-RUN
+#BSUB -o output.AMG2013-RUN
+#BSUB -e error.AMG2013-RUN
 
 
 export OMP_PROC_BIND=true
