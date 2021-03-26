@@ -19,6 +19,15 @@ run-long:
 run-pc:
 	SUBMIT="$(HPCTOOLKIT_LAGHOS_RUN_PC)" sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
+view-short:
+	DB=hpctoolkit-laghos-short sh  make-scripts/view.sh
+
+view-long:
+	DB=hpctoolkit-laghos-long sh  make-scripts/view.sh
+
+view-pc:
+	DB=hpctoolkit-laghos-pc sh  make-scripts/view.sh
+
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct 
 	/bin/rm -rf log*
