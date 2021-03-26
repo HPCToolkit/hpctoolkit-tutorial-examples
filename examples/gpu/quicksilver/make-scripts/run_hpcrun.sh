@@ -1,3 +1,8 @@
+#!/bin/bash 
+
+${HPCTOOLKIT_QS_MODULES_BUILD}
+${HPCTOOLKIT_QS_MODULES_HPCTOOLKIT}
+
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda
@@ -10,7 +15,7 @@ fi
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 # measure an execution of quicksilver
-RUN="time ${HPCTOOLKIT_LAUNCHER_SINGLE_GPU} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
+RUN="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
 echo ${RUN} ...
 ${RUN}
 
@@ -28,3 +33,5 @@ ${STRUCT_CUBIN}
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
 echo $ANALYZE ...
 ${ANALYZE}
+
+touch log.run.done
