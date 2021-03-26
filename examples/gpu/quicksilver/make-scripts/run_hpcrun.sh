@@ -1,3 +1,8 @@
+#!/bin/bash 
+
+${HPCTOOLKIT_QS_MODULES_BUILD}
+${HPCTOOLKIT_QS_MODULES_HPCTOOLKIT}
+
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda
@@ -28,3 +33,5 @@ ${STRUCT_CUBIN}
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
 echo $ANALYZE ...
 ${ANALYZE}
+
+touch log.run.done

@@ -1,37 +1,20 @@
-OPTFLAGS = -O2 -lineinfo -g
-
-#version below for more accurate gpu source info, but no optimization
-#OPTFLAGS = -g -G -O0
-
-CXX = $(CUDA_HOME)/bin/nvcc  
-CXXFLAGS = -DHAVE_CUDA -std=c++11 $(OPTFLAGS) -Xptxas -v -gencode=arch=compute_70,code=\\\"sm_70,compute_70\\\"
-CXXFLAGS = -DHAVE_CUDA -std=c++11 $(OPTFLAGS) -gencode=arch=compute_70,code=\\\"sm_70,compute_70\\\"
-CPPFLAGS = -x cu -dc
-LDFLAGS= -L${CUDA_HOME}/lib64 -lcuda -lcudart
-
 all:
 	@echo specify one of the possible targets: 
 	@echo "	build: build quicksilver"
 	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
-	@echo "	clean: remove performance data"
-	@echo "	veryclean: remove build and performance data"
+	@echo "	clean: remove build and performance data"
 
 build:
-	/bin/rm -rf quicksilver
-	time sh make-scripts/build.sh
-
-build-quicksilver:
-	make -j -C quicksilver/src CXX="$(CXX)" CXXFLAGS="$(CXXFLAGS)" CUDA_LDFLAGS="$(CUDA_LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(CUDA_LDFLAGS)"
+	$(HPCTOOLKIT_QS_BUILD) make-scripts/build.sh
 
 run-pc:
-	JOBNAME=Quicksilver-PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
+	SUBMIT="$(HPCTOOLKIT_QS_RUN_PC)" sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 run:
-	JOBNAME=Quicksilver-RUN sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
+	SUBMIT="$(HPCTOOLKIT_QS_RUN)" sh make-scripts/submit.sh make-scripts/run_hpcrun.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct qs error.* output.*
-
-veryclean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs build*
+	/bin/rm -rf quicksilver 
+	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf log* .build*
