@@ -8,20 +8,21 @@ all:
 	@echo "	veryclean: remove build and performance data"
 
 build:
-	time sh make-scripts/build.sh
+	 $(HPCTOOLKIT_LAGHOS_BUILD) make-scripts/build.sh
 
 run-short:
-	JOBNAME=Laghos-SHORT sh make-scripts/submit.sh make-scripts/run_hpcrun_short.sh
+	SUBMIT="$(HPCTOOLKIT_LAGHOS_RUN_SHORT)" sh make-scripts/submit.sh make-scripts/run_hpcrun_short.sh
 
 run-long:	
-	JOBNAME=Laghos-LONG sh make-scripts/submit.sh make-scripts/run_hpcrun_long.sh
+	SUBMIT="$(HPCTOOLKIT_LAGHOS_RUN_LONG)" sh make-scripts/submit.sh make-scripts/run_hpcrun_long.sh
 
 run-pc:
-	JOBNAME=Laghos-PC sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
+	SUBMIT="$(HPCTOOLKIT_LAGHOS_RUN_PC)" sh make-scripts/submit.sh make-scripts/run_hpcrun_pc.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct laghos  error.* output.*
+	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf log*
 
 veryclean: clean
-	/bin/rm -rf build .build_begin .build_end
+	/bin/rm -rf build .build_*
 
