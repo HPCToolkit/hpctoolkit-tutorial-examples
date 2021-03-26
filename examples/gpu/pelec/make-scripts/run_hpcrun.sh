@@ -13,27 +13,32 @@ cd ${DIR}
 
 /bin/rm -rf ${OUT}.m ${OUT}.d
 
-# if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]; then
-#   echo "jsrun -n 1 -g 1 -a 1 --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"  ...
-#   time jsrun -n 1 -g 1 -a 1 --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
-
 # measure an execution of PeleC
-echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" ...
-time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
+if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
+then
+  echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
+    hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" 
+  ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
+    hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
+else
+  echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"
+  time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
+fi
+
 
 # compute program structure information for the PeleC binary
 STRUCT_PELEC="hpcstruct -j 16 ${EXEC}"
-echo ${STRUCT_PELEC} ... 
+echo ${STRUCT_PELEC}
 $STRUCT_PELEC
 
 # compute program structure information for the PeleC cubins
 STRUCT_CUBIN="hpcstruct -j 16 --gpucfg no $OUT.m" 
-echo ${STRUCT_CUBIN} ...
+echo ${STRUCT_CUBIN}
 ${STRUCT_CUBIN}
 
 # combine the measurements with the program structure information
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
-echo $ANALYZE ...
+echo $ANALYZE
 ${ANALYZE}
 
 cd -

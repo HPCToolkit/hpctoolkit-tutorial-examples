@@ -12,22 +12,22 @@ OUT=hpctoolkit-${BINARY}-gpu-cuda
 
 # measure an execution of quicksilver
 RUN="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
-echo ${RUN} ...
+echo ${RUN}
 ${RUN}
 
 # compute program structure information for the quicksilver binary
 STRUCT_QS="hpcstruct -j 16 ${EXEC}"
-echo ${STRUCT_QS} ... 
+echo ${STRUCT_QS}
 $STRUCT_QS
 
 # compute program structure information for the quicksilver cubins
 STRUCT_CUBIN="hpcstruct --gpucfg no $OUT.m" 
-echo ${STRUCT_CUBIN} ... "(note: no \"-j <n>\" for parallel analysis since the cubin is not large)"
+echo ${STRUCT_CUBIN} "(note: no \"-j <n>\" for parallel analysis since the cubin is not large)"
 ${STRUCT_CUBIN}
 
 # combine the measurements with the program structure information
 ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
-echo $ANALYZE ...
+echo $ANALYZE
 ${ANALYZE}
 
 touch log.run.done
