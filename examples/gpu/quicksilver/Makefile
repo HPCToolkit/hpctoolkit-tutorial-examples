@@ -1,3 +1,5 @@
+RDY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY)
+
 all:
 	@echo
 	@echo Specify one of the possible targets: 
@@ -11,24 +13,24 @@ all:
 	@echo
 
 build:
-	@READY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY) CMD="$(HPCTOOLKIT_QS_BUILD)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_BUILD)" \
 	      	sh make-scripts/check.sh make-scripts/build.sh
 
 
 run:
-	@READY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY) CMD="$(HPCTOOLKIT_QS_RUN)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN)" \
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh
 
 run-pc:
-	@READY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY) CMD="$(HPCTOOLKIT_QS_RUN_PC)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN_PC)" \
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
 
 view:
-	@READY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY) CMD=sh DB="hpctoolkit-qs-gpu-cuda" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 view-pc:
-	@READY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY) CMD=sh DB="hpctoolkit-qs-gpu-cuda-pc" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda-pc" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
