@@ -22,6 +22,7 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # load modules
   module purge
   module load hpctoolkit/2021.03.01
   module load cuda/11.0.2

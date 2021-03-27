@@ -1,57 +1,37 @@
---------------------------------------------------------------------------------
-    Tutorial: Using HPCToolkit to Measure and Analyze the Performance of 
-                        GPU-Accelerated Applications
-
-                         ECP Project WBS 2.3.2.08
-
-                  John Mellor-Crummey (Rice University)
-                     Keren Zhou (Rice University)
-
-                         ECP Annual Meeting
-                          February 5, 2020 
-
---------------------------------------------------------------------------------
-
 This directory contains scripts to build and run Laghos to demonstrate
-GPU performance measurement on a single node with 4 MPI ranks and 
-4 GPUs.
+GPU performance measurement on a single node with 1 MPI rank and one GPU.
 
-To build laghos:
 
-- your path must contain a version of cmake newer than version 3.3, and
-- your path must contain a version of gcc newer than version 6.4.
+Instructions for this example 
 
-Instructions for this example on ORNL's ascent
+1. set up your enviroment
 
-0. module purge
+        source setup-env/<machine>.sh
 
-   this step is to avoid potential conflicts with modules already in your environment from other activities
+2. download and build the example
 
-1. load a new release of hpctoolkit. one will be provided in the "modules" directory in your training project:
+        make build
 
-    module use /ccsopen/proj/<YOUR PROJECT ID>/modules
+3a. collect kernel-level profile and trace data for a short run
 
-2. set up enviroment
+        make run-short
 
-    source setup-env/ascent.sh
+3b. collect kernel-level profile and trace data for a slightly longer run
 
-3. download and build the example
+        make run-long
 
-    make build
+3c. collect detailed gpu profile using pc-sampling
 
-4. collect kernel-level profile and trace
+        make run-pc
 
-    make run-short
+4a. view the short kernel-level profile and trace data with 
 
-5. view the kernel-level profile and trace data with 
+        make view-short
 
-    hpcviewer hpctoolkit-laghos-short.d
+4b. view the long kernel-level profile and trace data with 
 
-6. collect detailed gpu profile using pc-sampling
+        make view-long
 
-    make run-pc
+4a. view the PC-sampling measurements of gpu code
 
-7. view the detailed profile data with 
-
-    hpcviewer hpctoolkit-laghos-pc.d
-
+        make view-pc
