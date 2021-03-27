@@ -1,12 +1,12 @@
 #!/bin/bash
-OUT=hpctoolkit-amg2013
 
-module load hpcviewer 
+module load hpcviewer/2021.03.01 
 
-if [[ -z "`type -p hpcviewer`" ]] 
+if [ -e ${DB}.d ]
 then
-    echo "hpcviewer is not on your path. load the appropriate hpcviewer module"
-    exit
+  hpcviewer ${DB}.d 
+else
+  echo
+  echo "****** hpctoolkit performance database '$DB.d' does not exist *****"
+  echo
 fi
-
-hpcviewer ${OUT}.d 
