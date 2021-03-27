@@ -24,6 +24,10 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # set up your environment to use cori's gpu nodes
+  module purge
+  module load cgpu
+
   # environment settings for this example
   export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.1.1 cmake gcc"
   export HPCTOOLKIT_QS_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"

@@ -4,8 +4,8 @@ $HPCTOOLKIT_LAGHOS_MODULES_BUILD
 
 date > .build_begin
 
-mkdir build
-pushd build
+mkdir laghos
+pushd laghos
 
 # Tested for GCC >= 6.4.0, cmake >= 3.3
 
