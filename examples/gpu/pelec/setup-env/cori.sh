@@ -24,6 +24,10 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # set up your environment to use cori's gpu nodes
+  module purge
+  module load cgpu
+
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
   export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=cori
