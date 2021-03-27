@@ -4,6 +4,8 @@ $HPCTOOLKIT_LAMMPS_MODULES_BUILD
 
 date > .build_start
 
+rm -rf lammps
+
 mkdir lammps
 cd lammps
 

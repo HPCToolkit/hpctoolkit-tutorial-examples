@@ -7,9 +7,12 @@ OUT=hpctoolkit-$BINARY-pc
 
 STRUCT_FILE=$BINARY-pc.hpcstruct
 
-echo rm -rf log.run-pc.done log.lammps $STRUCT_FILE $OUT.m $OUT.d
-rm -rf log.run-pc.done log.lammps $STRUCT_FILE $OUT.m $OUT.d
+# remove old files and directories
+RMCMD="rm -rf log.run-pc.done log.lammps $STRUCT_FILE $OUT.m $OUT.d"
+echo $RMCMD
+$RMCMD
 
+# load up modules
 $HPCTOOLKIT_LAMMPS_MODULES_BUILD
 $HPCTOOLKIT_LAMMPS_MODULES_HPCTOOLKIT
 
@@ -25,11 +28,13 @@ echo $SCMD
 $SCMD
 
 # compute program structure information for the laghos cubins
-echo hpcstruct -j 16 $OUT.m ...
-time hpcstruct -j 16 $OUT.m
+SCMD="time hpcstruct -j 16 --gpucfg yes $OUT.m"
+echo $SCMD
+$SCMD
 
 # combine the measurements with the program structure information
-echo hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
-time hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
+PCMD="time hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+echo $PCMD
+$PCMD
 
 touch log.run-pc.done
