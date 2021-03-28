@@ -21,7 +21,7 @@ view:
 	  sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml error.* output.*
+	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml log*
 
 veryclean: clean
 	/bin/rm -rf miniqmc .build*

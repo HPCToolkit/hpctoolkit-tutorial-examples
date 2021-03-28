@@ -2,6 +2,8 @@
 
 date > .build_begin
 
+$HPCTOOLKIT_MINIQMC_BUILD_MODULES
+
 rm -rf miniqmc
 
 MPI_ROOT=ignore
