@@ -1,4 +1,3 @@
-
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
@@ -29,9 +28,14 @@ else
   module purge
   module load cgpu
 
+  # load hpctoolkit modules
+  module load hpcviewer/2021.03.01
+
+  # modules for hpctoolkit
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
+
   # environment settings for this example
   export HPCTOOLKIT_LAMMPS_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
-  export HPCTOOLKIT_LAMMPS_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
   export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 20"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"

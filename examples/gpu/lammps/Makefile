@@ -4,8 +4,8 @@ all:
 	@echo
 	@echo Specify one of the possible targets: 
 	@echo "	build: build lammps"
-	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
+	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	view: use hpcviewer to inspect performance data gathered using 'run'"
 	@echo "	view-pc: use hpcviewer to inspect performance data gathered using 'run-pc'"
 	@echo "	clean: delete performance data and logs"

@@ -22,21 +22,25 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # cleanse environment
   module purge
-  module load python
+
+  # load hpctoolkit modules
   module load hpctoolkit/2021.03.01
-  module load cuda/11.0.2
-  module load gcc/6.4.0
-  module load cmake/3.17.3
-  module load spectrum-mpi
+  module load hpcviewer/2021.03
+
+  # load modules needed to build and run pelec
+  module load python cuda/11.0.2 gcc/6.4.0 cmake/3.17.3 spectrum-mpi
 
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
   export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=summit
 
+  # modules for hpctoolkit
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
+
   # environment settings for this example
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
-  export HPCTOOLKIT_PELEC_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01"
   export HPCTOOLKIT_PELEC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"

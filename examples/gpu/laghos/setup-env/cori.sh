@@ -13,7 +13,7 @@ then
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-      export HPCTOOLKIT_PROJECTID="-A $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A $HPCTOOLKIT_TUTORIAL_PROJECTID"
   else
     unset HPCTOOLKIT_PROJECTID
   fi
@@ -24,13 +24,22 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # set up your environment to use cori's gpu nodes
+  module purge
+  module load cgpu
+
+  # load hpctoolkit modules
+  module load hpcviewer/2021.03.01
+
+  # modules for hpctoolkit
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
+
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
   export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=cori
 
   # environment settings for this example
   export HPCTOOLKIT_LAGHOS_MODULES_BUILD=" module load cuda/11.1.1 cmake gcc openmpi"
-  export HPCTOOLKIT_LAGHOS_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
   export HPCTOOLKIT_LAGHOS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error -G 1"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error -G 1"

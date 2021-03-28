@@ -14,11 +14,11 @@ $RMCMD
 
 # load up modules
 $HPCTOOLKIT_LAMMPS_MODULES_BUILD
-$HPCTOOLKIT_LAMMPS_MODULES_HPCTOOLKIT
+$HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 # measure an execution of laghos
 export OMP_NUM_THREADS=2
-RUNCMD="time ${HPCTOOLKIT_LAUNCHER} hpcrun -t -o $OUT.m -e gpu=nvidia,pc $EXEC -k on g 1 -sf kk -in lammps/lammps/bench/in.lj"
+RUNCMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc $EXEC -k on g 1 -sf kk -in lammps/lammps/bench/in.lj"
 echo $RUNCMD
 $RUNCMD
 

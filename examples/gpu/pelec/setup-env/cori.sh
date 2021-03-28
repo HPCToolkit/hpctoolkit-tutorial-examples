@@ -28,13 +28,18 @@ else
   module purge
   module load cgpu
 
+  # load hpctoolkit modules
+  module load hpcviewer/2021.03.01
+
+  # modules for hpctoolkit
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
+
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
   export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=cori
 
   # environment settings for this example
   export HPCTOOLKIT_PELEC_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
-  export HPCTOOLKIT_PELEC_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
   export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"

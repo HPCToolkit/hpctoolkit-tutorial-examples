@@ -22,9 +22,21 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # cleanse environment
+  module purge
+
+  # load hpctoolkit modules
+  module load hpctoolkit/2021.03.01
+  module load hpcviewer/2021.03
+
+  # load modules needed to build and run quicksilver
+  module load cuda/11.0.2 cmake/3.17.3 gcc/6.4.0
+
+  # modules for hpctoolkit
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
+
     # environment settings for this example
-  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.0.2 cmake/3.17.3 gcc/6.4.0"
-  export HPCTOOLKIT_QS_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01"
+  export HPCTOOLKIT_QS_MODULES_BUILD=""
   export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
