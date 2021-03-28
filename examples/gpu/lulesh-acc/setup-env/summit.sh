@@ -29,22 +29,25 @@ else
   module load hpctoolkit/2021.03.01
   module load hpcviewer/2021.03
 
-  # load modules needed to build and run quicksilver
-  module load cuda/11.0.2 cmake/3.17.3 gcc/6.4.0
+  # load modules needed for this example
+  module load cuda/11.1.1 cmake/3.17.3 gcc/6.4.0 pgi
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
 
     # environment settings for this example
-  export HPCTOOLKIT_QS_MODULES_BUILD=""
-  export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
-  export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
-  export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
-  export HPCTOOLKIT_QS_BUILD="sh"
-  export HPCTOOLKIT_QS_LAUNCH="jsrun -n 1 -g 1 -a 1"
+  export HPCTOOLKIT_LULESH_ACC_MODULES_BUILD=""
+  export HPCTOOLKIT_LULESH_ACC_CXX="pgc++ -DUSE_MPI=0 -DSEDOV_SYNC_POS_VEL_LATE"
+  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc -Minfo=accel -g"
+  export HPCTOOLKIT_LULESH_ACC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LULESH_ACC_RUN="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_LULESH_ACC_RUN_PC="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LULESH_ACC_RUN_PC="sh make-scripts/unsupported.sh"
+  export HPCTOOLKIT_LULESH_ACC_BUILD="sh"
+  export HPCTOOLKIT_LULESH_ACC_LAUNCH="jsrun -n 1 -g 1 -a 1 --smpiargs off"
 
   # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY=1
+  export HPCTOOLKIT_TUTORIAL_GPU_LULESH_ACC_READY=1
 
   # unset flags for other examples
   unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
@@ -53,6 +56,7 @@ else
   unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
+  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
 fi
 
 

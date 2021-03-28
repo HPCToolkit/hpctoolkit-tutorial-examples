@@ -18,7 +18,7 @@ popd
 
 tar xf tarfile/lulesh-omp.tgz
 pushd LULESH/omp_4.0
-make CXX=$HPCTOOLKIT_LULESH_OMP_CXX CXXFLAGS="$HPCTOOLKIT_LULESH_OMP_CXXFLAGS"
+make CXX="$HPCTOOLKIT_LULESH_OMP_CXX" CXXFLAGS="$HPCTOOLKIT_LULESH_OMP_OMPFLAGS"
 popd
 
 touch log.build.done
