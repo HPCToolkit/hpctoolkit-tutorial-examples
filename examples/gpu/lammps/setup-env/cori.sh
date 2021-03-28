@@ -36,7 +36,7 @@ else
 
   # environment settings for this example
   export HPCTOOLKIT_LAMMPS_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
-  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 20"
+  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch -q shared $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 20"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_LAMMPS_BUILD="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-build -o log.build.out -e log.build.error"

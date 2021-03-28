@@ -40,7 +40,7 @@ else
 
   # environment settings for this example
   export HPCTOOLKIT_PELEC_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
-  export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
+  export HPCTOOLKIT_PELEC_SUBMIT="sbatch -q shared $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_PELEC_BUILD="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-build -o log.build.out -e log.build.error"
