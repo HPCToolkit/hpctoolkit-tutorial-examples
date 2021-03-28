@@ -1,25 +1,37 @@
---------------------------------------------------------------------------------
-    Tutorial: Using HPCToolkit to Measure and Analyze the Performance of 
-                        GPU-Accelerated Applications
-
-                         ECP Project WBS 2.3.2.08
-
-                  John Mellor-Crummey (Rice University)
-                     Keren Zhou (Rice University)
-
-                         ECP Annual Meeting
-                          February 5, 2020 
-
---------------------------------------------------------------------------------
-
 This directory contains scripts to build and run Laghos to demonstrate
-GPU performance measurement on a single node with 4 MPI ranks and 
-4 GPUs.
+GPU performance measurement on a single node with 1 MPI rank and one GPU.
 
-To build laghos, you need to set the following environment variables:
 
-	CUDA_HOME: the top-level directory of a CUDA installation
-	MPI_HOME: the top-level directory of an MPI installation
+Instructions for this example 
 
-Your path must contain a version of cmake newer than version 3.3
-Your path must contain a version of gcc newer than version 6.4
+1. set up your enviroment
+
+        source setup-env/<machine>.sh
+
+2. download and build the example
+
+        make build
+
+3a. collect kernel-level profile and trace data for a short run
+
+        make run-short
+
+3b. collect kernel-level profile and trace data for a slightly longer run
+
+        make run-long
+
+3c. collect detailed gpu profile using pc-sampling
+
+        make run-pc
+
+4a. view the short kernel-level profile and trace data with 
+
+        make view-short
+
+4b. view the long kernel-level profile and trace data with 
+
+        make view-long
+
+4a. view the PC-sampling measurements of gpu code
+
+        make view-pc

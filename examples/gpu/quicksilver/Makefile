@@ -1,34 +1,41 @@
-OPTFLAGS = -O2 -lineinfo -g
-
-#version below for more accurate gpu source info, but no optimization
-#OPTFLAGS = -g -G -O0
-
-CXX = $(CUDA_HOME)/bin/nvcc  
-CXXFLAGS = -DHAVE_CUDA -std=c++11 $(OPTFLAGS) -Xptxas -v -gencode=arch=compute_70,code=\\\"sm_70,compute_70\\\"
-CXXFLAGS = -DHAVE_CUDA -std=c++11 $(OPTFLAGS) -gencode=arch=compute_70,code=\\\"sm_70,compute_70\\\"
-CPPFLAGS = -x cu -dc
-LDFLAGS= -L${CUDA_HOME}/lib64 -lcuda -lcudart
+RDY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY)
 
 all:
-	@echo specify one of the possible targets: 
+	@echo
+	@echo Specify one of the possible targets: 
 	@echo "	build: build quicksilver"
 	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
-	@echo "	run-pc: use hpctoolkit to collect and analyze detailed information about gpu performance "
-	@echo "	clean: remove build and performance data"
+	@echo "	view: use hpcviewer to inspect performance data gathered using 'run'"
+	@echo "	view-pc: use hpcviewer to inspect performance data gathered using 'run-pc'"
+	@echo "	clean: delete performance data and logs"
+	@echo "	veryclean: delete build, performance data, and logs"
+	@echo
 
 build:
-	/bin/rm -rf quicksilver
-	time sh make-scripts/build.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_BUILD)" \
+	      	sh make-scripts/check.sh make-scripts/build.sh
 
-build-quicksilver:
-	make -j -C quicksilver/src CXX="$(CXX)" CXXFLAGS="$(CXXFLAGS)" CUDA_LDFLAGS="$(CUDA_LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(CUDA_LDFLAGS)"
-
-run-pc:
-	time sh make-scripts/run_hpcrun_pc.sh
 
 run:
-	time sh make-scripts/run_hpcrun.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN)" \
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh
+
+run-pc:
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN_PC)" \
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
+
+view:
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
+
+view-pc:
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda-pc" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct quicksilver qs .build*
+	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf log* .build*
+
+veryclean: clean
+	/bin/rm -rf quicksilver 

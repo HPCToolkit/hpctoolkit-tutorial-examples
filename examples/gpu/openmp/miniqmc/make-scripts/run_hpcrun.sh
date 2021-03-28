@@ -3,21 +3,12 @@ EXEC=miniqmc/miniqmc-build/bin/${BINARY}
 
 OUT=hpctoolkit-miniqmc-gpu-openmp
 
-if [[ -z "`type -p hpcrun`" ]] 
-then
-    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
-    exit
-fi
-
-
+# remove old data
 /bin/rm -rf ${OUT}.m ${OUT}.d
 
-
 # measure an execution of miniqmc
-RUN="time ${MINIQMC_LAUNCHER} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
-echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"' ...
-
-
+RUN="time ${HPCTOOLKIT_MINIQMC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
+echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"' 
 OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
 
 # compute program structure information for the miniqmc binary

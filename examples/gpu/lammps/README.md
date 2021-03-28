@@ -16,10 +16,7 @@ This directory contains scripts to build and run LAMMPS to demonstrate
 GPU performance measurement on a single node with 4 MPI ranks and 
 4 GPUs.
 
-To build LAMMPS, you need to set the following environment variables:
+To build LAMMPS:
 
-        CUDA_HOME: the top-level directory of a CUDA installation
-        MPI_HOME: the top-level directory of an MPI installation
-
-Your path must contain a version of cmake newer than version 3.3
-Your path must contain a version of gcc newer than version 6.4
+- your path must contain a version of cmake newer than version 3.3, and
+- your path must contain a version of gcc newer than version 6.4.

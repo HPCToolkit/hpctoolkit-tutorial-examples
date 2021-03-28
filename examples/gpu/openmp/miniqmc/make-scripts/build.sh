@@ -2,6 +2,10 @@
 
 date > .build_begin
 
+$HPCTOOLKIT_MINIQMC_BUILD_MODULES
+
+rm -rf miniqmc
+
 MPI_ROOT=ignore
 CUDA_HOME=ignore
 
@@ -67,7 +71,7 @@ popd
 mkdir miniqmc/miniqmc-build
 pushd miniqmc/miniqmc-build
 # cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LDFLAGS=-lessl ..
-cmake -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER} -DCMAKE_BUILD_TYPE=RelWithDebInfo ${MINIQMC_COMPILER_FLAGS} ..
+cmake -DCMAKE_CXX_COMPILER=$HPCTOOLKIT_MINIQMC_CXX -DCMAKE_BUILD_TYPE=RelWithDebInfo CXXFLAGS=$HPCTOOLKIT_MINIQMC_CXXFLAGS ..
 make -j VERBOSE=1
 
 date > .build_end

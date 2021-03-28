@@ -1,20 +1,41 @@
+RDY=$(HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY)
+
 all:
-	@echo specify one of the possible targets: 
-	@echo "	build: build lammps and its supporting code"
-	@echo "	run:  use hpctoolkit to collect, analyze, and present information about gpu performance "
+	@echo
+	@echo Specify one of the possible targets: 
+	@echo "	build: build lammps"
+	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
 	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
+	@echo "	view: use hpcviewer to inspect performance data gathered using 'run'"
+	@echo "	view-pc: use hpcviewer to inspect performance data gathered using 'run-pc'"
+	@echo "	clean: delete performance data and logs"
+	@echo "	veryclean: delete build, performance data, and logs"
+	@echo
 
 build:
-	sh build.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_BUILD)" \
+	      	sh make-scripts/check.sh make-scripts/build.sh
+
 
 run:
-	sh run_hpcrun.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN)" \
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh
 
 run-pc:
-	sh run_hpcrun_pc.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN_PC)" \
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
+
+view:
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-lmp" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
+
+view-pc:
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-lmp-pc" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit-* lmp.hpcstruct log.lammps
+	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf log* .build*
 
 veryclean: clean
-	/bin/rm -rf build lammps
+	/bin/rm -rf lammps 
