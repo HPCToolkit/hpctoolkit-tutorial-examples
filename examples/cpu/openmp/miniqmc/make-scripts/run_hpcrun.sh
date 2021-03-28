@@ -1,6 +1,8 @@
 BINARY=miniqmc
 EXEC=miniqmc/miniqmc-build/bin/${BINARY}
 
+$HPCTOOLKIT_MINIQMC_BUILD_MODULES
+
 OUT=hpctoolkit-miniqmc
 
 if [[ -z "`type -p hpcrun`" ]] 
