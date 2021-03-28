@@ -10,20 +10,28 @@ BINARY=laghos
 LAGHOS_DIR=laghos/Laghos
 EXEC=${LAGHOS_DIR}/$BINARY
 OUT=hpctoolkit-laghos-short
+STRUCT_FILE=$BINARY-short.hpcstruct
+
+CMD="rm -rf $OUT.m $OUT.d $STRUCT_FILE"
+echo $CMD
+$CMD
 
 # measure an execution of laghos
-echo "${HPCTOOLKIT_LAGHOS_LAUNCH} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
-time ${HPCTOOLKIT_LAGHOS_LAUNCH} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda
+CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
+echo $CMD
+$CMD
 
 # compute program structure information for the laghos binary
-STRUCT_FILE=$BINARY-short.hpcstruct
-echo hpcstruct -j 16 -o $STRUCT_FILE $EXEC
-hpcstruct -j 16 -o $STRUCT_FILE $EXEC
+CMD="hpcstruct -j 16 -o $STRUCT_FILE $EXEC"
+echo $CMD
+$CMD
 
 # compute program structure information for the laghos cubins
-echo hpcstruct -j 16 $OUT.m
-hpcstruct -j 16 $OUT.m
+CMD="hpcstruct -j 16 $OUT.m"
+echo $CMD
+$CMD
 
 # combine the measurements with the program structure information
-echo hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
-hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
+CMD="hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+echo $CMD
+$CMD

@@ -6,28 +6,30 @@ $HPCTOOLKIT_MODULES_HPCTOOLKIT
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda
+STRUCT_FILE=$BINARY.hpcstruct
 
-# remove output directories to avoid conflicts
-/bin/rm -rf ${OUT}.m ${OUT}.d
+CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
+echo $CMD
+$CMD
 
 # measure an execution of quicksilver
-RUN="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
-echo ${RUN}
-${RUN}
+CMD="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
+echo $CMD
+$CMD
 
 # compute program structure information for the quicksilver binary
-STRUCT_QS="hpcstruct -j 16 ${EXEC}"
-echo ${STRUCT_QS}
-$STRUCT_QS
+CMD="hpcstruct -j 16 -o $STRUCT_FILE ${EXEC}"
+echo $CMD
+$CMD
 
 # compute program structure information for the quicksilver cubins
-STRUCT_CUBIN="hpcstruct --gpucfg no $OUT.m" 
-echo ${STRUCT_CUBIN} "(note: no \"-j <n>\" for parallel analysis since the cubin is not large)"
-${STRUCT_CUBIN}
+CMD="hpcstruct --gpucfg no $OUT.m" 
+echo $CMD "(note: no \"-j <n>\" for parallel analysis since the cubin is not large)"
+$CMD
 
 # combine the measurements with the program structure information
-ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
-echo $ANALYZE
-${ANALYZE}
+CMD="hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+echo $CMD
+$CMD
 
 touch log.run.done

@@ -16,20 +16,22 @@ $HPCTOOLKIT_MODULES_HPCTOOLKIT
 # measure an execution of laghos
 export OMP_NUM_THREADS=2
 CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -t $EXEC -k on g 1 -sf kk -in lammps/lammps/src/USER-INTEL/TEST/in.intel.lj"
-echo ${CMD}
+echo $CMD
 $CMD
 
 # compute program structure information for the lammps binary
-SCMD="time hpcstruct -j 16 -o $STRUCT_FILE $EXEC"
-echo $SCMD
-$SCMD
+CMD="time hpcstruct -j 16 -o $STRUCT_FILE $EXEC"
+echo $CMD
+$CMD
 
 # compute program structure information for the laghos cubins
-echo hpcstruct -j 16 $OUT.m ...
-time hpcstruct -j 16 $OUT.m
+CMD="time hpcstruct -j 16 $OUT.m"
+echo $CMD
+$CMD
 
 # combine the measurements with the program structure information
-echo hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
-time hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m
+CMD="time hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+echo $CMD
+$CMD
 
 touch log.run.done

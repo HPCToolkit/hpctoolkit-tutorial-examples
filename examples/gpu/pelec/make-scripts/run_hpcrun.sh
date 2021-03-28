@@ -8,10 +8,13 @@ DIR=PeleC/Exec/RegTests/PMF
 EXEC=./${BINARY}
 INPUT=./inputs_ex
 OUT=hpctoolkit-${BINARY}-gpu-cuda
+STRUCT_PELEC="hpcstruct -j 16 ${EXEC}"
 
 cd ${DIR}
 
-/bin/rm -rf ${OUT}.m ${OUT}.d
+CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
+echo $CMD
+$CMD
 
 # measure an execution of PeleC
 if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
@@ -27,19 +30,18 @@ fi
 
 
 # compute program structure information for the PeleC binary
-STRUCT_PELEC="hpcstruct -j 16 ${EXEC}"
 echo ${STRUCT_PELEC}
 $STRUCT_PELEC
 
 # compute program structure information for the PeleC cubins
-STRUCT_CUBIN="hpcstruct -j 16 --gpucfg no $OUT.m" 
-echo ${STRUCT_CUBIN}
-${STRUCT_CUBIN}
+CMD="hpcstruct -j 16 --gpucfg no $OUT.m" 
+echo $$CMD
+$CMD
 
 # combine the measurements with the program structure information
-ANALYZE="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
-echo $ANALYZE
-${ANALYZE}
+CMD="hpcprof -S ${BINARY}.hpcstruct -o $OUT.d $OUT.m"
+echo $CMD
+$CMD
 
 cd -
 
