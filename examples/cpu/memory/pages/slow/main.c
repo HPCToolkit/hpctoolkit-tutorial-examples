@@ -22,4 +22,5 @@ main(int argc, char **argv)
   for (reps=0; reps < NREPS; reps++) { 
     dowork();
   }
+  return 0;
 }
