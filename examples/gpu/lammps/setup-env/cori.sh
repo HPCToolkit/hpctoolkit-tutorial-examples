@@ -19,7 +19,7 @@ else
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION -q shared"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
