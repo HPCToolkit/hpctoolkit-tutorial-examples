@@ -27,7 +27,7 @@ echo $CMD
 $CMD
 
 # compute program structure information for the laghos cubins
-CMD="hpcstruct -j 16 --gpucfg yes $OUT.m"
+CMD="hpcstruct -j 16 $OUT.m"
 echo $CMD
 $CMD
 
