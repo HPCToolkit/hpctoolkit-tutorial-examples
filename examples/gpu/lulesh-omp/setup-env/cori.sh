@@ -19,7 +19,7 @@ else
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION -q shared"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
@@ -38,7 +38,7 @@ else
   export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD="module load hpcsdk/20.11 cuda/11.1.1"
   export HPCTOOLKIT_LULESH_OMP_CXX="nvc++"
   export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-mp=gpu -gpu=cc70,lineinfo,rdc -DHAVE_CUDA -cuda -DUSE_MPI=0"
-  export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch  -q shared $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
+  export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch  $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_LULESH_OMP_RUN_PC="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_LULESH_OMP_BUILD="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-build -o log.build.out -e log.build.error"
