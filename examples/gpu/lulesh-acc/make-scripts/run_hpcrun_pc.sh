@@ -13,7 +13,7 @@ echo $CMD
 $CMD
 
 # measure an execution of quicksilver
-CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC}"
+CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 10"
 echo $CMD
 $CMD
 
