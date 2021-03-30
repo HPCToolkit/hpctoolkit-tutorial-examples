@@ -35,9 +35,9 @@ else
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
 
   # environment settings for this example
-  export HPCTOOLKIT_LULESH_ACC_MODULES_BUILD="module load hpcsdk/20.11 cuda/11.1.1"
+  export HPCTOOLKIT_LULESH_ACC_MODULES_BUILD="module load hpcsdk/20.11 cuda/11.0.2"
   export HPCTOOLKIT_LULESH_ACC_CXX="nvc++ -DUSE_MPI=0 -DSEDOV_SYNC_POS_VEL_LATE"
-  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc=gpu -gpu=cc70,lineinfo,rdc -Minfo=accel"
+  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc=gpu -gpu=cc70,lineinfo,rdc -Minfo=accel -fast -gopt"
   export HPCTOOLKIT_LULESH_ACC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_LULESH_ACC_RUN="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_LULESH_ACC_RUN_PC="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
