@@ -38,7 +38,7 @@ else
     # environment settings for this example
   export HPCTOOLKIT_LULESH_ACC_MODULES_BUILD=""
   export HPCTOOLKIT_LULESH_ACC_CXX="pgc++ -DUSE_MPI=0 -DSEDOV_SYNC_POS_VEL_LATE"
-  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc -Minfo=accel -g"
+  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc -Minfo=accel -fast -gopt"
   export HPCTOOLKIT_LULESH_ACC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 20 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LULESH_ACC_RUN="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LULESH_ACC_RUN_PC="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error"
