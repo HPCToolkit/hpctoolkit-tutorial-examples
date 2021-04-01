@@ -35,8 +35,8 @@ else
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
 
   # environment settings for this example
-  export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD="module load hpcsdk/20.11 cuda/11.1.1"
-  export HPCTOOLKIT_LULESH_OMP_CXX="nvc++ -DUSE_MPI=0  -D_OPENMP -DSEDOV_SYNC_POS_VEL_LATE"
+  export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD="module load hpcsdk/20.11 cuda/11.0.2"
+  export HPCTOOLKIT_LULESH_OMP_CXX="nvc++ -DUSE_GPU=1 -DUSE_MPI=0 -D_OPENMP -DSEDOV_SYNC_POS_VEL_LATE -gopt -fast"
   export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-mp=gpu -gpu=cc70,lineinfo,rdc -DHAVE_CUDA -cuda"
   export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch  $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run -o log.run.out -e log.run.error -G 1"
