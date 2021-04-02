@@ -1,4 +1,5 @@
-TCMALLOC_PATH=../../../../../support/gperftools
+SUPPORT=../../../../../support
+TCMALLOC_PATH=$(SUPPORT)/gperftools
 TCMALLOC_ROOT=`pwd`/$(TCMALLOC_PATH)
 TCMALLOC_LIBDIR=$(TCMALLOC_ROOT)/gperftools-install/lib
 
@@ -25,7 +26,10 @@ run-pf: main
 	hpcprof -S main.hpcstruct -o main-cycles-faults-database main-cycles-faults
 	hpcviewer main-cycles-faults-database
 
-$(TCMALLOC_PATH)/gperftools-install/lib/libtcmalloc_minimal.so:
+$(TCMALLOC_PATH):
+		pushd $(SUPPORT); make
+
+$(TCMALLOC_PATH)/gperftools-install/lib/libtcmalloc_minimal.so: $(TCMALLOC_PATH)
 	-mkdir $(TCMALLOC_ROOT)/gperftools-build
 	-mkdir $(TCMALLOC_ROOT)/gperftools-install
 	(cd $(TCMALLOC_ROOT)/gperftools-build; ../configure --prefix=`pwd`/../gperftools-install; make -j install)
