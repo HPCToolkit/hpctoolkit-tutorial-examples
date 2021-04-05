@@ -3,7 +3,7 @@ export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
 
 # environment settings for this example
 export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD=""
-export HPCTOOLKIT_LULESH_OMP_CXX="/home/johnmc/rocm/aomp/bin/clang -DUSE_MPI=0" 
+export HPCTOOLKIT_LULESH_OMP_CXX="clang -DUSE_MPI=0" 
 export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-O3 -target x86_64-pc-linux-gnu -fopenmp -fopenmp-targets=amdgcn-amd-amdhsa -Xopenmp-target=amdgcn-amd-amdhsa -march=gfx906"
 export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-O3 -g -target x86_64-pc-linux-gnu -fopenmp -fopenmp-targets=amdgcn-amd-amdhsa -Xopenmp-target=amdgcn-amd-amdhsa -march=gfx906"
 export HPCTOOLKIT_LULESH_OMP_SUBMIT="sh"
