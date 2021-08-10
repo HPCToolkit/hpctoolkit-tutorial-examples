@@ -4,7 +4,9 @@ then
   echo "    'default' to run with your default project id unset"
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
-  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value or use"
+  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
+  echo "    'hpctoolkit1' for day 1"
+  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -24,40 +26,35 @@ else
   module purge
 
   # load hpctoolkit modules
-
   module use /ccsopen/proj/gen161/modules
   module load hpctoolkit/2021.08.10
 
-  # load modules needed to build and run laghos
-  module load cuda/10.1.243 gcc/7.4.0 cmake/3.18.2 spectrum-mpi
-
-  # set platform
-  unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
-  export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=summit
+  # load modules needed to build and run quicksilver
+  module load cuda/11.0.2 cmake/3.18.2 gcc/7.4.0
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
 
-  # environment settings for this example
-  export HPCTOOLKIT_LAGHOS_MODULES_BUILD=""
-  export HPCTOOLKIT_LAGHOS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
-  export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error -G 1"
-  export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error -G 1"
-  export HPCTOOLKIT_LAGHOS_RUN_PC="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
-  export HPCTOOLKIT_LAGHOS_BUILD="sh"
-  export HPCTOOLKIT_LAGHOS_LAUNCH="jsrun -n 1 -g 1 -a 1"
-
+    # environment settings for this example
+  export HPCTOOLKIT_QS_MODULES_BUILD=""
+  export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_QS_BUILD="sh"
+  export HPCTOOLKIT_QS_LAUNCH="jsrun -n 1 -g 1 -a 1"
 
   # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY=1
+  export HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY=1
 
   # unset flags for other examples
   unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
   unset HPCTOOLKIT_TUTORIAL_CPU_HPCG_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
+  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_ACC_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_OMP_READY
   unset HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
+  unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
 fi
+
+
