@@ -1,4 +1,4 @@
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_LULESH_OMP_READY)
+RDY=$(findstring luleshomp,$(HPCTOOLKIT_EXAMPLE))
 
 all: 
 	@echo 
@@ -34,7 +34,7 @@ view-pc:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf hpctoolkit*
 	/bin/rm -rf log* .build*
 
 veryclean: clean
