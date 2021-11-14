@@ -3,17 +3,19 @@
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-BINARY=PeleC3d.gnu.CUDA.ex
-DIR=PeleC/Exec/RegTests/PMF
-EXEC=./${BINARY}
-INPUT=./inputs_ex
+BINARY=PeleC-TG
+LOC=Exec/RegTests/TG
+DIR=../PeleC/build/${LOC}
+EXEC=${DIR}/${BINARY}
+INPUT=../PeleC/${LOC}/tg-1.inp max_step=1000
 OUT=hpctoolkit-${BINARY}-gpu-cuda
 
-cd ${DIR}
-
-CMD="rm -rf ${OUT}.m ${OUT}.d"
+CMD="rm -rf ${OUT}.m ${OUT}.d dir.run"
 echo $CMD
 $CMD
+
+mkdir dir.run
+cd dir.run
 
 # measure an execution of PeleC
 if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
@@ -38,7 +40,6 @@ CMD="hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
-cd -
-
-mv ${DIR}/$OUT.d ${DIR}/$OUT.m ./
+mv $OUT.d $OUT.m ..
+cd ..
 touch log.run.done
