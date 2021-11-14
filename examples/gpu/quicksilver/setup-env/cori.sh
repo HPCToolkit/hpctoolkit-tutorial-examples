@@ -37,7 +37,7 @@ else
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.11-gpu"
 
   # environment settings for this example
-  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.4.0 cmake gcc"
+  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.3.0 cmake gcc"
   export HPCTOOLKIT_QS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.stderr -G 1"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.stderr -G 1"
