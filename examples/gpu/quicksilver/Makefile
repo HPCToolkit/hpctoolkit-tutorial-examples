@@ -1,4 +1,4 @@
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY)
+RDY=$(findstring quicksilver,$(HPCTOOLKIT_EXAMPLE))
 
 all:
 	@echo
