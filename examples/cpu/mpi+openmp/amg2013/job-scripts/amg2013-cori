@@ -25,15 +25,14 @@ module load openmp/ompt
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-module load hpctoolkit/2021.03.01
+module use /global/common/software/m3977/hpctoolkit/2021-11/modules
+module load hpctoolkit/2021.11-cpu
 
 export OMP_PROC_BIND=true
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
 
 export OMP_WAIT_POLICY=active
-
-module load hpctoolkit/2021.03.01
 
 export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e CPUTIME -t"
 export ranks=16

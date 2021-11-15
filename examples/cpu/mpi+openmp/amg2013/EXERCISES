@@ -1,8 +1,19 @@
-1. use the trace view to identify the main phases of the program. proceed top down.  
-2. is the program running efficiently?
-3. use the bottom up view to see where it spends most of its time. use the flame button to 
-   look up the call chain to see how it gets there.
-4. experiment with halving the number of thread by changing OMP_NUM_THREADS in the job-script for your platform.
-   how does that affect the efficiency and the execution time?
-5. edit the job-script for your platform to comment out the module load of openmp/ompt (if present). measure
-   the program execution again. how does your view of the execution differ without the OpenMP tools interface? 
+               Analyzing and experimenting with AMG2013
+-------------------------------------------------------------------------
+
+1. Use the trace view to identify the main phases of the program. proceed
+   top down.
+
+2. Is the program running efficiently?
+
+3. Use the bottom up view to see where it spends most of its time. use
+   the flame button to look up the call chain to see how it gets there.
+
+4. Experiment with halving the number of thread by changing
+   OMP_NUM_THREADS in the job-script for your platform.  How does that
+   affect the efficiency and the execution time?
+
+5. Edit the job-script for your platform to comment out the module load
+   of openmp/ompt (if present). measure the program execution again. how
+   does your view of the execution differ without the OpenMP tools
+   interface?
