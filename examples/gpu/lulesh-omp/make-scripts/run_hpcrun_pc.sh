@@ -12,7 +12,7 @@ echo $CMD
 $CMD
 
 # measure an execution of lulesh-omp
-CMD="time ${HPCTOOLKIT_LULESH_OMP_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 100"
+CMD="time ${HPCTOOLKIT_LULESH_OMP_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 100"
 echo $CMD
 $CMD
 
