@@ -4,4 +4,3 @@
 hpcrun --disable-auditor -o julia.m julia mb.jl
 hpcstruct julia.m
 hpcprof -o julia.d julia.m
-hpcviewer julia.d
