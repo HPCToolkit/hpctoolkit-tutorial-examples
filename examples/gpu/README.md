@@ -50,3 +50,12 @@ data:
    NVIDIA GPUs HPCToolkit also reports static kernel characteristics, e.g. register 
    consumption, shared memory consumption, as well as dynamic measurements such as
    average number of blocks in launches of a kernel in a context, utilization, etc.       
+
+Tracing of GPU-accelerated codes is a work in progress. While a more sophisticated
+version of HPCToolkit under development is working to maintain meta data for each
+trace line, associating each trace line with hardware abstractions (e.g. nodes, cpu 
+cores, gpus) and software abstractions (e.g. mpi ranks, threads, gpu contexts, gpu streams),
+today's version of HPCToolkit lacks an association between software abstractions and
+the hardware they run on. Furthermore, there is no good way to distinguish CPU threads
+and GPU streams in hpcviewer's trace view. As a stopgap solution, we number GPU streams
+with thread numbers that begin at 500.
