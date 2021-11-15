@@ -1,0 +1,30 @@
+There are too many examples here to offer full guided exercises for each. Here are
+a few things to look for:
+
+1) GPU-accelerated programs are efficient when the GPU is nearly always busy. For
+   quicksilver, look at its trace view. Is the GPU busy most of the time? If not,
+   is there a particular CPU computation that occurs while the GPU is idle? What
+   would you want to ask the code author about that code?
+
+2) Looking at the flat view of the PC sampling data for quicksilver. Use the frame
+   button to see where the code spends most of its time on the GPU. What is unusal
+   about that? Is HPCToolkit's unique fine-grain attribution to inlined GPU 
+   functions, inlined code, and loops useful for understanding the performance of
+   GPU-accelerated code?
+
+3) For the PC sampling data for lulesh-omp, sort by the exclusive GPU instructions 
+   in the bottom-up view.  Can you spot the costly CUDA math operations (e.g. 
+   routines that begin with __cuda_sm20)? Where are they invoked? Is there a faster 
+   alternative to some of them? Reconstructing calling contexts for GPU device 
+   procedures is a capability unique to HPCToolkit.
+
+4) For the operation-level profiles and traces of lulesh-omp, look at the trace.
+   How many OpenMP threads are active in this execution? Are they doing useful work? 
+
+
+5) For laghos, given the PC sampling data for the code, what files represent the most
+   work? 
+
+6) For the lammps PC sampling experiments, see how HPCToolkit reveals the intricacy 
+   of the host and device-side code generated from Kokkos - a programming model based
+   on C++ templates.
