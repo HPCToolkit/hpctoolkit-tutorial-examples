@@ -7,7 +7,14 @@
    view of the program execution at a depth greater than 1 (a bug that
    will be fixed in the next release). Go to the top of the Call Path
    Pane and set the initial depth to 1 and proceed with your analysis
-   of the performance top-down.
+   of the performance top-down. You can select any point in the space
+   time view of a program to see its call path. (Note: the call path
+   pane on the right side of hpcviewer shows a call path with a color
+   for each procedure on the path. This is not a legend for the trace
+   view. If you want to see what procedure is associated with a color
+   anywhere in the trace view, select the point! You will see the 
+   call path at that point, which may have frames above and perhaps
+   below the procedure frame producing the color at the selected point)
 
 2. Is the program running efficiently? If not, what is wrong with it?
    I recommend that you use the "max depth" button on the Call Path Pane
