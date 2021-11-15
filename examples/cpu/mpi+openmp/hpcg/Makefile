@@ -1,8 +1,10 @@
+RDY=$(findstring hpcg,$(HPCTOOLKIT_EXAMPLE))
+
 all:
 	@echo ""
 	@echo specify one of the possible targets: 
-	@echo "	build: build amg2013"
-	@echo "	run: use hpctoolkit to collect measurements about the CPU performance of amg2013"
+	@echo "	build: build xhpcg"
+	@echo "	run: use hpctoolkit to collect measurements about the CPU performance of xhpcg"
 	@echo "	analyze: use hpcprof to analyze performance measurements serially and attribute back to source code"
 	@echo "	analyze-parallel: use hpcprof-mpi to analyze performance measurements in parallel and attribute back to source code"
 	@echo "	view: invoke hpcviewer to inspect results of measurement and analysis"
@@ -12,22 +14,30 @@ all:
 	@echo ""
 
 build:
-	/bin/rm -rf build src
-	time sh make-scripts/build.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_HPCG_BUILD)" \
+	      	sh make-scripts/check.sh make-scripts/build.sh
 
 run:
-	sh make-scripts/xhpcg.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_HPCG_RUN)" \
+	      	sh make-scripts/check.sh make-scripts/xhpcg.sh
 
 analyze:
-	sh make-scripts/prof.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_HPCG_ANALYZE)" \
+	      	sh make-scripts/check.sh make-scripts/prof.sh
 
 analyze-parallel:
-	sh make-scripts/profmpi.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_HPCG_ANALYZE)" \
+	      	sh make-scripts/check.sh make-scripts/profmpi.sh
 
 view:
-	sh make-scripts/view.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_HPCG_VIEW)" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct src build
-	/bin/rm -rf  hpcg2*.txt HPCG-*.txt .build* *core* slurm*
+	/bin/rm -rf hpctoolkit* 
+	 /bin/rm -rf  hpcg2*.txt HPCG-*.txt .build* *core* slurm*
+	/bin/rm -rf .build* log.*
+
+veryclean: clean
+	/bin/rm -rf src build tarfile
 	$(CLEAN_CMD)

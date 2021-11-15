@@ -1,10 +1,12 @@
 #!/bin/bash
-#SBATCH --qos=regular
+#SBATCH --qos=debug
 #SBATCH --time=10
 #SBATCH --nodes=2
 #SBATCH --tasks-per-node=8
 #SBATCH --cpus-per-task=8
 #SBATCH --constraint=knl
+#SBATCH -o log.run.out
+#SBATCH -e log.run.stderr
 
 #------------------------------------------------------------------------------
 # use LLVM OpenMP Tools support
@@ -23,15 +25,15 @@ module load openmp/ompt
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-module load hpctoolkit/2021.03.01
-
 # export OMP_PROC_BIND=true
 # export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
 
 export OMP_WAIT_POLICY=active
 
-module load hpctoolkit/2021.03.01
+module use /global/common/software/m3977/hpctoolkit/2021-11/modules
+module load hpctoolkit/2021.11-cpu
+
 
 export HPCRUN_ARGS="-o hpctoolkit-xhpcg.m -e CPUTIME -t"
 export ranks=16
@@ -42,3 +44,4 @@ size=32
 srun -n $ranks $bind  \
     hpcrun ${HPCRUN_ARGS} build/bin/xhpcg  --nx=$size --rt=30
 
+touch log.run.done

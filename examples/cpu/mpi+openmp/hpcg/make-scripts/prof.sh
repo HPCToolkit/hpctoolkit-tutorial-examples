@@ -1,22 +1,17 @@
 BINARY=xhpcg
 EXEC=build/bin/${BINARY}
+OUT=hpctoolkit-${BINARY}
 
-if [[ -z "`type -p hpcprof`" ]] 
-then
-    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
-    exit
-fi
-
-# compute program structure information for the amg2013 binary
-STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
+# compute program structure information for the xhpcg binary and its libraries
+STRUCT_BIN="hpcstruct ${OUT}.m"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 
 # remove any existing database
-/bin/rm -rf hpctoolkit-${BINARY}.d
+/bin/rm -rf ${OUT}.d
 
 # combine the measurements with the program structure information
-ANALYZE_CMD="hpcprof -S ${BINARY}.hpcstruct -o hpctoolkit-${BINARY}.d hpctoolkit-${BINARY}.m"
+ANALYZE_CMD="hpcprof -o ${OUT}.d  ${OUT}.m"  
  
-echo hpcprof ${ANALYZE_CMD} ...
+echo ${ANALYZE_CMD} ...
 ${ANALYZE_CMD}

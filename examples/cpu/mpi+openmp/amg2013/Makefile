@@ -1,3 +1,5 @@
+RDY=$(findstring amg2013,$(HPCTOOLKIT_EXAMPLE))
+
 all:
 	@echo ""
 	@echo specify one of the possible targets: 
@@ -12,23 +14,29 @@ all:
 	@echo ""
 
 build:
-	/bin/rm -rf AMG2013 tarfile
-	time sh make-scripts/build.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_AMG2013_BUILD)" \
+	      	sh make-scripts/check.sh make-scripts/build.sh
 
 run:
-	sh make-scripts/amg2013.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_AMG2013_RUN)" \
+	      	sh make-scripts/check.sh make-scripts/amg2013.sh
 
 analyze:
-	sh make-scripts/prof.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_AMG2013_ANALYZE)" \
+	      	sh make-scripts/check.sh make-scripts/prof.sh
 
 analyze-parallel:
-	sh make-scripts/profmpi.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_AMG2013_ANALYZE)" \
+	      	sh make-scripts/check.sh make-scripts/profmpi.sh
 
 view:
-	sh make-scripts/view.sh
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_AMG2013_VIEW)" \
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct AMG2013 sstruct.in.MG.FD slurm* *core*
-	/bin/rm -rf error.* output.* .build*
+	/bin/rm -rf hpctoolkit* sstruct.in.MG.FD *core*
+	/bin/rm -rf error.* output.* .build* log.*
+
+veryclean: clean
 	/bin/rm -rf AMG2013 tarfile
 	$(CLEAN_CMD)
