@@ -19,7 +19,7 @@ OPTFLAGS="-O2 -lineinfo -g"
 #OPTFLAGS = -g -G -O0
 
 CXX="${CUDA_HOME}/bin/nvcc"
-CXXFLAGS="-DHAVE_CUDA -std=c++11 ${OPTFLAGS} -gencode=arch=compute_70,code=\\\"sm_70,compute_70\\\""
+CXXFLAGS="-DHAVE_CUDA -std=c++11 ${OPTFLAGS} -gencode=arch=compute_${HPCTOOLKIT_CUDA_ARCH},code=\\\"sm_${HPCTOOLKIT_CUDA_ARCH},compute_${HPCTOOLKIT_CUDA_ARCH}\\\""
 CPPFLAGS="-x cu -dc"
 
 LDFLAGS="-L${CUDA_HOME}/lib64 -lcuda -lcudart"
