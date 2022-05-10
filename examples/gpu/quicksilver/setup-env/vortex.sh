@@ -32,31 +32,22 @@ else
   module load hpctoolkit/2022.04
 
   # load modules needed to build and run quicksilver
-  module load cuda/11.6.0 cmake/3.14.5 gcc/8.3.1
+  module load cuda/11.6.1 cmake/3.14.5 gcc/8.3.1
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
 
-    # environment settings for this example
-  export HPCTOOLKIT_QS_MODULES_BUILD=""
+  # environment settings for this example
+  export HPCTOOLKIT_CUDA_ARCH=70
+  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.6.1"
   export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_QS_BUILD="sh"
   export HPCTOOLKIT_QS_LAUNCH="jsrun -n 1 -g 1 -a 1"
 
-  # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY=1
-
-  # unset flags for other examples
-  unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
-  unset HPCTOOLKIT_TUTORIAL_CPU_HPCG_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_ACC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_OMP_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
+  # mark configuration for this example
+  export HPCTOOLKIT_EXAMPLE=quicksilver
 fi
 
 
