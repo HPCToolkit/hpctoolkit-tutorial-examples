@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 BINARY=lmp
 LAMMPS_DIR=lammps/lammps/build
@@ -19,18 +19,14 @@ CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e cycles -e gpu=nvidia -
 echo $CMD
 $CMD
 
-# compute program structure information for the lammps binary
-CMD="time hpcstruct -j 16 -o $STRUCT_FILE $EXEC"
-echo $CMD
-$CMD
-
+unset OMP_NUM_THREADS
 # compute program structure information for the laghos cubins
-CMD="time hpcstruct -j 16 $OUT.m"
+CMD="time hpcstruct $OUT.m"
 echo $CMD
 $CMD
 
 # combine the measurements with the program structure information
-CMD="time hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+CMD="time hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 

@@ -1,4 +1,4 @@
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY)
+RDY=$(findstring lammps,$(HPCTOOLKIT_EXAMPLE))
 
 all:
 	@echo
