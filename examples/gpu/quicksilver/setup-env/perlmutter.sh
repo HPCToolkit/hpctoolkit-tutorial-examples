@@ -36,10 +36,10 @@ else
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_QS_MODULES_BUILD="module load cudatoolkit/11.7 cmake gcc"
-  export HPCTOOLKIT_QS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -t 10"
+  export HPCTOOLKIT_QS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -t 10 -C gpu -q regular"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.stderr -G 1"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.stderr -G 1"
-  export HPCTOOLKIT_QS_BUILD="$HPCTOOLKIT_QS_SUBMIT -J qs-build -o log.build.out -e log.build.stderr"
+  export HPCTOOLKIT_QS_BUILD="$HPCTOOLKIT_QS_SUBMIT -J qs-build -o log.build.out -e log.build.stderr -G 0"
   export HPCTOOLKIT_QS_LAUNCH="srun -n 1 -G 1"
 
   # mark configuration for this example
