@@ -11,7 +11,7 @@ fi
 /bin/rm -rf hpctoolkit-amg2013.d
 
 # compute program structure information for the amg2013 binary
-STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
+STRUCT_BIN="hpcstruct hpctoolkit-amg2013.m"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 

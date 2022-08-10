@@ -1,0 +1,33 @@
+#!/bin/bash
+#COBALT --attrs filesystems=grand
+#COBALT -t 10 -n 2
+
+#------------------------------------------------------------------------------
+#    you can uncomment the line below if you don't want to use HPCToolkit's 
+#    OMPT support.
+#------------------------------------------------------------------------------
+
+# export OMP_TOOL=disabled
+
+export OMP_PROC_BIND=true
+export OMP_PLACES=threads
+export OMP_NUM_THREADS=4
+
+export OMP_WAIT_POLICY=active
+
+module load  hpctoolkit/2022.08.03
+
+export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e CPUTIME -t"
+
+export ranks=16
+
+export cores_per_task=$OMP_NUM_THREADS
+
+export bind="--cc none"
+
+export refine=20
+
+CMD="aprun -N $(( $ranks / 2 )) -n $ranks -d $cores_per_task $bind hpcrun ${HPCRUN_ARGS} AMG2013/test/amg2013  -P 2 4 2  -r  $refine $refine $refine"
+echo launching job with command \'$CMD\'
+$CMD
+touch $COBALT_JOBID.done

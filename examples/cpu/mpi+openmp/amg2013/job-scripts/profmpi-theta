@@ -1,0 +1,17 @@
+#!/bin/bash
+#COBALT --attrs filesystems=grand
+#COBALT -t 10 -n 1 
+
+module load hpctoolkit/2022.08.03
+
+rm -rf hpctoolkit-amg2013.d
+
+export ranks=16
+
+export cores_per_task=$OMP_NUM_THREADS
+
+export refine=20
+
+aprun -n $ranks -N $ranks hpcprof-mpi -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m
+touch $COBALT_JOBID.done
+

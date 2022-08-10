@@ -2,6 +2,8 @@ MPI + OpenMP example: AMG2013 benchmark
 
 1. set up your environment
 	module load hpctoolkit
+        export HPCTOOLKIT_TUTORIAL_RESERVATION=<queue name>
+        export HPCTOOLKIT_TUTORIAL_PROJECTID=ATPESC2022
 	source setup-env/theta.sh
 
 2. download and build AMG2013

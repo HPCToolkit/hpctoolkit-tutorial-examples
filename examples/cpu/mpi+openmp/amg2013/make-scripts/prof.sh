@@ -8,7 +8,7 @@ then
 fi
 
 # compute program structure information for the amg2013 binary
-STRUCT_BIN="hpcstruct -j 8 ${EXEC}"
+STRUCT_BIN="hpcstruct -j 8 hpctoolkit-amg2013.m"
 echo ${STRUCT_BIN} ... 
 ${STRUCT_BIN}
 
@@ -16,7 +16,7 @@ ${STRUCT_BIN}
 rm -rf hpctoolkit-amg2013.d
 
 # combine the measurements with the program structure information
-ANALYZE_CMD="hpcprof -S ${BINARY}.hpcstruct -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
+ANALYZE_CMD="hpcprof -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
  
 echo hpcprof ${ANALYZE_CMD} ...
 ${ANALYZE_CMD}
