@@ -28,10 +28,10 @@ else
 
   # load hpctoolkit modules
   module use /global/common/software/m3977/hpctoolkit/2022-08/modules
-  module load hpctoolkit/master-20220805
+  module load hpctoolkit/master-202208-nopapi
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/master-20220805"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/master-202208-nopapi"
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=80
