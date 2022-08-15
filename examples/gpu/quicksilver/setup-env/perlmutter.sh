@@ -41,6 +41,8 @@ else
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.stderr -G 1"
   export HPCTOOLKIT_QS_BUILD="$HPCTOOLKIT_QS_SUBMIT -J qs-build -o log.build.out -e log.build.stderr -G 0"
   export HPCTOOLKIT_QS_LAUNCH="srun -n 1 -G 1"
+  export HPCTOOLKIT_QS_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
+  export HPCTOOLKIT_QS_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=quicksilver
