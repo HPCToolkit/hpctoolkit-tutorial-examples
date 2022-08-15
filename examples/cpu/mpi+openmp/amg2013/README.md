@@ -2,7 +2,9 @@ MPI + OpenMP example: AMG2013 benchmark
 
 1. set up your environment
 	module load hpctoolkit
-	source setup-env/theta.sh
+        export HPCTOOLKIT_TUTORIAL_RESERVATION=<queue name>
+        export HPCTOOLKIT_TUTORIAL_PROJECTID=<project>
+	source setup-env/<machine>.sh
 
 2. download and build AMG2013
 	make build
@@ -17,7 +19,11 @@ or
 4.b analyze measurement data for a larger experiment on the compute nodes
 	make analyze-parallel
 
-5. interactively explore traces with hpctraceviewer GUI
+5a. interactively explore traces with hpctraceviewer GUI
+	make view
+or
+
+5b. interactively explore traces with hpctraceviewer GUI
    	hpcviewer hpctoolkit-amg2013.d
 
 NOTE: the directories used for hpctoolkit measurements and analysis results are non-standard

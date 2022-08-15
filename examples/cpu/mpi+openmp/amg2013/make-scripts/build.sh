@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/bin/rm -rf AMG2013 tarfile
+
 STD_CFLAGS=" -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_NO_GLOBAL_PARTITION -DHYPRE_LONG_LONG"
 OMP_CFLAGS=" -O2 -g -fopenmp "
 STD_LDFLAGS=" -dynamic -fopenmp -lm"
