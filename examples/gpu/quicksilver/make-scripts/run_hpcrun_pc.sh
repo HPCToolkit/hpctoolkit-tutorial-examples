@@ -11,10 +11,14 @@ CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
 echo $CMD
 $CMD
 
+$HPCTOOLKIT_QS_BEFORE_RUN_PC
+
 # measure an execution of quicksilver
 CMD="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -t -o $OUT.m -e gpu=nvidia,pc ${EXEC}"
 echo $CMD
 $CMD
+
+$HPCTOOLKIT_QS_AFTER_RUN_PC
 
 # compute program structure information for quicksilver CPU and GPU binaries
 CMD="hpcstruct --gpucfg yes $OUT.m" 
