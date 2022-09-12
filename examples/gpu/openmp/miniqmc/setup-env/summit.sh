@@ -33,17 +33,13 @@ else
   module load cmake/3.17.3
   module load spectrum-mpi
 
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_MINIQMC_CXX="xlC_r"
   export HPCTOOLKIT_MINIQMC_CXXFLAGS="-DENABLE_OFFLOAD=1"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
   export HPCTOOLKIT_MINIQMC_LAUNCH="jsrun -n 1 -g 1 -a 1 -c 11 -brs"
-  export HPCTOOLKIT_MINIQMC_RUN="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $RESERVE -J miniqmc-run -o log.run.out -e log.run.error $1"
+  export HPCTOOLKIT_MINIQMC_RUN="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
+  export HPCTOOLKIT_MINIQMC_RUN_PC="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
 
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAMMMPS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
-
-  export HPCTOOLKIT_TUTORIAL_BATCH=1
-  export HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY=1
+  unset HPCTOOLKIT_EXAMPLE=miniqmc
 fi
