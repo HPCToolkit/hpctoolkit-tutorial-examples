@@ -24,22 +24,27 @@ else
     unset HPCTOOLKIT_RESERVATION
   fi
 
+  # cleanse environment
   module purge
-  module load hpctoolkit/2021.03.01
-  module load xl
-  module load cuda/10.1.243
+
+  # load hpctoolkit modules
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  module load hpctoolkit/master-202208-papi
+
+  module load nvhpc
+  module load cuda/11.5.2
   module load essl
   module load netlib-lapack
-  module load cmake/3.17.3
+  module load cmake
   module load spectrum-mpi
 
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
-  export HPCTOOLKIT_MINIQMC_CXX="xlC_r"
+  export HPCTOOLKIT_MINIQMC_CXX_COMPILER="nvc++"
   export HPCTOOLKIT_MINIQMC_CXXFLAGS="-DENABLE_OFFLOAD=1"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
   export HPCTOOLKIT_MINIQMC_LAUNCH="jsrun -n 1 -g 1 -a 1 -c 11 -brs"
   export HPCTOOLKIT_MINIQMC_RUN="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
   export HPCTOOLKIT_MINIQMC_RUN_PC="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
 
-  unset HPCTOOLKIT_EXAMPLE=miniqmc
+  export HPCTOOLKIT_EXAMPLE=miniqmc
 fi
