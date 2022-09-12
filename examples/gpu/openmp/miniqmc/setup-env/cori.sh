@@ -35,24 +35,16 @@ else
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
 
   # environment settings for this example
-  export HPCTOOLKIT_MINIQMC_BUILD_MODULES="module load  llvm/12.0.0-git_20210117 cuda/11.1.1 cmake/3.18.2 gcc openblas"
-  export HPCTOOLKIT_MINIQMC_COMPILER_FLAGS="-DENABLE_OFFLOAD=1"
-  export HPCTOOLKIT_MINIQMC_CXX_COMPILER=clang
+  export HPCTOOLKIT_MINIQMC_MODULES_BUILD="module load llvm/12.0.0-git_20210117 cuda/11.1.1 cmake openblas"
+  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1"
+  export HPCTOOLKIT_MINIQMC_CXX_COMPILER=clang++
   export HPCTOOLKIT_MINIQMC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_MINIQMC_RUN="$HPCTOOLKIT_MINIQMC_SUBMIT -J qs-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_MINIQMC_RUN_PC="$HPCTOOLKIT_MINIQMC_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_MINIQMC_BUILD="$HPCTOOLKIT_MINIQMC_SUBMIT -J qs-build -o log.build.out -e log.build.error"
-  export HPCTOOLKIT_MINIQMC_BUILD="sh make-scripts/unsupported.sh"
+  export HPCTOOLKIT_MINIQMC_BUILD="sh make-scripts/unsupported-cori.sh"
   export HPCTOOLKIT_MINIQMC_LAUNCH="srun -n 1 -G 1"
 
   # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY=1
-
-  # unset flags for other examples
-  unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
-  unset HPCTOOLKIT_TUTORIAL_CPU_HPCG_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY
+  export HPCTOOLKIT_EXAMPLE=miniqmc
 fi
