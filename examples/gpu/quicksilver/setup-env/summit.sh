@@ -27,7 +27,7 @@ else
 
   # load hpctoolkit modules
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
-  module load hpctoolkit/master-20220727
+  module load hpctoolkit/2022.10.01
   #module load hpcviewer/2021.03
 
   # load modules needed to build and run quicksilver
