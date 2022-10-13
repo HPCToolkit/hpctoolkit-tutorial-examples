@@ -27,11 +27,11 @@ else
   module purge
 
   # load hpctoolkit modules
-  module use /global/common/software/m3977/hpctoolkit/2022-08/modules
-  module load hpctoolkit/master-202208-nopapi
+  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
+  module load hpctoolkit/2022.10.01-gpu
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/master-202208-nopapi"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01-gpu"
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=80
