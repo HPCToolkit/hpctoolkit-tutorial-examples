@@ -18,5 +18,5 @@ rm -rf hpctoolkit-amg2013.d
 # combine the measurements with the program structure information
 ANALYZE_CMD="hpcprof -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
  
-echo hpcprof ${ANALYZE_CMD} ...
+echo ${ANALYZE_CMD} ...
 ${ANALYZE_CMD}
