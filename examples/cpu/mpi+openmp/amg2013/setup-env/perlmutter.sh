@@ -32,8 +32,15 @@ else
 #  export HPCTOOLKIT_ANALYZE_CMD="job-scripts/profmpi-perlmutter"
   export HPCTOOLKIT_BATCH="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION" 
 
+  # Load/unload NERSC modules
+  module reset
   module load cpu
+  module load PrgEnv-gnu
   module unload darshan
+
+  # Load HPCToolkit module
+  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
+  module load hpctoolkit/2022.10.01-cpu
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=amg2013
