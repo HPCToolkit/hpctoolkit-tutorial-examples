@@ -1,8 +1,10 @@
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
   echo "    'ntrain' for training accounts"
-  echo "    'default' to run with your default repository, which won't let you use the  reservation"
+  echo "    'default' to run with your default repository, which won't let you use the reservation"
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"

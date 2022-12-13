@@ -1,3 +1,5 @@
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
@@ -5,8 +7,8 @@ then
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-  echo "    'hpctoolkit1' for day 1"
-  echo "    'hpctoolkit2' for day 2"
+#  echo "    'hpctoolkit1' for day 1"
+#  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -28,7 +30,6 @@ else
   # load hpctoolkit modules
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
   module load hpctoolkit/2022.10.01
-  #module load hpcviewer/2021.03
 
   # load modules needed to build and run quicksilver
   module load cuda/11.5.2 cmake/3.23.2 gcc/9.1.0
