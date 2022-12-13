@@ -3,11 +3,11 @@
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-BINARY=PeleC3d.gnu.CUDA.ex
+BINARY=PeleC3d.gnu.${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}.ex
 DIR=PeleC/Exec/RegTests/PMF
 EXEC=./${BINARY}
 INPUT=./inputs_ex
-OUT=hpctoolkit-${BINARY}-gpu-cuda
+OUT=hpctoolkit-${BINARY}-gpu-${HPCTOOLKIT_PELEC_GPU_PLATFORM}
 STRUCT_PELEC="hpcstruct -j 16 ${EXEC}"
 
 cd ${DIR}
@@ -17,12 +17,14 @@ echo $CMD
 $CMD
 
 # measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
-then
+if [[ "${HPCTOOLKIT_TUTORIAL_GPU_SYSTEM}" == "summit" ]]; then
   echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
     hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" 
   ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
     hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
+elif [[ "${HPCTOOLKIT_TUTORIAL_GPU_SYSTEM}" == "crusher" ]]; then
+  echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=amd -t ${EXEC} ${INPUT}"
+  time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=amd -t ${EXEC} ${INPUT}
 else
   echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"
   time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC} ${INPUT}

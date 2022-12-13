@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ "${HPCTOOLKIT_PELEC_GPU_PLATFORM}" != "cuda" ]]; then
+  echo "PC sampling is not yet supported on GPU platforms other than NVIDIA"
+  exit 0
+fi
+
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
@@ -16,10 +21,10 @@ echo $CMD
 $CMD
 
 # measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
+if [[ "${HPCTOOLKIT_TUTORIAL_GPU_SYSTEM}" == "summit" ]]
 then
   echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
-    hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}" 
+    hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
   ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
     hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
 else

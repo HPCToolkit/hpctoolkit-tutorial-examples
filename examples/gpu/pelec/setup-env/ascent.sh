@@ -1,3 +1,5 @@
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
@@ -5,8 +7,6 @@ then
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-  echo "    'hpctoolkit1' for day 1"
-  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -25,21 +25,20 @@ else
   # cleanse environment
   module purge
 
-  # load hpctoolkit modules
-  module use /ccsopen/proj/gen161/modules
-  module load hpctoolkit/2021.08.10
-
   # load modules needed to build and run pelec
   module load python cuda/10.1.243 gcc/7.4.0 cmake/3.18.2 spectrum-mpi
 
   # set platform
-  unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
-  export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=summit
+  unset HPCTOOLKIT_TUTORIAL_GPU_SYSTEM
+  export HPCTOOLKIT_TUTORIAL_GPU_SYSTEM=summit
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
+  module use /ccsopen/proj/gen161/modules
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.08.10"
+  $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
+  export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
@@ -47,15 +46,7 @@ else
   export HPCTOOLKIT_PELEC_BUILD="sh"
   export HPCTOOLKIT_PELEC_LAUNCH="jsrun -n 1 -g 1 -a 1"
 
+  # mark configuration for this example
+  export HPCTOOLKIT_EXAMPLE=pelec
 
-  # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY=1
-
-  # unset flags for other examples
-  unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
-  unset HPCTOOLKIT_TUTORIAL_CPU_HPCG_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
 fi

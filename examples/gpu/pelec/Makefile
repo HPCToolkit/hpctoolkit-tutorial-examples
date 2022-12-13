@@ -1,5 +1,5 @@
-EXEC=PeleC3d.gnu.CUDA.ex
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY) 
+EXEC=PeleC3d.gnu.${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}.ex
+RDY=$(findstring pelec,$(HPCTOOLKIT_EXAMPLE))
 
 all:
 	@echo
@@ -26,7 +26,7 @@ run-pc:
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
 
 view:
-	@READY=$(RDY) CMD=sh DB="hpctoolkit-$(EXEC)-gpu-cuda" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-$(EXEC)-gpu-{HPCTOOLKIT_PELEC_GPU_PLATFORM}" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 view-pc:
