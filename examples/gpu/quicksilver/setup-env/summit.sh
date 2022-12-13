@@ -27,17 +27,16 @@ else
   # cleanse environment
   module purge
 
-  # load hpctoolkit modules
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
-  module load hpctoolkit/2022.10.01
-
   # load modules needed to build and run quicksilver
-  module load cuda/11.5.2 cmake/3.23.2 gcc/9.1.0
+  module load gcc spectrum-mpi cuda/11.5.2 cmake/3.23.2
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT=""
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01"
+  $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
+  export HPCTOOLKIT_MPI_CXX=mpicxx
   export HPCTOOLKIT_CUDA_ARCH=70
   export HPCTOOLKIT_QS_MODULES_BUILD=""
   export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"

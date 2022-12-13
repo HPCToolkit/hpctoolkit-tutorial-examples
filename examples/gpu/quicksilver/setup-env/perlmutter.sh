@@ -25,14 +25,14 @@ else
 
   # cleanse environment
   module purge
+
+  # load modules needed to build and run quicksilver
   module load PrgEnv-gnu gpu cmake craype-x86-milan
 
-  # load hpctoolkit modules
-  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
-  module load hpctoolkit/2022.10.01-gpu
-
   # modules for hpctoolkit
+  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01-gpu"
+  $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
   export HPCTOOLKIT_MPI_CXX=CC
