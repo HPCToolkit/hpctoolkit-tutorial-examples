@@ -3,8 +3,18 @@ EXEC=AMG2013/test/${BINARY}
 
 if [[ -z "`type -p hpcprof-mpi`" ]] 
 then
+  if [[ -z "`type -p hpcrun`" ]]
+  then
     echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
     exit
+  else
+    ver="$(hpcrun -V | head -n 1 | sed 's/.*version //')"
+    if [[ "$ver" =~ "2022.10.01-release" ]]
+    then
+      echo "hpcprof-mpi is disabled on version $ver"
+      exit
+    fi
+  fi
 fi
 
 # remove any existing database
