@@ -7,7 +7,7 @@ BINARY=qs
 EXEC=quicksilver/src/${BINARY}
 OUT=hpctoolkit-${BINARY}-gpu-cuda
 
-CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
+CMD="rm -rf ${OUT}.m ${OUT}.d"
 echo $CMD
 $CMD
 
