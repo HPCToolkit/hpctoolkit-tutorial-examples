@@ -1,3 +1,5 @@
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your projec
@@ -7,8 +9,8 @@ elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an approp
 riate value:"
-  echo "    'hpctoolkit1' for day 1"
-  echo "    'hpctoolkit2' for day 2"
+#  echo "    'hpctoolkit1' for day 1"
+#  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -27,16 +29,13 @@ else
   # cleanse environment
   module purge
 
-  # load hpctoolkit modules
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
-  module load hpctoolkit/master-202208-papi
+  # load modules needed to build and run miniqmc
+  module load nvhpc/22.11 cuda/11.5.2 cmake essl netlib-lapack
 
-  module load nvhpc
-  module load cuda/11.5.2
-  module load essl
-  module load netlib-lapack
-  module load cmake
-  module load spectrum-mpi
+  # modules for hpctoolkit
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
+  $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_MINIQMC_CXX_COMPILER="nvc++"
@@ -46,5 +45,6 @@ else
   export HPCTOOLKIT_MINIQMC_RUN="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
   export HPCTOOLKIT_MINIQMC_RUN_PC="bsub -P $HPCTOOLKIT_TUTORIAL_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
 
+  # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=miniqmc
 fi
