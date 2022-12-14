@@ -5,11 +5,12 @@ $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 BINARY=miniqmc
 EXEC=miniqmc/miniqmc-build/bin/${BINARY}
-
-OUT=hpctoolkit-miniqmc-gpu-openmp-pc
+OUT=hpctoolkit-${BINARY}-gpu-openmp-pc
 
 # remove old data
-/bin/rm -rf ${OUT}.m ${OUT}.d
+CMD="rm -rf ${OUT}.m ${OUT}.d"
+echo $CMD
+$CMD
 
 $HPCTOOLKIT_BEFORE_RUN_PC
 
@@ -21,11 +22,11 @@ OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
 $HPCTOOLKIT_AFTER_RUN_PC
 
 # compute program structure information for the miniqmc cpu and gpu binaries recorded during execution
-STRUCT_GPU="hpcstruct --gpucfg yes $OUT.m"
-echo ${STRUCT_GPU} ... 
-${STRUCT_GPU}
+CMD="hpcstruct --gpucfg yes $OUT.m"
+echo $CMD 
+$CMD
 
 # combine the measurements with the program structure information
-ANALYZE="hpcprof -o $OUT.d $OUT.m"
-echo $ANALYZE ...
-${ANALYZE}
+CMD="hpcprof -o $OUT.d $OUT.m"
+echo $CMD
+$CMD
