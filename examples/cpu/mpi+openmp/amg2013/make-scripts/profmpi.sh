@@ -1,5 +1,7 @@
 BINARY=amg2013
 EXEC=AMG2013/test/${BINARY}
+OUT=hpctoolkit-amg2013
+
 
 if [[ -z "`type -p hpcprof-mpi`" ]] 
 then
@@ -18,12 +20,15 @@ then
 fi
 
 # remove any existing database
-/bin/rm -rf hpctoolkit-amg2013.d
+CMD="rm -rf hpctoolkit-amg2013.d"
+echo $CMD
+$CMD
 
 # compute program structure information for the amg2013 binary
-STRUCT_BIN="hpcstruct hpctoolkit-amg2013.m"
-echo ${STRUCT_BIN} ... 
-${STRUCT_BIN}
+CMD="hpcstruct ${OUT}.m"
+echo $CMD
+$CMD
 
-echo analyzing amg2013 measurement data by running \'${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}\'
+# combine the measurements with the program structure information
+echo ${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}
 ${HPCTOOLKIT_BATCH} ${HPCTOOLKIT_ANALYZE_CMD}

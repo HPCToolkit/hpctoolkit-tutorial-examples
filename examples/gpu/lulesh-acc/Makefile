@@ -1,4 +1,4 @@
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_LULESH_ACC_READY)
+RDY=$(findstring luleshacc,$(HPCTOOLKIT_EXAMPLE))
 
 all: 
 	@echo 
@@ -15,7 +15,6 @@ all:
 build:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_LULESH_ACC_BUILD)" \
 	      	sh make-scripts/check.sh make-scripts/build.sh
-
 
 run:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_LULESH_ACC_RUN)" \
@@ -34,7 +33,7 @@ view-pc:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf hpctoolkit*
 	/bin/rm -rf log* .build*
 
 veryclean: clean

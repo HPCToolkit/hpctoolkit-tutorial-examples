@@ -34,7 +34,7 @@ view-pc:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf hpctoolkit*
 	/bin/rm -rf log* .build*
 
 veryclean: clean

@@ -1,5 +1,6 @@
 EXEC=laghos
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY) 
+RDY=$(findstring laghos,$(HPCTOOLKIT_EXAMPLE))
+
 
 all:
 	@echo
@@ -45,7 +46,7 @@ view-pc:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf hpctoolkit* 
 	/bin/rm -rf log* .build*
 
 veryclean: clean

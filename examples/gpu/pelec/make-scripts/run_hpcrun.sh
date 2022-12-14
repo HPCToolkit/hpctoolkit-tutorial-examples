@@ -3,17 +3,19 @@
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-BINARY=PeleC3d.gnu.${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}.ex
-DIR=PeleC/Exec/RegTests/PMF
-EXEC=./${BINARY}
-INPUT=./inputs_ex
+BINARY=PeleC
+LOC=Exec/RegTests/PMF
+DIR=../PeleC/build/${LOC}
+EXEC=${DIR}/${BINARY}
+INPUT=../PeleC/${LOC}/inputs_ex
 OUT=hpctoolkit-${BINARY}-gpu-${HPCTOOLKIT_PELEC_GPU_PLATFORM}
 
-cd ${DIR}
-
-CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
+CMD="rm -rf ${OUT}.m ${OUT}.d dir.run"
 echo $CMD
 $CMD
+
+mkdir dir.run
+cd dir.run
 
 # measure an execution of PeleC
 echo "${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC} ${INPUT}"
@@ -29,6 +31,11 @@ CMD="hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
-cd -
+# combine the measurements with the program structure information
+CMD="hpcprof -o $OUT.d $OUT.m"
+echo $CMD
+$CMD
 
-mv ${DIR}/$OUT.d ${DIR}/$OUT.m ./
+mv $OUT.d $OUT.m ..
+cd ..
+touch log.run.done

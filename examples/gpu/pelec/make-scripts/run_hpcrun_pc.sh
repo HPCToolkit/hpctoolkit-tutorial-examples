@@ -1,24 +1,21 @@
 #!/bin/bash
 
-if [[ "${HPCTOOLKIT_GPU_PLATFORM}" != "nvidia" ]]; then
-  echo "PC sampling is only supported on NVIDIA GPU platforms"
-  exit 0
-fi
-
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-BINARY=PeleC3d.gnu.CUDA.ex
-DIR=PeleC/Exec/RegTests/PMF
-EXEC=./${BINARY}
-INPUT=./inputs_ex
+BINARY=PeleC
+LOC=Exec/RegTests/PMF
+DIR=../PeleC/build/${LOC}
+EXEC=${DIR}/${BINARY}
+INPUT=../PeleC/${LOC}/inputs_ex
 OUT=hpctoolkit-${BINARY}-gpu-cuda-pc
 
-cd ${DIR}
-
-CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
+CMD="rm -rf ${OUT}.m ${OUT}.d dir.run-pc"
 echo $CMD
 $CMD
+
+mkdir dir.run-pc
+cd dir.run-pc
 
 $HPCTOOLKIT_BEFORE_RUN_PC
 
@@ -39,6 +36,6 @@ CMD="hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
-cd -
-
-mv ${DIR}/$OUT.d ${DIR}/$OUT.m ./
+mv $OUT.d $OUT.m .. 
+cd ..
+touch log.run-pc.done

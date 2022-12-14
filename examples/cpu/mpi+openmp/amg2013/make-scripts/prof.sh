@@ -1,5 +1,6 @@
 BINARY=amg2013
 EXEC=AMG2013/test/${BINARY}
+OUT=hpctoolkit-amg2013
 
 if [[ -z "`type -p hpcprof`" ]] 
 then
@@ -7,16 +8,17 @@ then
     exit
 fi
 
-# compute program structure information for the amg2013 binary
-STRUCT_BIN="hpcstruct -j 8 hpctoolkit-amg2013.m"
-echo ${STRUCT_BIN} ... 
-${STRUCT_BIN}
+# compute program structure information for amg2013 and shared libraries
+CMD="hpcstruct -j 8 hpctoolkit-amg2013.m"
+echo $CMD 
+$CMD
 
-# remove any old results directory to avoid trouble 
-rm -rf hpctoolkit-amg2013.d
+# remove any existing database
+CMD="rm -rf ${OUT}.d"
+echo $CMD
+$CMD
 
 # combine the measurements with the program structure information
-ANALYZE_CMD="hpcprof -o hpctoolkit-amg2013.d hpctoolkit-amg2013.m"
- 
-echo ${ANALYZE_CMD} ...
-${ANALYZE_CMD}
+CMD="hpcprof -o ${OUT}.d ${OUT}.m" 
+echo $CMD
+$CMD
