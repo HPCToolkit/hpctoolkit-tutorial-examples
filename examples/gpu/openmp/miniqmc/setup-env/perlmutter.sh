@@ -27,7 +27,7 @@ else
   module purge
 
   # load modules needed to build and run miniqmc
-  module load gpu PrgEnv-nvidia cmake
+  module load gpu PrgEnv-nvidia cmake cray-libsci
 
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
