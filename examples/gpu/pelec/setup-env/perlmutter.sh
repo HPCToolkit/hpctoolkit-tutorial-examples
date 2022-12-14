@@ -28,16 +28,16 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load PrgEnv-gnu rocm cray-python cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load gpu PrgEnv-gnu cray-python cray-mpich cmake
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
+  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01-gpu"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
-  export HPCTOOLKIT_GPU_PLATFORM=amd
-  export HPCTOOLKIT_PELEC_GPU_PLATFORM=hip
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_SUBMIT="srun $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"

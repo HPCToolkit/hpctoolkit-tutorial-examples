@@ -26,18 +26,15 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load python cuda/10.1.243 gcc/7.4.0 cmake/3.18.2 spectrum-mpi
-
-  # set platform
-  unset HPCTOOLKIT_TUTORIAL_GPU_SYSTEM
-  export HPCTOOLKIT_TUTORIAL_GPU_SYSTEM=summit
+  module load gcc python cuda spectrum-mpi cmake
 
   # modules for hpctoolkit
   module use /ccsopen/proj/gen161/modules
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.08.10"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
@@ -45,6 +42,7 @@ else
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_PELEC_BUILD="sh"
   export HPCTOOLKIT_PELEC_LAUNCH="jsrun -n 1 -g 1 -a 1"
+  export HPCTOOLKIT_PELEC_LAUNCH_ARGS="--smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=pelec

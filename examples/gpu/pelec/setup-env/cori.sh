@@ -28,17 +28,14 @@ else
   module load cgpu
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
-  module load hpcviewer/2021.03.01  
-
-  # set platform
-  unset HPCTOOLKIT_TUTORIAL_GPU_SYSTEM
-  export HPCTOOLKIT_TUTORIAL_GPU_SYSTEM=cori
+  module load hpcviewer
 
   # environment settings for this example
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
-  export HPCTOOLKIT_PELEC_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
+  export HPCTOOLKIT_PELEC_MODULES_BUILD="module load gcc python cuda/11.4.0 openmpi cmake"
   export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"

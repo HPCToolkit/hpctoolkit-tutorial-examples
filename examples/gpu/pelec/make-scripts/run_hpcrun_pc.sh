@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ "${HPCTOOLKIT_PELEC_GPU_PLATFORM}" != "cuda" ]]; then
-  echo "PC sampling is not yet supported on GPU platforms other than NVIDIA"
+if [[ "${HPCTOOLKIT_GPU_PLATFORM}" != "nvidia" ]]; then
+  echo "PC sampling is only supported on NVIDIA GPU platforms"
   exit 0
 fi
 
@@ -21,35 +21,21 @@ echo $CMD
 $CMD
 
 # measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_SYSTEM}" == "summit" ]]
-then
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
-    hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
-  ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
-    hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
-else
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
-  time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
-fi
+echo "${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
+time  ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
 
 # measure an execution of PeleC
 CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
 echo $CMD
 $CMD
 
-# compute program structure information for the PeleC binary
-STRUCT_OUT=${BINARY}-pc.hpcstruct
-CMD="hpcstruct -j 16 -o ${STRUCT_OUT} ${EXEC}"
-echo $CMD
-$CMD
-
-# compute program structure information for the PeleC cubins
-CMD="hpcstruct -j 16 --gpucfg no $OUT.m" 
+# compute program structure information
+CMD="hpcstruct -j 16 --gpucfg yes $OUT.m" 
 echo $CMD
 $CMD
 
 # combine the measurements with the program structure information
-CMD="hpcprof -S ${STRUCT_OUT} -o $OUT.d $OUT.m"
+CMD="hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
