@@ -41,7 +41,7 @@ else
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_SUBMIT="srun $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
-  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
+  export HPCTOOLKIT_PELEC_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_PELEC_BUILD="sh"
   export HPCTOOLKIT_PELEC_LAUNCH="srun -n 1 -c 1 -G 1"
 
