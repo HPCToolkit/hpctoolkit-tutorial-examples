@@ -26,7 +26,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load python cuda/11.0.2 gcc/6.4.0 cmake/3.17.3 spectrum-mpi
+  module load python cuda/11.5.2 gcc cmake spectrum-mpi
 
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_SYSTEM
