@@ -9,7 +9,7 @@ date > .build_begin
 # PeleC
 git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
 cd PeleC/Exec/RegTests/PMF
-make USE_${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}=TRUE TPL -j 16
+make TPL USE_${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}=TRUE
 make USE_${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}=TRUE -j 16
 cd -
 
