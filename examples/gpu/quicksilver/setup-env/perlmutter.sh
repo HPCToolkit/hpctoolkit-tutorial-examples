@@ -27,7 +27,7 @@ else
   module purge
 
   # load modules needed to build and run quicksilver
-  module load PrgEnv-gnu gpu cmake craype-x86-milan
+  module load gpu PrgEnv-gnu cmake craype-x86-milan
 
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
