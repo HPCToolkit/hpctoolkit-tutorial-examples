@@ -3,8 +3,8 @@
 
 1. Set up your environment
 
-	module load hpctoolkit
-	source setup-env/cori.sh
+        export HPCTOOLKIT_TUTORIAL_PROJECTID=<project>
+	source setup-env/<machine>.sh
 
 2. Download and build AMG2013
 
@@ -15,17 +15,26 @@
 
 	make run
 
-4.a Analyze measurement data for a small experiment serially on the
+4a. Analyze measurement data for a small experiment serially on the
     login node
 
 	make analyze 
 or
 
-4.b Analyze measurement data for a larger experiment on the compute nodes
+4b. Analyze measurement data for a larger experiment on the compute nodes
 
 	make analyze-parallel
 
-5. Interactively explore traces with hpctraceviewer GUI
+5a. Interactively explore traces with hpcviewer GUI on the login node
+    (needs VNC or X11 forwarding)
+
+        make view
+
+or
+
+5b. Install the hpcviewer GUI on your local machine,
+    transfer the database directory to your local machine,
+    and then interactively explore traces with hpcviewer GUI
 
    	hpcviewer hpctoolkit-amg2013.d
 
@@ -36,5 +45,5 @@ NOTE: The directories used for hpctoolkit measurements and analysis
       results are non-standard and are used for convenience of this
       canned tutorial. by default, directories of measurement data
       and analysis result have a job manager job id embedded in their
-      directory names. the scripts here avoid that convention and use
+      directory names. The scripts here avoid that convention and use
       explicit names to simplify automation.

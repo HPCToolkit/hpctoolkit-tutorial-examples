@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 BINARY=lmp
 LAMMPS_DIR=lammps/lammps/build
@@ -18,7 +18,8 @@ echo $CMD
 $CMD
 
 # compute program structure information for the lammps cpu and gpu binaries
-CMD="time hpcstruct $OUT.m"
+unset OMP_NUM_THREADS
+CMD="time hpcstruct --gpucfg no $OUT.m"
 echo $CMD
 $CMD
 

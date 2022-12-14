@@ -2,16 +2,23 @@ BINARY=amg2013
 EXEC=AMG2013/test/${BINARY}
 OUT=hpctoolkit-amg2013
 
-# compute program structure information for amg2013 and shared libraries
-STRUCT_BIN="hpcstruct ${OUT}.m"
-echo ${STRUCT_BIN} ... 
-${STRUCT_BIN}
+if [[ -z "`type -p hpcprof`" ]] 
+then
+    echo hpctoolkit is not on your path. either load a module or add a hpctoolkit bin directory to your path manually.
+    exit
+fi
 
-# remove any old results directory to avoid trouble 
-rm -rf ${OUT}.d 
+# compute program structure information for amg2013 and shared libraries
+CMD="hpcstruct -j 8 hpctoolkit-amg2013.m"
+echo $CMD 
+$CMD
+
+# remove any existing database
+CMD="rm -rf ${OUT}.d"
+echo $CMD
+$CMD
 
 # combine the measurements with the program structure information
-ANALYZE_CMD="hpcprof -o ${OUT}.d ${OUT}.m"
- 
-echo ${ANALYZE_CMD} ...
-${ANALYZE_CMD}
+CMD="hpcprof -o ${OUT}.d ${OUT}.m" 
+echo $CMD
+$CMD

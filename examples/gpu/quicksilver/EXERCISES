@@ -1,0 +1,25 @@
+Quicksilver exercises
+
+Using a measurement database with traces that was collected *without*
+PC sampling enabled:
+
+1. Use the trace view to look at the CPU and GPU traces. What is 
+   happening on the CPU when the GPU is idle? Does this suggest
+   any optimization opportunities? 
+
+Using a measurement database with traces that was collected *with*
+PC sampling enabled:
+
+3. Use the bottom-up view in the profile to identify the GPU function or
+inlined function that causes the most instruction stalls. 
+
+ a. What is the cause of these stalls (which stall kind)?  
+
+ b. Where is this function called from? Could some of the calls be 
+    eliminated?
+
+3. What function causes 8% of the GPU instruction stalls? Can you 
+   envision a strategy that would reduce that?
+
+
+

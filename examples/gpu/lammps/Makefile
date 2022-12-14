@@ -1,4 +1,4 @@
-RDY==$(findstring lammps,$(HPCTOOLKIT_EXAMPLE))
+RDY=$(findstring lammps,$(HPCTOOLKIT_EXAMPLE))
 
 all:
 	@echo

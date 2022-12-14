@@ -34,9 +34,9 @@ view:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* sstruct.in.MG.FD *core*
-	/bin/rm -rf error.* output.* .build* log.*
+	/bin/rm -rf hpctoolkit* *.hpcstruct *core*
+	$(HPCTOOLKIT_AMG2013_CLEAN_CMD)
 
 veryclean: clean
 	/bin/rm -rf AMG2013 tarfile
-	$(CLEAN_CMD)
+

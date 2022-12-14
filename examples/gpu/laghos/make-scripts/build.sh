@@ -13,7 +13,7 @@ pushd laghos
 git clone https://github.com/Jokeren/Laghos.git
 pushd Laghos
 git checkout tutorial
-make setup NPROC=16 MFEM_BUILD="pcuda CUDA_ARCH='sm_70 -lineinfo' BASE_FLAGS='-std=c++11 -g'"
+make setup NPROC=16 MFEM_BUILD="pcuda CUDA_ARCH=$HPCTOOLKIT_CUDA_ARCH BASE_FLAGS='-std=c++11 -g'"
 make -j 8
 popd
 popd
