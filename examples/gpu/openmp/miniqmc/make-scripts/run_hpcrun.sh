@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 $HPCTOOLKIT_MINIQMC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
@@ -17,7 +17,7 @@ echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
 OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
 
 # compute program structure information for the miniqmc cpu and gpu binaries recorded during execution
-STRUCT_GPU="hpcstruct $OUT.m"
+STRUCT_GPU="hpcstruct --gpucfg no $OUT.m"
 echo ${STRUCT_GPU} ... 
 ${STRUCT_GPU}
 
