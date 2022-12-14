@@ -1,3 +1,7 @@
+# configure default setup for users
+export HPCTOOLKIT_TUTORIAL_PROJECTID=default
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
@@ -29,33 +33,24 @@ else
   module load cgpu
 
   # load hpctoolkit modules
-  module load hpcviewer/2021.03.01
+  module use /global/common/software/m3977/hpctoolkit/2021-11/modules
+  module load hpctoolkit/2021.11-gpu
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.03.01-gpu"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2021.11-gpu"
 
   # set platform
   unset HPCTOOLKIT_TUTORIAL_GPU_PLATFORM
   export HPCTOOLKIT_TUTORIAL_GPU_PLATFORM=cori
 
   # environment settings for this example
-  export HPCTOOLKIT_PELEC_MODULES_BUILD="module load cuda/11.1.1 cmake gcc openmpi"
+  export HPCTOOLKIT_PELEC_MODULES_BUILD="module load cuda/11.3.0 cmake/3.21.3 gcc openmpi"
   export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -c 10 -C gpu -t 10"
-  export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
-  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
-  export HPCTOOLKIT_PELEC_BUILD="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-build -o log.build.out -e log.build.error"
+  export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.stderr -G 1"
+  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.stderr -G 1"
+  export HPCTOOLKIT_PELEC_BUILD="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-build -o log.build.out -e log.build.stderr"
   export HPCTOOLKIT_PELEC_LAUNCH="srun -n 1 -G 1"
 
-  # set flag for this example
-  export HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY=1
-
-  # unset flags for other examples
-  unset HPCTOOLKIT_TUTORIAL_CPU_AMG2013_READY
-  unset HPCTOOLKIT_TUTORIAL_CPU_HPCG_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAGHOS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LAMMPS_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_ACC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_LULESH_OMP_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_MINIQMC_READY
-  unset HPCTOOLKIT_TUTORIAL_GPU_QUICKSILVER_READY
+  # mark configuration for this example
+  export HPCTOOLKIT_EXAMPLE=pelec
 fi

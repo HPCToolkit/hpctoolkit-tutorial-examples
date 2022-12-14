@@ -1,10 +1,28 @@
-1. use the trace view to identify the main phases of the program. proceed top down.  
-2. what is the most salient feature that you see in the trace? 
-3. is the program running efficiently?
-4. use the color map menu to map *yield* and *barrier* to white. does this affect your conclusions about the program execution?
-5. use the top-down view to inspect the application performance. are the threads distinguishable in this view? 
-6. what does the time spent in <omp barrier> at the top level mean?
-7. select <program root>. use the flame button to look down the dominant call path. do you see information at the loop level?
-8. use the bottom up view to see where it spends most of its time. use the flame button to look up the call chain to see how it gets there.
-9. experiment with halving the number of threads by changing OMP_NUM_THREADS in the job-script for your platform.
-   how does that affect the efficiency and the execution time?
+               Analyzing and experimenting with AMG2013
+-------------------------------------------------------------------------
+
+1. Use the trace view to identify the main phases of the program. proceed
+   top down. At depth 2, you will see that the program has two principal 
+   phases, along with some others, e.g. before each MPI rank launches
+   OpenMP threads.
+
+2. What is the most striking feature of the setup phase?
+
+3. Is the program running efficiently?
+
+4. Zoom in to analyze the solve phase in detail. Do you see load 
+   imbalance among the threads? If so, does it have a consistent pattern?
+
+5. Switch to the profile view. Use the bottom-up view to see where it 
+   spends most of its time, then use the flame button to look up the call 
+   chain to see how it gets there.
+
+6. Experiment with halving the number of thread by changing
+   OMP_NUM_THREADS in the job-script for your platform. How does that
+   affect the efficiency and the execution time?
+
+7. Edit the job-script for your platform to comment out the module load
+   of openmp/ompt (if present). Measure the program execution again.
+   How does your view of the execution differ without the OpenMP tools
+   interface?
+

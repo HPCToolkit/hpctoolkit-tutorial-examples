@@ -8,9 +8,13 @@ date > .build_begin
 
 # PeleC
 git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
-cd PeleC/Exec/RegTests/PMF
-make USE_CUDA=TRUE -j 16
-cd -
+cd PeleC
+mkdir build
+cd build
+cmake .. -DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cd Exec/RegTests/TG
+make -j 16
+cd ../../../../..
 
 touch log.build.done
 

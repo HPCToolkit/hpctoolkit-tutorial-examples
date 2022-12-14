@@ -1,5 +1,5 @@
 EXEC=PeleC3d.gnu.CUDA.ex
-RDY=$(HPCTOOLKIT_TUTORIAL_GPU_PELEC_READY) 
+RDY=$(findstring pelec,$(HPCTOOLKIT_EXAMPLE))
 
 all:
 	@echo
@@ -34,7 +34,7 @@ view-pc:
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
-	/bin/rm -rf hpctoolkit* *.hpcstruct 
+	/bin/rm -rf hpctoolkit* dir.*
 	/bin/rm -rf log* .build*
 
 veryclean: clean

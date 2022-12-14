@@ -10,9 +10,8 @@ BINARY=laghos
 LAGHOS_DIR=laghos/Laghos
 EXEC=${LAGHOS_DIR}/$BINARY
 OUT=hpctoolkit-laghos-pc
-STRUCT_FILE=$BINARY-pc.hpcstruct
 
-CMD="rm -rf $OUT.m $OUT.d $STRUCT_FILE"
+CMD="rm -rf $OUT.m $OUT.d"
 echo $CMD
 $CMD
 
@@ -21,17 +20,14 @@ CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${LAG
 echo $CMD
 $CMD
 
-# compute program structure information for the laghos binary
-CMD="hpcstruct -j 16 -o $STRUCT_FILE $EXEC"
-echo $CMD
-$CMD
-
-# compute program structure information for the laghos cubins
-CMD="hpcstruct -j 16 $OUT.m"
+# compute program structure information for the laghos cpu and gpu binaries
+CMD="hpcstruct $OUT.m"
 echo $CMD
 $CMD
 
 # combine the measurements with the program structure information
-CMD="hpcprof -S $STRUCT_FILE -o $OUT.d $OUT.m"
+CMD="hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
+
+touch log.run-pc.done

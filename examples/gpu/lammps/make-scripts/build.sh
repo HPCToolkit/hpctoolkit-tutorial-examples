@@ -15,6 +15,7 @@ cd lammps
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON -DPKG_NAME=KOKKOS $HPCTOOLKIT_LAMMPS_GPU_ARCH $HPCTOOLKIT_LAMMPS_HOST_ARCH -DKokkos_ENABLE_CUDA=yes -DCMAKE_CXX_COMPILER=`pwd`/../lib/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS="-lineinfo" ../cmake
 time make -j8 # 16 dies on summit for lack of memory
-cd ../..
+cd ../../..
 
+touch log.build.done
 date > .build_end

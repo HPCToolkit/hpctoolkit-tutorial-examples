@@ -1,21 +1,22 @@
+# configure default setup for users
+export HPCTOOLKIT_TUTORIAL_PROJECTID=default
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
-  echo "    'm3502' for cori users" 
   echo "    'ntrain' for training accounts"
   echo "    'default' to run with your default repository, which won't let you use the  reservation"
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-  echo "    'hpc1_knl' for day 1" 
-  echo "    'hpc2_knl' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-    export HPCTOOLKITL_PROJECTID="-A $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A $HPCTOOLKIT_TUTORIAL_PROJECTID"
   else
-    unset HPCTOOLKITL_PROJECTID
+    unset HPCTOOLKIT_PROJECTID
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
@@ -23,6 +24,18 @@ else
   else
     unset HPCTOOLKIT_RESERVATION
   fi
+
+  # unload darshan
+  module unload darshan
+
+  # load hpctoolkit modules
+  module use /global/common/software/m3977/hpctoolkit/2021-11/modules
+  module load hpctoolkit/2021.11-cpu
+
+  export HPCTOOLKIT_HPCG_BUILD=sh
+  export HPCTOOLKIT_HPCG_ANALYZE=sh
+  export HPCTOOLKIT_HPCG_RUN=sh
+  export HPCTOOLKIT_HPCG_VIEW=sh
   export HPCTOOLKIT_MPI_CC=cc
   export HPCTOOLKIT_RUN_CMD="job-scripts/xhpcg-cori"
   export HPCTOOLKIT_ANALYZE_CMD="job-scripts/profmpi-cori"
@@ -30,5 +43,7 @@ else
   export HPCTOOLKIT_BATCH="sbatch $HPCTOOLKITL_PROJECTID $HPCTOOLKIT_RESERVATION" 
   export HPCTOOLKIT_HPCG_MPICC=CC
   export HPCTOOLKIT_HPCG_CONFIG=hpctoolkit
-  export HPCTOOLKIT_TUTORIAL_HPCG_READY
+
+  # mark configuration for this example
+  export HPCTOOLKIT_EXAMPLE=hpcg
 fi
