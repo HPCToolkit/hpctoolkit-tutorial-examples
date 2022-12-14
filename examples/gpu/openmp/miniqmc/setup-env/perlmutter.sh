@@ -26,26 +26,24 @@ else
   # cleanse environment
   module purge
 
-  # load modules needed to build and run quicksilver
-  module load gpu PrgEnv-gnu cmake craype-x86-milan
+  # load modules needed to build and run miniqmc
+  module load gpu PrgEnv-nvidia cmake
 
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01-gpu"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-  # environment settings for this example
-  export HPCTOOLKIT_MPI_CXX=CC
-  export HPCTOOLKIT_CUDA_ARCH=80
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
-  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
-  export HPCTOOLKIT_QS_MODULES_BUILD=""
-  export HPCTOOLKIT_QS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 10 -C gpu -q debug"
-  export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.stderr -G 1"
-  export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.stderr -G 1"
-  export HPCTOOLKIT_QS_BUILD="sh"
-  export HPCTOOLKIT_QS_LAUNCH="srun -n 4 -c 32 -G 4 --gpus-per-task=1 --gpu-bind=map_gpu:0,1,2,3"
+  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"
+  export HPCTOOLKIT_MINIQMC_CXX_COMPILER="nvc++"
+  export HPCTOOLKIT_MINIQMC_CXXFLAGS="-DENABLE_OFFLOAD=1"
+  export HPCTOOLKIT_MINIQMC_BUILD="sh"
+  export HPCTOOLKIT_MINIQMC_LAUNCH="srun -n 1 -c 32 -G 1"
+  export HPCTOOLKIT_MINIQMC_RUN="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error --export=OMP_NUM_THREADS $1"
+  export HPCTOOLKIT_MINIQMC_RUN_PC="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error --export=OMP_NUM_THREADS $1"
 
   # mark configuration for this example
-  export HPCTOOLKIT_EXAMPLE=quicksilver
+  export HPCTOOLKIT_EXAMPLE=miniqmc
 fi

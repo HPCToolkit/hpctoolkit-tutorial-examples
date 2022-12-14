@@ -20,14 +20,14 @@ CMD="rm -rf ${OUT}.m ${OUT}.d $STRUCT_FILE"
 echo $CMD
 $CMD
 
-# measure an execution of PeleC
-echo "${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
-time  ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS" hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}
+$HPCTOOLKIT_BEFORE_RUN_PC
 
 # measure an execution of PeleC
-CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
+CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
 echo $CMD
 $CMD
+
+$HPCTOOLKIT_AFTER_RUN_PC
 
 # compute program structure information
 CMD="hpcstruct -j 16 --gpucfg yes $OUT.m" 
