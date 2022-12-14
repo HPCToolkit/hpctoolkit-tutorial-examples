@@ -1,5 +1,8 @@
 #!/bin/sh
 
+$HPCTOOLKIT_MINIQMC_MODULES_BUILD
+$HPCTOOLKIT_MODULES_HPCTOOLKIT
+
 BINARY=miniqmc
 EXEC=miniqmc/miniqmc-build/bin/${BINARY}
 

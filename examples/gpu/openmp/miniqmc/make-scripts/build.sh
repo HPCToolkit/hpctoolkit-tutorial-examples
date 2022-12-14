@@ -73,5 +73,6 @@ pushd miniqmc/miniqmc-build
 # cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LDFLAGS=-lessl ..
 cmake -DCMAKE_CXX_COMPILER=$HPCTOOLKIT_MINIQMC_CXX_COMPILER -DCMAKE_BUILD_TYPE=RelWithDebInfo $HPCTOOLKIT_MINIQMC_GPUFLAGS ..
 make -j VERBOSE=1
+popd
 
 date > .build_end
