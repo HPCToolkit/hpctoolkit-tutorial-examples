@@ -25,7 +25,7 @@ $CMD
 $HPCTOOLKIT_BEFORE_RUN_PC
 
 # measure an execution of PeleC
-CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
+CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
 echo $CMD
 $CMD
 
