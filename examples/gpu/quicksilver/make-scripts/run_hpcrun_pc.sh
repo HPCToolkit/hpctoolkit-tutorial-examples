@@ -16,7 +16,7 @@ $HPCTOOLKIT_BEFORE_RUN_PC
 # measure an execution of quicksilver
 CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC}"
 echo $CMD
-$CMD
+eval $CMD
 
 $HPCTOOLKIT_AFTER_RUN_PC
 
