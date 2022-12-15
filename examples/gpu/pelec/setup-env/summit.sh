@@ -44,7 +44,7 @@ else
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
   export HPCTOOLKIT_PELEC_BUILD="sh"
   export HPCTOOLKIT_PELEC_LAUNCH="jsrun -n 1 -g 1 -a 1"
-  export HPCTOOLKIT_PELEC_LAUNCH_ARGS="--smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
+  export HPCTOOLKIT_PELEC_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=pelec
