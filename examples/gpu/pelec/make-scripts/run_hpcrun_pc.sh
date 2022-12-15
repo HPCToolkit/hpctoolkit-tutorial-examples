@@ -7,7 +7,7 @@ BINARY=PeleC-TG
 LOC=Exec/RegTests/TG
 DIR=../PeleC/build/${LOC}
 EXEC=${DIR}/${BINARY}
-INPUT=../PeleC/${LOC}/example.inp
+INPUT=../PeleC/${LOC}/tg-1.inp max_step=100
 OUT=hpctoolkit-${BINARY}-gpu-cuda-pc
 
 CMD="rm -rf ${OUT}.m ${OUT}.d dir.run-pc"
