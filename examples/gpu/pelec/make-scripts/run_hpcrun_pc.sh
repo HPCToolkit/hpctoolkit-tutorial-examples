@@ -17,6 +17,11 @@ $CMD
 mkdir dir.run-pc
 cd dir.run-pc
 
+# remove old data
+CMD="rm -rf ${OUT}.m ${OUT}.d"
+echo $CMD
+$CMD
+
 $HPCTOOLKIT_BEFORE_RUN_PC
 
 # measure an execution of PeleC
