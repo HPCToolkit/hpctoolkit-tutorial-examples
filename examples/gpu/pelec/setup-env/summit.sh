@@ -26,7 +26,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load gcc python cuda/11.5.2 spectrum-mpi cmake
+  module load nvhpc/22.11 python cuda/11.5.2 spectrum-mpi cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
@@ -37,6 +37,8 @@ else
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
+  export HPCTOOLKIT_PELEC_GPUFLAGS="-DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DAMReX_CUDA_ARCH=7.0"
+  export HPCTOOLKIT_PELEC_CXX_COMPILER=nvc++
   export HPCTOOLKIT_PELEC_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"

@@ -3,11 +3,11 @@
 $HPCTOOLKIT_PELEC_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-BINARY=PeleC
-LOC=Exec/RegTests/PMF
+BINARY=PeleC-TG
+LOC=Exec/RegTests/TG
 DIR=../PeleC/build/${LOC}
 EXEC=${DIR}/${BINARY}
-INPUT=../PeleC/${LOC}/inputs_ex
+INPUT=../PeleC/${LOC}/example.inp
 OUT=hpctoolkit-${BINARY}-gpu-${HPCTOOLKIT_PELEC_GPU_PLATFORM}
 
 CMD="rm -rf ${OUT}.m ${OUT}.d dir.run"

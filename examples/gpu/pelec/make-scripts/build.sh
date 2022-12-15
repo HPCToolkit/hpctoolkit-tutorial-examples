@@ -10,9 +10,8 @@ date > .build_begin
 git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
 mkdir -p PeleC/build
 pushd PeleC/build
-cmake .. -DENABLE_${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}=ON -DPELEC_ENABLE_${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
-cd Exec/RegTests/PMF
-make TPL
+cmake -DCMAKE_CXX_COMPILER=$HPCTOOLKIT_PELEC_CXX_COMPILER -DCMAKE_BUILD_TYPE=RelWithDebInfo $HPCTOOLKIT_PELEC_GPUFLAGS ..
+cd Exec/RegTests/TG
 make -j 16
 popd
 

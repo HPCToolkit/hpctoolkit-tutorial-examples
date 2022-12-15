@@ -1,4 +1,4 @@
-EXEC=PeleC3d.gnu.${HPCTOOLKIT_PELEC_GPU_PLATFORM^^}.ex
+EXEC=PeleC-TG
 RDY=$(findstring pelec,$(HPCTOOLKIT_EXAMPLE))
 
 all:
