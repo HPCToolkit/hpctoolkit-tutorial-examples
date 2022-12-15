@@ -28,11 +28,11 @@ else
   module purge
 
   # load modules needed to build and run quicksilver
-  module load gcc spectrum-mpi cuda/11.5.2 cmake/3.23.2
+  module load gcc spectrum-mpi cuda/11.5.2 cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
