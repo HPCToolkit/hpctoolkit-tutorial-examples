@@ -28,7 +28,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load PrgEnv-amd amd/5.3.0 cray-python cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load PrgEnv-cray rocm/5.2.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
@@ -40,7 +40,7 @@ else
   export HPCTOOLKIT_PELEC_GPU_PLATFORM=hip
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_GPUFLAGS="-DENABLE_HIP=ON -DPELEC_ENABLE_HIP=ON -DAMReX_AMD_ARCH=gfx90a"
-  export HPCTOOLKIT_PELEC_CXX_COMPILER=amdclang++
+  export HPCTOOLKIT_PELEC_CXX_COMPILER=crayCC
   export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_PELEC_RUN_PC="sh make-scripts/unsupported-amd.sh"
