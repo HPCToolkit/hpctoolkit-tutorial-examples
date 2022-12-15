@@ -44,6 +44,7 @@ else
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -J qs-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_QS_BUILD="sh"
   export HPCTOOLKIT_QS_LAUNCH="jsrun -n 1 -g 1 -a 1"
+  export HPCTOOLKIT_QS_LAUNCH_ARGS="--smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=quicksilver
