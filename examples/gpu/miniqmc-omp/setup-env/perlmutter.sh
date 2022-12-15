@@ -41,8 +41,8 @@ else
   export HPCTOOLKIT_MINIQMC_CXXFLAGS="-DENABLE_OFFLOAD=1"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
   export HPCTOOLKIT_MINIQMC_LAUNCH="srun -n 1 -c 32 -G 1"
-  export HPCTOOLKIT_MINIQMC_RUN="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error --export=OMP_NUM_THREADS $1"
-  export HPCTOOLKIT_MINIQMC_RUN_PC="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error --export=OMP_NUM_THREADS $1"
+  export HPCTOOLKIT_MINIQMC_RUN="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
+  export HPCTOOLKIT_MINIQMC_RUN_PC="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=miniqmc
