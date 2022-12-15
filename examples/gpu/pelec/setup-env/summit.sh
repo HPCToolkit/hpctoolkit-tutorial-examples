@@ -26,7 +26,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load gcc python cuda/11.5.2 spectrum-mpi cmake
+  module load gcc cuda/11.5.2 spectrum-mpi cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le

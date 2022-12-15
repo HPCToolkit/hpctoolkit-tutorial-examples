@@ -28,7 +28,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load gpu PrgEnv-nvidia nvidia/22.7 cray-python cray-mpich cmake
+  module load gpu PrgEnv-nvidia nvidia/22.7 cray-mpich cmake
 
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
