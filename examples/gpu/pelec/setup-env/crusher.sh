@@ -28,7 +28,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load PrgEnv-cray rocm/5.2.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load PrgEnv-cray rocm/5.3.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
