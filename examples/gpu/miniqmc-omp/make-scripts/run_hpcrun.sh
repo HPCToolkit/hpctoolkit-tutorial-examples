@@ -13,9 +13,9 @@ echo $CMD
 $CMD
 
 # measure an execution of miniqmc
-RUN="time ${HPCTOOLKIT_MINIQMC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC}"
-echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"' 
-OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
+CMD="OMP_NUM_THREADS=10 time ${HPCTOOLKIT_MINIQMC_LAUNCH} ${HPCTOOLKIT_MINIQMC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC}-g '\"2 2 1\"'"
+echo $CMD
+eval $CMD
 
 # compute program structure information for the miniqmc cpu and gpu binaries recorded during execution
 CMD="hpcstruct --gpucfg no $OUT.m"

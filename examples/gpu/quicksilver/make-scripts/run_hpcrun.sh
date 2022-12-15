@@ -12,9 +12,9 @@ echo $CMD
 $CMD
 
 # measure an execution of quicksilver
-CMD="time ${HPCTOOLKIT_QS_LAUNCH} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
+CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
 echo $CMD
-$CMD
+eval $CMD
 
 # compute program structure information for quicksilver CPU and GPU binaries
 CMD="hpcstruct --gpucfg no $OUT.m" 

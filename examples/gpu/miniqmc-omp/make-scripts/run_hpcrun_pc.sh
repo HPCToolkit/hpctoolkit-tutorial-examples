@@ -15,9 +15,9 @@ $CMD
 $HPCTOOLKIT_BEFORE_RUN_PC
 
 # measure an execution of miniqmc
-RUN="time ${HPCTOOLKIT_MINIQMC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia,pc -t ${EXEC}"
-echo OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"' 
-OMP_NUM_THREADS=10 ${RUN} -g '\"2 2 1\"'
+CMD="OMP_NUM_THREADS=10 time ${HPCTOOLKIT_MINIQMC_LAUNCH} ${HPCTOOLKIT_MINIQMC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia,pc -t ${EXEC} -g '\"2 2 1\"'"
+echo $CMD
+eval $CMD
 
 $HPCTOOLKIT_AFTER_RUN_PC
 
