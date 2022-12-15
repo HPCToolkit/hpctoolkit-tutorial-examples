@@ -21,7 +21,7 @@ echo $CMD
 eval $CMD
 
 # compute program structure information for the laghos cpu and gpu binaries
-CMD="hpcstruct $OUT.m"
+CMD="hpcstruct --gpucfg yes $OUT.m"
 echo $CMD
 $CMD
 
