@@ -4,6 +4,7 @@ date > .build_begin
 
 $HPCTOOLKIT_QS_MODULES_BUILD
 
+if [ -n "$CUDA_PATH" ]; then CUDA_HOME=$CUDA_PATH; fi
 if [ -z "$CUDA_HOME" ]
 then
   echo "Please export CUDA_HOME to point to an appropriate CUDA Toolkit installation"
