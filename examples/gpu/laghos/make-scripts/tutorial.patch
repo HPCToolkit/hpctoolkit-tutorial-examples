@@ -1,5 +1,5 @@
 diff --git a/makefile b/makefile
-index a59f844..c5932ac 100644
+index a59f844..80f2cc6 100644
 --- a/makefile
 +++ b/makefile
 @@ -55,7 +55,7 @@ make style
@@ -11,7 +11,7 @@ index a59f844..c5932ac 100644
  GOALS = help clean distclean style setup mfem metis hypre
  
  # Default installation location
-@@ -248,13 +248,13 @@ tests:
+@@ -248,16 +248,16 @@ tests:
  
  # Setup: download & install third party libraries: HYPRE, METIS & MFEM
  
@@ -27,7 +27,11 @@ index a59f844..c5932ac 100644
 +		tar xzvf v$(HYPRE_VER).tar.gz &&\
  		ln -s hypre-$(HYPRE_VER) $(HYPRE_DIR) &&\
  		cd $(HYPRE_DIR)/src &&\
- 		./configure --disable-fortran --without-fei CC=mpicc CXX=mpic++ &&\
+-		./configure --disable-fortran --without-fei CC=mpicc CXX=mpic++ &&\
++		./configure --disable-fortran --without-fei CC=${HPCTOOLKIT_MPI_CC} CXX=${HPCTOOLKIT_MPI_CXX} &&\
+ 		make -j $(NPROC);	else echo "Using existing ../$(HYPRE_DIR)"; fi)
+ 
+ METIS_URL = http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis
 @@ -279,6 +279,6 @@ mfem: hypre metis
  	@(if [[ ! -e ../mfem ]]; then cd ..; \
  		git clone --single-branch --branch master --depth 1 $(MFEM_GIT) &&\
