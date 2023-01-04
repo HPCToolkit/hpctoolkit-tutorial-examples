@@ -30,8 +30,8 @@ else
   module load gpu PrgEnv-gnu cmake craype-x86-milan
 
   # modules for hpctoolkit
-  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2022.10.01-gpu"
+  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
