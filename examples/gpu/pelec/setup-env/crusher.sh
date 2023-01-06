@@ -32,7 +32,7 @@ else
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/latest"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
