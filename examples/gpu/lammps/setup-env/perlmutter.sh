@@ -28,22 +28,24 @@ else
   module purge
 
   # load modules needed to build and run lammps
-  module load PrgEnv-gnu rocm/5.3.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load gpu PrgEnv-gnu cudatoolkit cray-mpich cmake
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/latest"
+  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
-  export HPCTOOLKIT_GPU_PLATFORM=amd
+  export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
+  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
   export HPCTOOLKIT_LAMMPS_MODULES_BUILD=""
-  export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_GPUARCH=VEGA90A -DKokkos_ARCH_VEGA90A=ON"
+  export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_GPUARCH=AMPERE80 -DKokkos_ARCH_AMPERE80=ON"
   export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_HOSTARCH=ZEN3"
-  export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_HIP=yes -DCMAKE_CXX_COMPILER=$(which hipcc) -DCMAKE_CXX_FLAGS=\"-g\""
-  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 20 -N 1 --core-spec=8 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_CUDA=yes -DCMAKE_CXX_COMPILER=$(pwd)/lammps/lammps/lib/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS=\"-lineinfo\""
+  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 20 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error"
-  export HPCTOOLKIT_LAMMPS_RUN_PC="sh make-scripts/unsupported-amd.sh"
+  export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
   export HPCTOOLKIT_LAMMPS_LAUNCH="srun -n 1 -G 1 -c 1"
 
