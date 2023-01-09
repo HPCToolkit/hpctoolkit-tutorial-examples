@@ -13,7 +13,7 @@ cd lammps
 git clone https://github.com/lammps/lammps.git
 cd lammps
 mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON -DPKG_NAME=KOKKOS \
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON \
       $HPCTOOLKIT_LAMMPS_GPU_ARCH $HPCTOOLKIT_LAMMPS_HOST_ARCH \
       $HPCTOOLKIT_LAMMPS_GPUFLAGS ../cmake
 time make -j 4
