@@ -12,9 +12,9 @@ echo $CMD
 $CMD
 
 # measure an execution of lulesh openacc
-CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
+CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} ${HPCTOOLKIT_LULESH_ACC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC}"
 echo $CMD
-$CMD
+eval $CMD
 
 # compute program structure information for the quicksilver cubins
 CMD="hpcstruct --gpucfg no $OUT.m" 

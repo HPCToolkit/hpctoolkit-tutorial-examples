@@ -12,9 +12,9 @@ echo $CMD
 $CMD
 
 # measure an execution of lulesh-acc
-CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 10"
+CMD="time ${HPCTOOLKIT_LULESH_ACC_LAUNCH} ${HPCTOOLKIT_LULESH_ACC_LAUNCH_ARGS} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 10"
 echo $CMD
-$CMD
+eval $CMD
 
 # compute program structure information for the lulesh-acc cpu and gpu binaries
 CMD="hpcstruct --gpucfg yes $OUT.m" 
