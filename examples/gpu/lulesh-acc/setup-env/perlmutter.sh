@@ -27,8 +27,9 @@ else
   # cleanse environment
   module purge
 
-  # load modules needed to build and run pelec
-  module load gpu PrgEnv-gnu cudatoolkit cray-mpich cmake craype-x86-milan
+  # load modules needed to build and run lulesh
+  module load gpu PrgEnv-nvidia cray-mpich
+
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
@@ -38,17 +39,17 @@ else
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
   export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
-  export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
-  export HPCTOOLKIT_PELEC_MODULES_BUILD=""
-  export HPCTOOLKIT_PELEC_GPUFLAGS="-DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DAMReX_CUDA_ARCH=8.0"
-  export HPCTOOLKIT_PELEC_CXX_COMPILER=g++
-  export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 20 -N 1 $HPCTOOLKIT_RESERVATION -C gpu"
-  export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error"
-  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error"
-  export HPCTOOLKIT_PELEC_BUILD="sh"
-  export HPCTOOLKIT_PELEC_LAUNCH="srun -n 1 -c 1 -G 1"
+  export HPCTOOLKIT_LULESH_ACC_MODULES_BUILD=""
+  export HPCTOOLKIT_LULESH_ACC_CXX="nvc++ -DUSE_MPI=0 -DSEDOV_SYNC_POS_VEL_LATE"
+  export HPCTOOLKIT_LULESH_ACC_CXXFLAGS="-mp --restrict -Mautoinline -Minline=levels:20"
+  export HPCTOOLKIT_LULESH_ACC_ACCFLAGS="-acc -Minfo=accel -fast -gopt"
+  export HPCTOOLKIT_LULESH_ACC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION -C gpu"
+  export HPCTOOLKIT_LULESH_ACC_RUN="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run -o log.run.out -e log.run.error -G 1"
+  export HPCTOOLKIT_LULESH_ACC_RUN_PC="$HPCTOOLKIT_LULESH_ACC_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
+  export HPCTOOLKIT_LULESH_ACC_BUILD="sh"
+  export HPCTOOLKIT_LULESH_ACC_LAUNCH="srun -n 1 -c 1 -G 1"
 
   # mark configuration for this example
-  export HPCTOOLKIT_EXAMPLE=pelec
+  export HPCTOOLKIT_EXAMPLE=luleshacc
 
 fi

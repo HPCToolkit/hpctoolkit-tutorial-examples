@@ -28,7 +28,7 @@ echo $CMD
 eval $CMD
 
 # compute program structure information
-CMD="hpcstruct -j 16 --gpucfg no $OUT.m" 
+CMD="hpcstruct --gpucfg no $OUT.m" 
 echo $$CMD
 $CMD
 

@@ -32,7 +32,7 @@ eval $CMD
 $HPCTOOLKIT_AFTER_RUN_PC
 
 # compute program structure information
-CMD="hpcstruct -j 16 --gpucfg yes $OUT.m" 
+CMD="hpcstruct --gpucfg yes $OUT.m" 
 echo $CMD
 $CMD
 
