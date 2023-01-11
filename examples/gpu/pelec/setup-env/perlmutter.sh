@@ -28,8 +28,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load gpu PrgEnv-nvidia nvidia/22.7 cray-mpich cmake
-
+  module load gpu PrgEnv-gnu cudatoolkit cray-mpich cmake craype-x86-milan
   # modules for hpctoolkit
   module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
@@ -42,10 +41,10 @@ else
   export HPCTOOLKIT_PELEC_GPU_PLATFORM=cuda
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_GPUFLAGS="-DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DAMReX_CUDA_ARCH=8.0"
-  export HPCTOOLKIT_PELEC_CXX_COMPILER=nvc++
-  export HPCTOOLKIT_PELEC_SUBMIT="srun $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION"
-  export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error -G 1"
-  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error -G 1"
+  export HPCTOOLKIT_PELEC_CXX_COMPILER=g++
+  export HPCTOOLKIT_PELEC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 10 -N 1 $HPCTOOLKIT_RESERVATION -C gpu"
+  export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_PELEC_BUILD="sh"
   export HPCTOOLKIT_PELEC_LAUNCH="srun -n 1 -c 1 -G 1"
 
