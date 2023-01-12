@@ -11,10 +11,14 @@ CMD="rm -rf ${OUT}.m ${OUT}.d"
 echo $CMD
 $CMD
 
+$HPCTOOLKIT_BEFORE_RUN_PC
+
 # measure an execution of lulesh-omp
 CMD="time ${HPCTOOLKIT_LULESH_OMP_LAUNCH} ${HPCTOOLKIT_LULESH_OMP_LAUNCH_ARGS} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} -i 100"
 echo $CMD
 eval $CMD
+
+$HPCTOOLKIT_AFTER_RUN_PC
 
 # compute program structure information for lulesh-omp cpu and gpu binaries 
 CMD="hpcstruct --gpucfg yes $OUT.m" 
