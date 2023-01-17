@@ -39,8 +39,9 @@ else
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
   export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
   export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD=""
-  export HPCTOOLKIT_LULESH_OMP_CXX="nvc++ -DUSE_MPI=0"
-  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-mp=gpu -Minfo=mp -fast -gopt"
+  export HPCTOOLKIT_LULESH_OMP_CXX=nvc++ 
+  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-mp=gpu -Minfo=mp"
+  export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -fast -gopt ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
   export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION -C gpu"
   export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J pelec-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LULESH_OMP_RUN_PC="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error"

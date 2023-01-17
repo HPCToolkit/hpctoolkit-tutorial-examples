@@ -1,4 +1,5 @@
-HPCTOOLKIT_TUTORIAL_RESERVATION="default"
+export HPCTOOLKIT_TUTORIAL_RESERVATION=default
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
@@ -12,13 +13,13 @@ then
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-    export HPCTOOLKIT_PROJECTID="-P $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A ${HPCTOOLKIT_TUTORIAL_PROJECTID}_crusher"
   else
     unset HPCTOOLKIT_PROJECTID
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="-U $HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
@@ -27,25 +28,24 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load nvhpc cuda/11.5.2
+  module load PrgEnv-cray cce/15.0.0 rocm/5.3.0 craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/latest"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
-  export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  export HPCTOOLKIT_GPU_PLATFORM=amd
   export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD=""
-  export HPCTOOLKIT_LULESH_OMP_CXX=nvc++ 
-  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-mp=gpu -Minfo=mp"
-  export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -fast -gopt ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
-  export HPCTOOLKIT_LULESH_OMP_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LULESH_OMP_CXX=crayCC
+  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-fopenmp"
+  export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -g -fast ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
+  export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run -o log.run.out -e log.run.error"
-  export HPCTOOLKIT_LULESH_OMP_RUN_PC="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LULESH_OMP_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_LULESH_OMP_BUILD="sh"
-  export HPCTOOLKIT_LULESH_OMP_LAUNCH="jsrun -n 1 -g 1 -a 1"
-  export HPCTOOLKIT_LULESH_OMP_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
+  export HPCTOOLKIT_LULESH_OMP_LAUNCH="srun -n 1 -c 1 -G 1"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=luleshomp
