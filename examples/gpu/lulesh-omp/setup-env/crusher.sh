@@ -28,7 +28,7 @@ else
   module purge
 
   # load modules needed to build and run pelec
-  module load PrgEnv-cray cce/15.0.0 rocm/5.3.0 craype-x86-trento craype-accel-amd-gfx90a
+  module load PrgEnv-amd amd/5.3.0 craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
@@ -38,9 +38,9 @@ else
   # environment settings for this example
   export HPCTOOLKIT_GPU_PLATFORM=amd
   export HPCTOOLKIT_LULESH_OMP_MODULES_BUILD=""
-  export HPCTOOLKIT_LULESH_OMP_CXX=crayCC
-  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-fopenmp"
-  export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -g -fast ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
+  export HPCTOOLKIT_LULESH_OMP_CXX=amdclang++
+  export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-fopenmp -target x86_64-pc-linux-gnu -fopenmp-targets=amdgcn-amd-amdhsa -Xopenmp-target=amdgcn-amd-amdhsa -march=gfx90a"
+  export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -g -Ofast ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
   export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LULESH_OMP_RUN_PC="sh make-scripts/unsupported-amd.sh"
