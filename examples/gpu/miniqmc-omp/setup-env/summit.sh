@@ -34,7 +34,7 @@ else
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/latest"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
