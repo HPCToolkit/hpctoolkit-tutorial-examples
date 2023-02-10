@@ -30,7 +30,7 @@ else
   module purge
 
   # load modules needed to build and run miniqmc
-  module load PrgEnv-amd amd/5.2.0 cmake openblas craype-x86-trento craype-accel-amd-gfx90a
+  module load PrgEnv-amd amd/5.4.0 cmake openblas craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
@@ -42,7 +42,7 @@ else
   export HPCTOOLKIT_MINIQMC_MODULES_BUILD=""
   export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_TARGET=amdgcn-amd-amdhsa -DOFFLOAD_ARCH=gfx90a -DQMC_MIXED_PRECISION=ON"
   export HPCTOOLKIT_MINIQMC_CXX_COMPILER=amdclang++
-  export HPCTOOLKIT_MINIQMC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 10"
+  export HPCTOOLKIT_MINIQMC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 30"
   export HPCTOOLKIT_MINIQMC_RUN="$HPCTOOLKIT_MINIQMC_SUBMIT -J miniqmc-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_MINIQMC_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
