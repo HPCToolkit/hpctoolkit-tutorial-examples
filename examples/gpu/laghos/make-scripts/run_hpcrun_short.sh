@@ -16,9 +16,9 @@ echo $CMD
 $CMD
 
 # measure an execution of laghos
-CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
+CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} ${HPCTOOLKIT_LAGHOS_LAUNCH_ARGS} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
 echo $CMD
-$CMD
+eval $CMD
 
 # compute program structure information for laghos cpu and gpu binaries
 CMD="hpcstruct $OUT.m"

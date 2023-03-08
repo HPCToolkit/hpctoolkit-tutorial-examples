@@ -12,9 +12,9 @@ echo $CMD
 $CMD
 
 # measure an execution of lulesh-omp
-CMD="time ${HPCTOOLKIT_LULESH_OMP_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t ${EXEC} -i 1000"
+CMD="OMP_NUM_THREADS=1 time ${HPCTOOLKIT_LULESH_OMP_LAUNCH} ${HPCTOOLKIT_LULESH_OMP_LAUNCH_ARGS} hpcrun -o $OUT.m -e CPUTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC} -i 1000"
 echo $CMD
-$CMD
+eval $CMD
 
 # compute program structure information for lulesh-omp cpu and gpu binaries
 CMD="hpcstruct --gpucfg no $OUT.m" 

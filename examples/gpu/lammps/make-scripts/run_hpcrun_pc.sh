@@ -14,11 +14,15 @@ $CMD
 $HPCTOOLKIT_LAMMPS_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
+$HPCTOOLKIT_BEFORE_RUN_PC
+
 # measure an execution of lammps
 export OMP_NUM_THREADS=2
 CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc $EXEC -k on g 1 -sf kk -in lammps/lammps/bench/in.lj"
 echo $CMD
 $CMD
+
+$HPCTOOLKIT_AFTER_RUN_PC
 
 # compute program structure information for the lammps cpu and gpu binaries
 CMD="time hpcstruct --gpucfg yes $OUT.m"

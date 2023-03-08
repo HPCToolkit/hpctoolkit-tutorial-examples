@@ -8,7 +8,7 @@ LOC=Exec/RegTests/TG
 DIR=../PeleC/build/${LOC}
 EXEC=${DIR}/${BINARY}
 INPUT=../PeleC/${LOC}/tg-1.inp max_step=1000
-OUT=hpctoolkit-${BINARY}-gpu-cuda
+OUT=hpctoolkit-${BINARY}-gpu-${HPCTOOLKIT_PELEC_GPU_PLATFORM}
 
 CMD="rm -rf ${OUT}.m ${OUT}.d dir.run"
 echo $CMD
@@ -17,22 +17,19 @@ $CMD
 mkdir dir.run
 cd dir.run
 
-# measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
-then
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
-    hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t ${EXEC} ${INPUT}" 
-  ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
-    hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
-else
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t ${EXEC} ${INPUT}"
-  time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t ${EXEC} ${INPUT}
-fi
-
-
-# compute program structure information for the PeleC cpu and gpu binaries
-CMD="hpcstruct --gpucfg no $OUT.m" 
+# remove old data
+CMD="rm -rf ${OUT}.m ${OUT}.d"
 echo $CMD
+$CMD
+
+# measure an execution of PeleC
+CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t ${EXEC} ${INPUT}"
+echo $CMD
+eval $CMD
+
+# compute program structure information
+CMD="hpcstruct --gpucfg no $OUT.m" 
+echo $$CMD
 $CMD
 
 # combine the measurements with the program structure information

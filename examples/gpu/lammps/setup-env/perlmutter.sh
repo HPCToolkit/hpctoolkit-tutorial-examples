@@ -13,7 +13,7 @@ then
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-    export HPCTOOLKIT_PROJECTID="-P $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A $HPCTOOLKIT_TUTORIAL_PROJECTID"
   else
     unset HPCTOOLKIT_PROJECTID
   fi
@@ -28,25 +28,26 @@ else
   module purge
 
   # load modules needed to build and run lammps
-  module load gcc cuda/11.5.2 spectrum-mpi cmake
+  module load gpu PrgEnv-nvidia cray-mpich cmake craype-x86-milan
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
+  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
   export HPCTOOLKIT_LAMMPS_MODULES_BUILD=""
-  export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_VOLTA70=ON"
-  export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_POWER9=ON"
-  export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_CUDA=yes -DCMAKE_CXX_COMPILER=$(pwd)/lammps/lammps/lib/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS=\"-lineinfo\""
-  export HPCTOOLKIT_LAMMPS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 20 -nnodes 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_AMPERE80=ON"
+  export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_ZEN3=ON"
+  export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_CUDA=yes -DCMAKE_CXX_COMPILER=$(pwd)/lammps/lammps/lib/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS=\"-lineinfo -ccbin $(which CC)\""
+  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -C gpu -t 20 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
-  export HPCTOOLKIT_LAMMPS_LAUNCH="jsrun -n 1 -g 1 -a 1"
-  export HPCTOOLKIT_LAMMPS_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
+  export HPCTOOLKIT_LAMMPS_LAUNCH="srun -n 1 -G 1 -c 1"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=lammps

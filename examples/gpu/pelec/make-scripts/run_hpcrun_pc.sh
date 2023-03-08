@@ -17,25 +17,22 @@ $CMD
 mkdir dir.run-pc
 cd dir.run-pc
 
-# measure an execution of PeleC
-if [[ "${HPCTOOLKIT_TUTORIAL_GPU_PLATFORM}" == "summit" ]]
-then
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs=\"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\" \
-    hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}" 
-  ${HPCTOOLKIT_PELEC_LAUNCH} --smpiargs="-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks" \
-    hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}
-else
-  echo "${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}"
-  time  ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}
-fi
-
-# measure an execution of PeleC
-CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc ${EXEC} ${INPUT}"
+# remove old data
+CMD="rm -rf ${OUT}.m ${OUT}.d"
 echo $CMD
 $CMD
 
-# compute program structure information for the PeleC cpu and bpu binaries
-CMD="hpcstruct --gpucfg no $OUT.m" 
+$HPCTOOLKIT_BEFORE_RUN_PC
+
+# measure an execution of PeleC
+CMD="time ${HPCTOOLKIT_PELEC_LAUNCH} ${HPCTOOLKIT_PELEC_LAUNCH_ARGS} hpcrun -o $OUT.m -e gpu=nvidia,pc -t ${EXEC} ${INPUT}"
+echo $CMD
+eval $CMD
+
+$HPCTOOLKIT_AFTER_RUN_PC
+
+# compute program structure information
+CMD="hpcstruct --gpucfg yes $OUT.m" 
 echo $CMD
 $CMD
 

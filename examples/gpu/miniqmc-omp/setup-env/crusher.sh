@@ -15,38 +15,38 @@ riate value:"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-    export HPCTOOLKIT_PROJECTID="-P $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A ${HPCTOOLKIT_TUTORIAL_PROJECTID}_crusher"
   else
     unset HPCTOOLKIT_PROJECTID
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="-U $HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
 
-  # cleanse environment
+  # Cleanse environment
   module purge
 
   # load modules needed to build and run miniqmc
-  module load nvhpc/22.11 cuda/11.5.2 cmake essl netlib-lapack
+  module load PrgEnv-amd amd/5.4.0 cmake openblas craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
-  export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  # environment settings for this example
+  export HPCTOOLKIT_GPU_PLATFORM=amd
   export HPCTOOLKIT_MINIQMC_MODULES_BUILD=""
-  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_ARCH=cc70 -DCMAKE_LDFLAGS=-lessl"
-  export HPCTOOLKIT_MINIQMC_CXX_COMPILER="nvc++"
+  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_TARGET=amdgcn-amd-amdhsa -DOFFLOAD_ARCH=gfx90a -DQMC_MIXED_PRECISION=ON"
+  export HPCTOOLKIT_MINIQMC_CXX_COMPILER=amdclang++
+  export HPCTOOLKIT_MINIQMC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 30"
+  export HPCTOOLKIT_MINIQMC_RUN="$HPCTOOLKIT_MINIQMC_SUBMIT -J miniqmc-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_MINIQMC_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
-  export HPCTOOLKIT_MINIQMC_LAUNCH="jsrun -n 1 -g 1 -a 1 -c 11 -brs"
-  export HPCTOOLKIT_MINIQMC_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
-  export HPCTOOLKIT_MINIQMC_RUN="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
-  export HPCTOOLKIT_MINIQMC_RUN_PC="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
-
+  export HPCTOOLKIT_MINIQMC_LAUNCH="srun -n 1 -G 1"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=miniqmc

@@ -8,13 +8,12 @@ date > .build_begin
 
 # PeleC
 git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
-cd PeleC
-mkdir build
-cd build
-cmake .. -DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
+mkdir -p PeleC/build
+pushd PeleC/build
+cmake -DCMAKE_CXX_COMPILER=$HPCTOOLKIT_PELEC_CXX_COMPILER -DCMAKE_BUILD_TYPE=RelWithDebInfo $HPCTOOLKIT_PELEC_GPUFLAGS ..
 cd Exec/RegTests/TG
 make -j 16
-cd ../../../../..
+popd
 
 touch log.build.done
 

@@ -13,13 +13,13 @@ then
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
-    export HPCTOOLKIT_PROJECTID="-P $HPCTOOLKIT_TUTORIAL_PROJECTID"
+    export HPCTOOLKIT_PROJECTID="-A ${HPCTOOLKIT_TUTORIAL_PROJECTID}_crusher"
   else
     unset HPCTOOLKIT_PROJECTID
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="-U $HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
@@ -27,30 +27,30 @@ else
   # cleanse environment
   module purge
 
-  # load modules needed to build and run laghos
-  module load gcc spectrum-mpi cuda/11.5.2
+  # load modules needed to build and run pelec
+  module load PrgEnv-amd amd/5.2.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
-  export HPCTOOLKIT_GPU_PLATFORM=nvidia
-  export HPCTOOLKIT_CUDA_ARCH=70
-  export HPCTOOLKIT_MPI_CC=mpicc
-  export HPCTOOLKIT_MPI_CXX=mpicxx
+  export HPCTOOLKIT_GPU_PLATFORM=amd
+  export HPCTOOLKIT_HIP_ARCH=gfx90a
+  export HPCTOOLKIT_MPI_CC=cc
+  export HPCTOOLKIT_MPI_CXX=CC
   export HPCTOOLKIT_LAGHOS_MODULES_BUILD=""
-  export HPCTOOLKIT_LAGHOS_C_COMPILER=gcc
-  export HPCTOOLKIT_LAGHOS_MFEM_FLAGS="pcuda CUDA_ARCH=sm_$HPCTOOLKIT_CUDA_ARCH BASE_FLAGS='-std=c++11 -g'"
-  export HPCTOOLKIT_LAGHOS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LAGHOS_C_COMPILER=amdclang
+  export HPCTOOLKIT_LAGHOS_MFEM_FLAGS="phip HIP_ARCH=$HPCTOOLKIT_HIP_ARCH BASE_FLAGS='-std=c++11 -g'"
+  export HPCTOOLKIT_LAGHOS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error"
-  export HPCTOOLKIT_LAGHOS_RUN_PC="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LAGHOS_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_LAGHOS_BUILD="sh"
-  export HPCTOOLKIT_LAGHOS_LAUNCH="jsrun -n 6 -g 1 -a 1 -c 1 -bpacked:7"
-  export HPCTOOLKIT_LAGHOS_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
+  export HPCTOOLKIT_LAGHOS_LAUNCH="srun -n 8 -c 1 --gpus-per-node=8 --gpu-bind=closest"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=laghos
+
 fi
