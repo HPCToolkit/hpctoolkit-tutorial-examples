@@ -30,8 +30,9 @@ else
   export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-12.0.0
 
   # modules for hpctoolkit
-  module use /soft/perftools/hpctoolkit/polaris/modulefiles
+  export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example

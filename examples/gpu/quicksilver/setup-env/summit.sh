@@ -31,8 +31,9 @@ else
   module load gcc spectrum-mpi cuda/11.5.2 cmake
 
   # modules for hpctoolkit
-  module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le
+  export HPCTOOLKIT_MODULES_USE="module use /gpfs/alpine/csc322/world-shared/modulefiles/ppc64le"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
