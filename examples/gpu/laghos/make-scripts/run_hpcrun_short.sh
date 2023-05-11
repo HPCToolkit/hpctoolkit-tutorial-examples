@@ -16,7 +16,7 @@ echo $CMD
 $CMD
 
 # measure an execution of laghos
-CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} ${HPCTOOLKIT_LAGHOS_LAUNCH_ARGS} hpcrun -o $OUT.m -e CPUTIME -e gpu=nvidia -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
+CMD="time ${HPCTOOLKIT_LAGHOS_LAUNCH} ${HPCTOOLKIT_LAGHOS_LAUNCH_ARGS} hpcrun -o $OUT.m -e CPUTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t $EXEC -p 0 -dim 2 -rs 1 -tf 0.75 -pa -d cuda"
 echo $CMD
 eval $CMD
 

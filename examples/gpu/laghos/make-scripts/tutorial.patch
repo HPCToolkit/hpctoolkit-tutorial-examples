@@ -1,5 +1,5 @@
 diff --git a/makefile b/makefile
-index a59f844..80f2cc6 100644
+index a59f844..dbeba13 100644
 --- a/makefile
 +++ b/makefile
 @@ -55,7 +55,7 @@ make style
@@ -11,7 +11,7 @@ index a59f844..80f2cc6 100644
  GOALS = help clean distclean style setup mfem metis hypre
  
  # Default installation location
-@@ -248,16 +248,16 @@ tests:
+@@ -248,28 +248,28 @@ tests:
  
  # Setup: download & install third party libraries: HYPRE, METIS & MFEM
  
@@ -31,7 +31,22 @@ index a59f844..80f2cc6 100644
 +		./configure --disable-fortran --without-fei CC=${HPCTOOLKIT_MPI_CC} CXX=${HPCTOOLKIT_MPI_CXX} &&\
  		make -j $(NPROC);	else echo "Using existing ../$(HYPRE_DIR)"; fi)
  
- METIS_URL = http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis
+-METIS_URL = http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis
++METIS_URL = https://github.com/mfem/tpls/raw/gh-pages
+ METIS_VER = 4.0.3
+ METIS_DIR = metis-4.0
+ metis:
+ 	@(if [[ ! -e ../$(METIS_DIR) ]]; then cd ..; \
+-		wget -nc $(METIS_URL)/OLD/metis-$(METIS_VER).tar.gz &&\
++		wget -nc $(METIS_URL)/metis-$(METIS_VER).tar.gz &&\
+ 		tar zxvf metis-$(METIS_VER).tar.gz &&\
+ 		ln -s metis-$(METIS_VER) $(METIS_DIR) &&\
+ 		cd $(METIS_DIR) &&\
+-		make -j $(NPROC) OPTFLAGS="-O2";\
++		make -j $(NPROC) OPTFLAGS="-O2" COPTIONS="-std=c89";\
+ 		else echo "Using existing ../$(METIS_DIR)"; fi)
+ 
+ MFEM_GIT = https://github.com/mfem/mfem.git
 @@ -279,6 +279,6 @@ mfem: hypre metis
  	@(if [[ ! -e ../mfem ]]; then cd ..; \
  		git clone --single-branch --branch master --depth 1 $(MFEM_GIT) &&\
