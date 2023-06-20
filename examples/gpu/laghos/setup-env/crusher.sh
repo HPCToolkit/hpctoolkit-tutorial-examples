@@ -47,7 +47,8 @@ else
   export HPCTOOLKIT_LAGHOS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error"
-  export HPCTOOLKIT_LAGHOS_RUN_PC="sh make-scripts/unsupported-amd.sh"
+  export HPCTOOLKIT_LAGHOS_RUN_PC="sh make-scripts/unsupported-pc.sh AMD"
+  export HPCTOOLKIT_LAGHOS_RUN_COUNT="sh make-scripts/unsupported-inst-count.sh"
   export HPCTOOLKIT_LAGHOS_BUILD="sh"
   export HPCTOOLKIT_LAGHOS_LAUNCH="srun -n 8 -c 1 --gpus-per-node=8 --gpu-bind=closest"
 

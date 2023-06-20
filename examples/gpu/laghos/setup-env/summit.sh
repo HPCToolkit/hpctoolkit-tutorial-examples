@@ -47,6 +47,7 @@ else
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error"
   export HPCTOOLKIT_LAGHOS_RUN_PC="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LAGHOS_RUN_COUNT="sh make-scripts/unsupported-inst-count.sh"
   export HPCTOOLKIT_LAGHOS_BUILD="sh"
   export HPCTOOLKIT_LAGHOS_LAUNCH="jsrun -n 6 -g 1 -a 1 -c 1 -bpacked:7"
   export HPCTOOLKIT_LAGHOS_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
