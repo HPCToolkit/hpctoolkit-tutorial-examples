@@ -31,9 +31,9 @@ else
   module load PrgEnv-amd amd/5.4.3 cray-mpich craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
-#  module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
-#  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/develop"
+  export HPCTOOLKIT_MODULES_USE="module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example

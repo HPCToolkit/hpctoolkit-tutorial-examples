@@ -31,8 +31,9 @@ else
   module load oneapi spack cmake
 
   # modules for hpctoolkit
-  module use /soft/perftools/hpctoolkit/modulefiles
+  export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/modulefiles"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/latest"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
