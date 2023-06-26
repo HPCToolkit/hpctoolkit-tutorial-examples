@@ -45,7 +45,8 @@ else
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
-  export HPCTOOLKIT_LAMMPS_LAUNCH="jsrun -n 1 -g 1 -a 1"
+  export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=7
+  export HPCTOOLKIT_LAMMPS_LAUNCH="jsrun -n 6 -g 1 -a 1 -c 7"
   export HPCTOOLKIT_LAMMPS_LAUNCH_ARGS="--smpiargs \"-x PAMI_DISABLE_CUDA_HOOK=1 -disable_gpu_hooks\""
 
   # mark configuration for this example

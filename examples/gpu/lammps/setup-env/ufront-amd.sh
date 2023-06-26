@@ -18,6 +18,7 @@ export HPCTOOLKIT_LAMMPS_SUBMIT="sh"
 export HPCTOOLKIT_LAMMPS_RUN="env ROCR_VISIBLE_DEVICES=3,4 sh"
 export HPCTOOLKIT_LAMMPS_RUN_PC="sh make-scripts/unsupported-amd.sh"
 export HPCTOOLKIT_LAMMPS_BUILD="sh"
+export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=1
 export HPCTOOLKIT_LAMMPS_LAUNCH="sh"
 
 # mark configuration for this example

@@ -28,7 +28,7 @@ else
   module purge
 
   # load modules needed to build and run lammps
-  module load PrgEnv-amd amd/5.2.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load PrgEnv-amd amd/5.3.0 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
 
   # modules for hpctoolkit
   module use /gpfs/alpine/csc322/world-shared/modulefiles/x86_64
@@ -41,11 +41,12 @@ else
   export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_VEGA90A=ON"
   export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_ZEN3=ON"
   export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_HIP=yes -DCMAKE_CXX_COMPILER=$(which hipcc) -DCMAKE_CXX_FLAGS=\"-g\""
-  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 20 -N 1 --core-spec=8 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 20 -N 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LAMMPS_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
-  export HPCTOOLKIT_LAMMPS_LAUNCH="srun -n 1 -G 1 -c 1"
+  export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=7
+  export HPCTOOLKIT_LAMMPS_LAUNCH="srun --ntasks-per-node=8 --gpus-per-task=1 --gpu-bind=closest -c 7"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=lammps

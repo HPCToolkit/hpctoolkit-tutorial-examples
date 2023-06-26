@@ -18,6 +18,7 @@ export HPCTOOLKIT_LAMMPS_SUBMIT="sh"
 export HPCTOOLKIT_LAMMPS_RUN="sh"
 export HPCTOOLKIT_LAMMPS_RUN_PC="sh"
 export HPCTOOLKIT_LAMMPS_BUILD="sh"
+export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=1
 export HPCTOOLKIT_LAMMPS_LAUNCH="mpiexec -n 1"
 
 # mark configuration for this example

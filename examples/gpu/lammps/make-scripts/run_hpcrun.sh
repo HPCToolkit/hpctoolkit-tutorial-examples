@@ -12,7 +12,7 @@ $HPCTOOLKIT_LAMMPS_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 # measure an execution of lammps
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=$HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS
 CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t $EXEC -k on g 1 -sf kk -in lammps/lammps/src/INTEL/TEST/in.intel.lj"
 echo $CMD
 $CMD
