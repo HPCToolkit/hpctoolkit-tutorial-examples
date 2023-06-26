@@ -10,4 +10,4 @@ then
   exit
 fi
 
-$CMD $1 
+$CMD $1

@@ -1,3 +1,16 @@
+diff --git a/laghos.cpp b/laghos.cpp
+index 3d756ea..2ac8c04 100644
+--- a/laghos.cpp
++++ b/laghos.cpp
+@@ -84,7 +84,7 @@ static void Checks(const int dim, const int ti, const double norm, int &checks);
+ int main(int argc, char *argv[])
+ {
+    // Initialize MPI.
+-   MPI_Session mpi(argc, argv);
++   mfem::MPI_Session mpi(argc, argv);
+    const int myid = mpi.WorldRank();
+ 
+    // Print the banner.
 diff --git a/makefile b/makefile
 index a59f844..dbeba13 100644
 --- a/makefile

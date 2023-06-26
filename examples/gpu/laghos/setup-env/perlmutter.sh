@@ -31,8 +31,9 @@ else
   module load gpu PrgEnv-nvidia nvidia/22.7 cray-mpich
 
   # modules for hpctoolkit
-  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
@@ -49,6 +50,7 @@ else
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-short -o log.run-short.out -e log.run-short.error"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-long -o log.run-long.out -e log.run-long.error"
   export HPCTOOLKIT_LAGHOS_RUN_PC="$HPCTOOLKIT_LAGHOS_SUBMIT -J laghos-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LAGHOS_RUN_COUNT="sh make-scripts/unsupported-inst-count.sh"
   export HPCTOOLKIT_LAGHOS_BUILD="sh"
   export HPCTOOLKIT_LAGHOS_LAUNCH="srun -n 4 -c 1 --gpus-per-node=4 --gpu-bind=closest"
 
