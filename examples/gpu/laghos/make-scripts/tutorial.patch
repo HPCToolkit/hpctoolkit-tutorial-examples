@@ -52,6 +52,6 @@ index a59f844..dbeba13 100644
  		git clone --single-branch --branch master --depth 1 $(MFEM_GIT) &&\
  		cd mfem &&\
 -		make $(MFEM_BUILD) -j $(NPROC); else echo "Using existing ../mfem"; fi)
-+		make $(MFEM_BUILD) -j $(NPROC) CC=${HPCTOOLKIT_LAGHOS_C_COMPILER}; else echo "Using existing ../mfem"; fi)
++		make $(MFEM_BUILD) -j $(NPROC) CC=${HPCTOOLKIT_LAGHOS_C_COMPILER} MPICXX=${HPCTOOLKIT_MPI_CXX}; else echo "Using existing ../mfem"; fi)
  
  setup: mfem
