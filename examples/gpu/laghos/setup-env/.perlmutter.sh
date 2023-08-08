@@ -1,5 +1,3 @@
-export HPCTOOLKIT_TUTORIAL_RESERVATION=default
-
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
@@ -7,8 +5,6 @@ then
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-#  echo "    'hpctoolkit1' for day 1"
-#  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -40,6 +36,7 @@ else
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_MPI_CC=cc
   export HPCTOOLKIT_MPI_CXX=CC
+  export HPCTOOLKIT_LAGHOS_ROOT="$(pwd)"
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
   export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"
   export HPCTOOLKIT_LAGHOS_MODULES_BUILD=""
