@@ -17,7 +17,7 @@ else
   then
     export HPCTOOLKIT_RESERVATION="-q $HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
-    unset HPCTOOLKIT_PROJECTID
+    unset HPCTOOLKIT_RESERVATION
   fi
 
   # cleanse environment
