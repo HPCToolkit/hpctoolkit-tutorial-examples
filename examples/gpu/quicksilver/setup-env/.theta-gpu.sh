@@ -40,6 +40,7 @@ else
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda"
   export HPCTOOLKIT_QS_MODULES_BUILD="export PATH=$PATH"
+  export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_SUBMIT="sh"
   export HPCTOOLKIT_QS_RUN="sh"
   export HPCTOOLKIT_QS_RUN_PC="sh"

@@ -34,6 +34,7 @@ else
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=80
+  export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.6"
   export HPCTOOLKIT_QS_SUBMIT="sh"
   export HPCTOOLKIT_QS_RUN="sh"

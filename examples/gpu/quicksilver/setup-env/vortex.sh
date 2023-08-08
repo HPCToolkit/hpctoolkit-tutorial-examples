@@ -39,6 +39,7 @@ else
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=70
+  export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.6.1"
   export HPCTOOLKIT_QS_SUBMIT="bsub $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.error"
