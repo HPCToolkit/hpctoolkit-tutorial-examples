@@ -1,5 +1,3 @@
-export HPCTOOLKIT_TUTORIAL_RESERVATION=default
-
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
@@ -19,7 +17,7 @@ else
   then
     export HPCTOOLKIT_RESERVATION="-q $HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
-    export HPCTOOLKIT_RESERVATION="-q debug"
+    unset HPCTOOLKIT_PROJECTID
   fi
 
   # cleanse environment
@@ -28,7 +26,7 @@ else
   # load modules needed to build and run quicksilver
   module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/11.8.0
   export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.8.0
-
+i
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
