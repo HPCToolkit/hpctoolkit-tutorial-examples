@@ -37,7 +37,8 @@ else
   export HPCTOOLKIT_MPI_CXX=CC
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
-  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"  
+  export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"
+  export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD=""
   export HPCTOOLKIT_QS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 10 -C gpu -q debug"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -J qs-run -o log.run.out -e log.run.stderr -G 1"
