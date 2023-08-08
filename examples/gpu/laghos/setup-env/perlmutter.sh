@@ -21,14 +21,15 @@ else
   fi
 
   # cleanse environment
-  module purge
+  module reset
 
   # load modules needed to build and run pelec
   module load gpu PrgEnv-nvidia nvidia/22.7 cray-mpich
 
   # modules for hpctoolkit
-  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example

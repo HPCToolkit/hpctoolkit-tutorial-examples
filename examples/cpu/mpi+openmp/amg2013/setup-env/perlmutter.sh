@@ -39,8 +39,8 @@ else
   module unload darshan
 
   # Load HPCToolkit module
-  module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
-  module load hpctoolkit/2022.10.01-cpu
+  module use /global/common/software/m3977/modulefiles/perlmutter
+  module load hpctoolkit/default
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=amg2013

@@ -1,5 +1,3 @@
-export HPCTOOLKIT_TUTORIAL_RESERVATION=default
-
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
@@ -30,8 +28,9 @@ else
   module load gpu PrgEnv-nvidia cmake cray-libsci
 
   # modules for hpctoolkit
-  module use /global/common/software/m3977/hpctoolkit/latest/perlmutter/modulefiles
+  export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
