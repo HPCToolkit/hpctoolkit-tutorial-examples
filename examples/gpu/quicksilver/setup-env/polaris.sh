@@ -17,7 +17,8 @@ else
   then
     export HPCTOOLKIT_RESERVATION="-q $HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
-    unset HPCTOOLKIT_RESERVATION
+    # If no reservation is set, use the debug queue
+    export HPCTOOLKIT_RESERVATION="-q debug"
   fi
 
   # cleanse environment
