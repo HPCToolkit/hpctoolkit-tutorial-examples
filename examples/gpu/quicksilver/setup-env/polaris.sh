@@ -23,11 +23,11 @@ else
   fi
 
   # cleanse environment
-  module purge
+  module reset
 
   # load modules needed to build and run quicksilver
-  module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/12.0.0
-  export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-12.0.0
+  module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/11.8.0
+  export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.8.0
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
@@ -38,8 +38,9 @@ else
   # environment settings for this example
   export HPCTOOLKIT_MPI_CXX=CC
   export HPCTOOLKIT_CUDA_ARCH=80
+  export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD=""
-  export HPCTOOLKIT_QS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand"
+  export HPCTOOLKIT_QS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand -V"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -N qs-run -o log.run.out -e log.run.stderr"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -N qs-run-pc -o log.run-pc.out -e log.run-pc.stderr"
   export HPCTOOLKIT_QS_BUILD="sh"

@@ -3,6 +3,7 @@
 $HPCTOOLKIT_QS_MODULES_BUILD
 $HPCTOOLKIT_MODULES_USE
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
+cd $HPCTOOLKIT_QS_ROOT
 
 BINARY=qs
 EXEC=quicksilver/src/${BINARY}
@@ -13,7 +14,7 @@ echo $CMD
 $CMD
 
 # measure an execution of quicksilver
-CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME  -e gpu=nvidia -t ${EXEC}"
+CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
 echo $CMD
 eval $CMD
 
