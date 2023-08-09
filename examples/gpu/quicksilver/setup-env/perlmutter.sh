@@ -25,7 +25,7 @@ else
   module reset
 
   # load modules needed to build and run quicksilver
-  module load gpu PrgEnv-gnu cmake craype-x86-milan
+  module load gpu PrgEnv-gnu gcc/11.2.0 cudatoolkit/11.7 cmake craype-x86-milan craype-accel-nvidia80
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
