@@ -7,14 +7,8 @@
 #SBATCH --cpus-per-task=16
 
 # Load HPCToolkit module
-module use /global/common/software/m3977/hpctoolkit/2022.10.01/perlmutter/modulefiles
-module load hpctoolkit/2022.10.01-cpu
-
-#------------------------------------------------------------------------------
-# use LLVM OpenMP Tools support
-#------------------------------------------------------------------------------
-module load openmp/ompt
-#------------------------------------------------------------------------------
+module use /global/common/software/m3977/modulefiles/perlmutter
+module load hpctoolkit/default
 
 export OMP_PROC_BIND=true
 export OMP_PLACES=threads
