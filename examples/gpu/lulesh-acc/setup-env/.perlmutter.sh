@@ -24,7 +24,7 @@ else
   module purge
 
   # load modules needed to build and run lulesh
-  module load gpu PrgEnv-nvidia cray-mpich
+  module load gpu PrgEnv-nvidia cray-mpich libfabric craype-x86-milan craype-accel-nvidia80
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
