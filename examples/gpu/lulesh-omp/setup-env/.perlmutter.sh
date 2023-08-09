@@ -41,8 +41,8 @@ else
   export HPCTOOLKIT_LULESH_OMP_OMPFLAGS="-mp=gpu -Minfo=mp"
   export HPCTOOLKIT_LULESH_OMP_CXXFLAGS="-DUSE_MPI=0 -fast -gopt ${HPCTOOLKIT_LULESH_OMP_OMPFLAGS}"
   export HPCTOOLKIT_LULESH_OMP_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -t 5 -N 1 $HPCTOOLKIT_RESERVATION -C gpu"
-  export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J pelec-run -o log.run.out -e log.run.error"
-  export HPCTOOLKIT_LULESH_OMP_RUN_PC="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J pelec-run-pc -o log.run-pc.out -e log.run-pc.error"
+  export HPCTOOLKIT_LULESH_OMP_RUN="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-omp-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_LULESH_OMP_RUN_PC="$HPCTOOLKIT_LULESH_OMP_SUBMIT -J lulesh-omp-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_LULESH_OMP_BUILD="sh"
   export HPCTOOLKIT_LULESH_OMP_LAUNCH="srun -n 1 -c 1 -G 1"
 
