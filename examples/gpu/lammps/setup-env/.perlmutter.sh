@@ -21,10 +21,10 @@ else
   fi
   
   # cleanse environment
-  module purge
+  module reset
 
   # load modules needed to build and run lammps
-  module load gpu PrgEnv-nvidia cray-mpich cmake craype-x86-milan
+  module load gpu PrgEnv-gnu cudatoolkit/11.7 cray-mpich libfabric cmake craype-x86-milan craype-accel-nvidia80
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
@@ -41,7 +41,7 @@ else
   export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_AMPERE80=ON"
   export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_ZEN3=ON"
   export HPCTOOLKIT_LAMMPS_GPUFLAGS="-DKokkos_ENABLE_CUDA=yes -DCMAKE_CXX_COMPILER=$(pwd)/lammps/lammps/lib/kokkos/bin/nvcc_wrapper -DCMAKE_CXX_FLAGS=\"-lineinfo -ccbin $(which CC)\""
-  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -C gpu -t 20 -N 1 $HPCTOOLKIT_RESERVATION"
+  export HPCTOOLKIT_LAMMPS_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID -C gpu -t 20 -N 1 $HPCTOOLKIT_RESERVATION --export=ALL,MPICH_GPU_SUPPORT_ENABLED=1"
   export HPCTOOLKIT_LAMMPS_RUN="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_LAMMPS_RUN_PC="$HPCTOOLKIT_LAMMPS_SUBMIT -J lammps-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
