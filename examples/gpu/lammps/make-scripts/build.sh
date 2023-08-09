@@ -16,7 +16,7 @@ mkdir build && cd build
 eval cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON \
       $HPCTOOLKIT_LAMMPS_GPU_ARCH $HPCTOOLKIT_LAMMPS_HOST_ARCH \
       $HPCTOOLKIT_LAMMPS_GPUFLAGS ../cmake
-time make -j 4
+time make -j 8
 cd ../../..
 
 touch log.build.done

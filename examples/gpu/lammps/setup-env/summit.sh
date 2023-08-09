@@ -1,5 +1,3 @@
-export HPCTOOLKIT_TUTORIAL_RESERVATION=default
-
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
@@ -7,8 +5,6 @@ then
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then 
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-#  echo "    'hpctoolkit1' for day 1"
-#  echo "    'hpctoolkit2' for day 2"
   echo "    'default' to run without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
@@ -37,6 +33,7 @@ else
 
   # environment settings for this example
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
+  export HPCTOOLKIT_LAMMPS_ROOT="$(pwd)"
   export HPCTOOLKIT_LAMMPS_MODULES_BUILD=""
   export HPCTOOLKIT_LAMMPS_GPU_ARCH="-DKokkos_ARCH_VOLTA70=ON"
   export HPCTOOLKIT_LAMMPS_HOST_ARCH="-DKokkos_ARCH_POWER9=ON"
