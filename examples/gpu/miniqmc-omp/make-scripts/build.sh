@@ -6,28 +6,29 @@ $HPCTOOLKIT_MINIQMC_MODULES_BUILD
 
 rm -rf miniqmc
 
-MPI_ROOT=ignore
-CUDA_HOME=ignore
-
-if [[ ! -z "$CUDA_PATH" ]] 
-then
+if [[ -z "$CUDA_HOME" ]]; then
+  if [[ ! -z "$CUDA_PATH" ]]; then
     export CUDA_HOME=$CUDA_PATH
+  elif [[ ! -z "$NVHPC_CUDA_PATH" ]]; then
+    export CUDA_HOME=$NVHPC_CUDA_PATH
+  fi
 fi
+echo using CUDA_HOME=$CUDA_HOME
 
-
-if [[ ! -z "$MPI_ROOT" ]] 
-then
+if [[ -z "$MPI_HOME" ]]; then
+  if [[ ! -z "$MPI_ROOT" ]]; then
     export MPI_HOME=$MPI_ROOT
+  elif [[ ! -z "$CRAY_MPICH_DIR" ]]; then
+    export MPI_HOME=$CRAY_MPICH_DIR
+  fi
 fi
+echo using MPI_HOME=$MPI_HOME
 
 if [[ -z "`type -p cmake`" ]] 
 then
-    echo "CMake version 3.21 or newer was not found in your PATH"
-    exit
+  echo "CMake version 3.21 or newer was not found in your PATH"
+  exit
 fi
-
-echo using CUDA_HOME=$CUDA_HOME
-echo using MPI_HOME=$MPI_HOME
 
 export CMAKE_MAJOR_VERSION=`cmake --version | head -1 | tr '.' ' ' | awk '{print $3}'`
 export CMAKE_MINOR_VERSION=`cmake --version | head -1 | tr '.' ' ' | awk '{print $4}'`

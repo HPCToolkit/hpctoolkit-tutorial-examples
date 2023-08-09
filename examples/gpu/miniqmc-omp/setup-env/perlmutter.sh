@@ -25,7 +25,7 @@ else
   module purge
 
   # load modules needed to build and run miniqmc
-  module load gpu PrgEnv-nvidia cmake cray-libsci
+  module load gpu PrgEnv-nvidia nvidia/23.1 cmake cray-libsci
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
@@ -36,12 +36,13 @@ else
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_BEFORE_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --pause"
   export HPCTOOLKIT_AFTER_RUN_PC="srun --ntasks-per-node 1 dcgmi profile --resume"
-  export HPCTOOLKIT_MINIQMC_CXX_COMPILER="nvc++"
-  export HPCTOOLKIT_MINIQMC_CXXFLAGS="-DENABLE_OFFLOAD=1"
+  export HPCTOOLKIT_MINIQMC_CXX_COMPILER=nvc++
+  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_ARCH=cc80"
+  export HPCTOOLKIT_MINIQMC_SUBMIT="sbatch $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -N 1 -t 30 -C gpu"
+  export HPCTOOLKIT_MINIQMC_RUN="$HPCTOOLKIT_MINIQMC_SUBMIT -J miniqmc-run -o log.run.out -e log.run.error"
+  export HPCTOOLKIT_MINIQMC_RUN_PC="$HPCTOOLKIT_MINIQMC_SUBMIT -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
   export HPCTOOLKIT_MINIQMC_BUILD="sh"
   export HPCTOOLKIT_MINIQMC_LAUNCH="srun -n 1 -c 32 -G 1"
-  export HPCTOOLKIT_MINIQMC_RUN="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run -o log.run.out -e log.run.error $1"
-  export HPCTOOLKIT_MINIQMC_RUN_PC="sbatch $HPCTOOLKIT_PROJECTID -W 5 -nnodes 1 $HPCTOOLKIT_RESERVATION -J miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=miniqmc
