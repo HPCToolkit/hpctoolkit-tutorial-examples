@@ -43,7 +43,7 @@ else
   export HPCTOOLKIT_LAGHOS_MODULES_BUILD=""
   export HPCTOOLKIT_LAGHOS_C_COMPILER=gcc
   export HPCTOOLKIT_LAGHOS_MFEM_FLAGS="pcuda CUDA_ARCH=sm_$HPCTOOLKIT_CUDA_ARCH BASE_FLAGS='-std=c++11 -g'"
-  export HPCTOOLKIT_LAGHOS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand -V"
+  export HPCTOOLKIT_LAGHOS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:20:00 -l filesystems=home:grand -V"
   export HPCTOOLKIT_LAGHOS_RUN_SHORT="$HPCTOOLKIT_LAGHOS_SUBMIT -N laghos-run-short -o log.run-short.out -e log.run-short.error"
   export HPCTOOLKIT_LAGHOS_RUN_LONG="$HPCTOOLKIT_LAGHOS_SUBMIT -N laghos-run-long -o log.run-long.out -e log.run-long.error"
   export HPCTOOLKIT_LAGHOS_RUN_PC="$HPCTOOLKIT_LAGHOS_SUBMIT -N laghos-run-pc -o log.run-pc.out -e log.run-pc.error"
