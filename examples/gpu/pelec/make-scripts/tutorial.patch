@@ -1,26 +1,26 @@
 diff -Naur PeleC-orig/Exec/RegTests/TG/tg-1.inp PeleC/Exec/RegTests/TG/tg-1.inp
 --- PeleC-orig/Exec/RegTests/TG/tg-1.inp        2023-10-10 15:37:11.000000000 +0000
 +++ PeleC/Exec/RegTests/TG/tg-1.inp     2023-10-10 15:39:53.000000000 +0000
-@@ -48,21 +48,21 @@
+@@ -48,13 +48,15 @@
  amr.n_error_buf     = 2 2 2 2 # number of buffer cells in error est
-
+ 
  # CHECKPOINT FILES
- -amr.check_file      = chk        # root name of checkpoint file
- -amr.check_int       = 100        # number of timesteps between checkpoints
- +amr.checkpoint_files_output = 0
- +#amr.check_file      = chk        # root name of checkpoint file
- +#amr.check_int       = 100        # number of timesteps between checkpoints
-
+-amr.check_file      = chk        # root name of checkpoint file
+-amr.check_int       = 100        # number of timesteps between checkpoints
++amr.checkpoint_files_output = 0
++#amr.check_file      = chk        # root name of checkpoint file
++#amr.check_int       = 100        # number of timesteps between checkpoints
+ 
  # PLOTFILES
- -amr.plot_file       = plt        # root name of plotfile
- -amr.plot_int        = 100        # number of timesteps between plotfiles
- -amr.plot_vars  =  density Temp
- -amr.derive_plot_vars = x_velocity y_velocity z_velocity magvel magvort pressure
- +amr.plot_files_output = 0
- +#amr.plot_file       = plt        # root name of plotfile
- +#amr.plot_int        = 100        # number of timesteps between plotfiles
- +#amr.plot_vars  =  density Temp
- +#amr.derive_plot_vars = x_velocity y_velocity z_velocity magvel magvort pressure
-
+-amr.plot_file       = plt        # root name of plotfile
+-amr.plot_int        = 100        # number of timesteps between plotfiles
+-amr.plot_vars  =  density Temp
+-amr.derive_plot_vars = x_velocity y_velocity z_velocity magvel magvort pressure
++amr.plot_files_output = 0
++#amr.plot_file       = plt        # root name of plotfile
++#amr.plot_int        = 100        # number of timesteps between plotfiles
++#amr.plot_vars  =  density Temp
++#amr.derive_plot_vars = x_velocity y_velocity z_velocity magvel magvort pressure
+ 
  # PROBLEM PARAMETERS
-  prob.reynolds = 1600.0
+ prob.reynolds = 1600.0
