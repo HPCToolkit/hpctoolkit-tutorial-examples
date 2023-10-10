@@ -44,7 +44,7 @@ else
   export HPCTOOLKIT_PELEC_MODULES_BUILD=""
   export HPCTOOLKIT_PELEC_GPUFLAGS="-DENABLE_CUDA=ON -DPELEC_ENABLE_CUDA=ON -DAMReX_CUDA_ARCH=8.0"
   export HPCTOOLKIT_PELEC_CXX_COMPILER=g++
-  export HPCTOOLKIT_PELEC_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:15:00 -l filesystems=home:grand -V"
+  export HPCTOOLKIT_PELEC_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:15:00 -l filesystems=home:grand:eagle -V"
   export HPCTOOLKIT_PELEC_RUN="$HPCTOOLKIT_PELEC_SUBMIT -N pelec-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_PELEC_RUN_PC="$HPCTOOLKIT_PELEC_SUBMIT -N pelec-run-pc -o log.run-pc.out -e log.run-pc.error"
   export HPCTOOLKIT_PELEC_BUILD="sh"

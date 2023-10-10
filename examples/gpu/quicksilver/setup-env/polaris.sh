@@ -40,7 +40,7 @@ else
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD=""
-  export HPCTOOLKIT_QS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand -V"
+  export HPCTOOLKIT_QS_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand:eagle -V"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -N qs-run -o log.run.out -e log.run.stderr"
   export HPCTOOLKIT_QS_RUN_PC="$HPCTOOLKIT_QS_SUBMIT -N qs-run-pc -o log.run-pc.out -e log.run-pc.stderr"
   export HPCTOOLKIT_QS_BUILD="sh"
