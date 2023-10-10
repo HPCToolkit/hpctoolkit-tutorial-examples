@@ -35,7 +35,7 @@ echo $CMD
 $CMD
 
 # combine the measurements with the program structure information
-CMD="hpcprof -o $OUT.d $OUT.m"
+CMD="hpcprof --only-exe ${BINARY} -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
