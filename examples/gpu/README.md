@@ -20,17 +20,14 @@ our experiments with these codes using only a single GPU.
 
    - lulesh-omp  - the OpenMP version
 
-4. pelec -  a turbulent combustion code built using the ECP AMReX (AMR for Exascale) 
+4. miniqmc - a miniapp for QMCPACK, a simplified real space ab initio Quantum 
+             Monte Carlo code for computing the electronic structure of atoms, 
+             molecules, and solids with portable GPU support using OpenMP
+
+5. pelec -  a turbulent combustion code built using the ECP AMReX (AMR for Exascale) 
             adaptive mesh refinement framework  
 
-5. quicksilver - a LLNL proxy application for dynamic Monte Carlo particle transport
-
-Cori-GPU is a complex system to run on. It runs one OS and software stack on the login
-nodes and a different software stack on the GPU nodes accessible via Slurm. For that
-reason, code that runs on the GPU nodes must be build on the GPU nodes. Rather than
-run interactively on the GPU nodes (tying them up more than is necessary), all of the 
-Makefiles for the GPU examples use Slurm to offload build and run operations from 
-the login nodes to Cori's GPU nodes. 
+6. quicksilver - a LLNL proxy application for dynamic Monte Carlo particle transport
 
 Our experiments with these GPU-accelerated codes collect two kinds of measurement 
 data:
@@ -50,12 +47,3 @@ data:
    NVIDIA GPUs HPCToolkit also reports static kernel characteristics, e.g. register 
    consumption, shared memory consumption, as well as dynamic measurements such as
    average number of blocks in launches of a kernel in a context, utilization, etc.       
-
-Tracing of GPU-accelerated codes is a work in progress. While a more sophisticated
-version of HPCToolkit under development is working to maintain meta data for each
-trace line, associating each trace line with hardware abstractions (e.g. nodes, cpu 
-cores, gpus) and software abstractions (e.g. mpi ranks, threads, gpu contexts, gpu streams),
-today's version of HPCToolkit lacks an association between software abstractions and
-the hardware they run on. Furthermore, there is no good way to distinguish CPU threads
-and GPU streams in hpcviewer's trace view. As a stopgap solution, we number GPU streams
-with thread numbers that begin at 500.
