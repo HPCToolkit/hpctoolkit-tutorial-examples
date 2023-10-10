@@ -9,8 +9,8 @@ rm -rf miniqmc
 if [[ -z "$CUDA_HOME" ]]; then
   if [[ ! -z "$CUDA_PATH" ]]; then
     export CUDA_HOME=$CUDA_PATH
-  elif [[ ! -z "$NVHPC_CUDA_PATH" ]]; then
-    export CUDA_HOME=$NVHPC_CUDA_PATH
+  elif [[ ! -z "$NVHPC_CUDA_HOME" ]]; then
+    export CUDA_HOME=$NVHPC_CUDA_HOME
   fi
 fi
 echo using CUDA_HOME=$CUDA_HOME

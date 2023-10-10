@@ -1,7 +1,9 @@
 #!/bin/bash
 
 $HPCTOOLKIT_MINIQMC_MODULES_BUILD
+$HPCTOOLKIT_MODULES_USE
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
+cd "$HPCTOOLKIT_MINIQMC_ROOT"
 
 BINARY=miniqmc
 EXEC=miniqmc/miniqmc-build/bin/${BINARY}
@@ -15,7 +17,7 @@ $CMD
 $HPCTOOLKIT_BEFORE_RUN_PC
 
 # measure an execution of miniqmc
-CMD="OMP_NUM_THREADS=10 time ${HPCTOOLKIT_MINIQMC_LAUNCH} ${HPCTOOLKIT_MINIQMC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia,pc -t ${EXEC} -g '\"2 2 1\"'"
+CMD="OMP_NUM_THREADS=10 time ${HPCTOOLKIT_MINIQMC_LAUNCH} ${HPCTOOLKIT_MINIQMC_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia,pc ${EXEC} -g '\"2 2 1\"'"
 echo $CMD
 eval $CMD
 
