@@ -39,7 +39,7 @@ else
   export HPCTOOLKIT_GPU_PLATFORM=nvidia
   export HPCTOOLKIT_MINIQMC_ROOT="$(pwd)"
   export HPCTOOLKIT_MINIQMC_CXX_COMPILER=CC
-  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_ARCH=cc80 -DCMAKE_SYSTEM_NAME=CrayLinuxEnvironment"
+  export HPCTOOLKIT_MINIQMC_GPUFLAGS="-DENABLE_OFFLOAD=1 -DOFFLOAD_ARCH=cc80 -DQMC_MPI=ON -DCMAKE_SYSTEM_NAME=CrayLinuxEnvironment"
   export HPCTOOLKIT_MINIQMC_SUBMIT="qsub $HPCTOOLKIT_PROJECTID $HPCTOOLKIT_RESERVATION -l select=1 -l walltime=0:10:00 -l filesystems=home:grand:eagle -V"
   export HPCTOOLKIT_MINIQMC_RUN="$HPCTOOLKIT_MINIQMC_SUBMIT -N miniqmc-run -o log.run.out -e log.run.error"
   export HPCTOOLKIT_MINIQMC_RUN_PC="$HPCTOOLKIT_MINIQMC_SUBMIT -N miniqmc-run-pc -o log.run-pc.out -e log.run-pc.error $1"
