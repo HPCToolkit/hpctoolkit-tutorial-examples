@@ -32,6 +32,7 @@ else
   
   # load modules needed to build and run lammps
   module load PrgEnv-gnu cray-mpich cmake craype-x86-milan cudatoolkit-standalone/11.4.4
+  unset CUDA_HOME NVHPC_CUDA_HOME
   export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.4.4
 
   # modules for hpctoolkit

@@ -26,6 +26,7 @@ else
 
   # load modules needed to build and run quicksilver
   module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/11.8.0
+  unset CUDA_HOME NVHPC_CUDA_HOME
   export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.8.0
 
   # modules for hpctoolkit
