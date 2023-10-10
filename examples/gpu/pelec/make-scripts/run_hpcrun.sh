@@ -1,7 +1,9 @@
 #!/bin/bash
 
 $HPCTOOLKIT_PELEC_MODULES_BUILD
+$HPCTOOLKIT_MODULES_USE
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
+cd "$HPCTOOLKIT_PELEC_ROOT"
 
 BINARY=PeleC-TG
 LOC=Exec/RegTests/TG
@@ -29,7 +31,7 @@ eval $CMD
 
 # compute program structure information
 CMD="hpcstruct --gpucfg no $OUT.m" 
-echo $$CMD
+echo $CMD
 $CMD
 
 # combine the measurements with the program structure information
