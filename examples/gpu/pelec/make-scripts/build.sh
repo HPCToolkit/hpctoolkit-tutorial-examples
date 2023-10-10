@@ -8,8 +8,10 @@ date > .build_begin
 
 # PeleC
 git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
-mkdir -p PeleC/build
-pushd PeleC/build
+cd PeleC
+git apply ../make-scripts/tutorial.patch
+mkdir -p build
+pushd build
 cmake -DCMAKE_CXX_COMPILER=$HPCTOOLKIT_PELEC_CXX_COMPILER -DCMAKE_BUILD_TYPE=RelWithDebInfo $HPCTOOLKIT_PELEC_GPUFLAGS ..
 cd Exec/RegTests/TG
 make -j 16

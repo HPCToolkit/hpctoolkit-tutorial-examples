@@ -28,6 +28,8 @@ else
 
   # load modules needed to build and run pelec
   module load PrgEnv-gnu cmake craype-x86-milan cray-mpich cudatoolkit-standalone/11.4.4
+  unset CUDA_HOME NVHPC_CUDA_HOME
+  export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.4.4
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
