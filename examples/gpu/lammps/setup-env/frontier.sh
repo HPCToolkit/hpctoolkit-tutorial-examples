@@ -15,7 +15,7 @@ else
   fi
   if test "$HPCTOOLKIT_TUTORIAL_RESERVATION" != "default"
   then
-    export HPCTOOLKIT_RESERVATION="-U $HPCTOOLKIT_TUTORIAL_RESERVATION"
+    export HPCTOOLKIT_RESERVATION="--reservation=$HPCTOOLKIT_TUTORIAL_RESERVATION"
   else
     unset HPCTOOLKIT_RESERVATION
   fi
@@ -24,7 +24,7 @@ else
   module purge
 
   # load modules needed to build and run lammps
-  module load PrgEnv-amd amd/5.4.3 cray-mpich craype-x86-trento craype-accel-amd-gfx90a cmake
+  module load PrgEnv-amd amd/5.4.3 cray-mpich cmake craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load ums ums023 hpctoolkit"
