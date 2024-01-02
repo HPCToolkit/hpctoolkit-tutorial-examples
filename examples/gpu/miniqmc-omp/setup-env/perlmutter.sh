@@ -22,14 +22,14 @@ else
   fi
 
   # cleanse environment
-  module purge
+  module reset
 
   # load modules needed to build and run miniqmc
-  module load gpu PrgEnv-nvidia nvidia/23.1 cmake cray-libsci
+  module load gpu PrgEnv-nvidia nvidia/23.9 cmake cray-libsci
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_USE="module use /global/common/software/m3977/modulefiles/perlmutter"
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
