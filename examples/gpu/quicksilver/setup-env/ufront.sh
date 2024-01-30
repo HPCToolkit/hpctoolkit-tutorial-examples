@@ -26,16 +26,17 @@ else
   fi
 
   # load hpctoolkit modules
-  module use /usr/local/modules
-  module use /home/johnmc/modules
+  # module use /usr/local/modules
+  # module use /home/johnmc/modules
+  module use /projects/modulefiles
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/master"
+  # export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/master"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2023.08.1/cuda11.8.0-rocm5.4.3 "
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=80
-  export HPCTOOLKIT_QS_ROOT="$(pwd)"
-  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.6"
+  export HPCTOOLKIT_QS_MODULES_BUILD="module load cuda/11.8"
   export HPCTOOLKIT_QS_SUBMIT="sh"
   export HPCTOOLKIT_QS_RUN="sh"
   export HPCTOOLKIT_QS_RUN_PC="sh"

@@ -1,0 +1,79 @@
+#!/bin/bash
+
+dotests()
+{
+	# Prepare the test list by reading the QATESTS file
+	echo -n "test list file = "  | tee -a $logname
+	ls -l QATESTS  | tee -a $logname
+	echo "  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - " | tee -a $logname
+        echo ""| tee -a $logname
+        
+        declare -a arr_tests
+        for i in  $( cat QATESTS | sed '/^#/d' ); do arr_tests+=($i); done
+
+        for test in "${arr_tests[@]}"
+        do
+		export TESTLOG=log.$test
+                echo "--> Running test \"$test\"  on \"${TARGET} ${TARGET_ARGS}\" `date`" | tee -a $logname | tee -a $TESTLOG
+		export ROCR_VISIBLE_DEVICES=1,2
+                dohpct "${TARGET} ${TARGET_ARGS}" ${test} 2>&1 >>$TESTLOG
+		if [ -a dohpct.err ]; then
+			# dohpct found a syntax error in the data descriptor
+			cat dohpct.err >> $TESTLOG
+		fi
+		if [ "`grep TESTFAIL $TESTLOG`" != "" ]; then
+			grep TESTFAIL $TESTLOG | tee -a $logname
+			# echo "Test failed, setting EXITMODE=1" >> $logname
+			export EXITMODE=1
+		else
+			grep TESTPASS $TESTLOG | tee -a $logname
+			# echo "Test passed, leaving EXITMODE=$EXITMODE" >> $logname
+		fi
+		echo "" | tee -a $logname
+	done
+}
+
+######################################################################################################################
+# QA.lammps -- script to run QA tests on the lammps executable
+######################################################################################################################
+#  The first argument is the suitemode; only "smoke" is currently supported for running tests
+# echo " First argument = \"$1\""
+
+# first check the environent for GPUs and MPI -- setting TOPDIR, since this script must be
+#  invoked from the lammps top-level directory.
+DIR=`which dohpct`
+export TOPDIR=`dirname $DIR`/..
+echo "TOPDIR = $TOPDIR"
+#source $TOPDIR/bin/subs/checkenv
+# checkenv
+
+export logname=LOG.lammps
+export TARGET=lammps/lammps/build/lmp
+export TARGET_ARGS="-k on g 1 -sf kk -in lammps/lammps/src/INTEL/TEST/in.intel.lj"
+export EXITMODE=0
+export time_out="timeout -s6 0"
+
+/bin/rm -rf meas.* dbase.* log.run* log.test* report.test* rterrs.*
+/bin/rm -f $logname
+make clean
+echo "Begin QA.lammps $1 `date`" | tee -a $logname
+echo "Removing old data, leaving the executable $TARGET" | tee -a $logname
+echo "" | tee -a $logname
+
+case "$1" in
+    list)
+	ls -al ;;
+    build)
+	make;;
+    clean)
+	;;
+    distclean)
+	make distclean;;
+    smoke)
+	dotests ;;
+    *)
+	echo "suitemode \"$1\" is not supported " | tee -a $logname ;;
+esac
+
+echo "End QA.lammps $1 `date`; exiting $EXITMODE" | tee -a $logname
+exit $EXITMODE

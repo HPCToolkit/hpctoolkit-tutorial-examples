@@ -1,11 +1,12 @@
 # load modules needed to build and run lammps
 module use /projects/modulefiles
 module use /usr/local/modules
-module load gcc/12.2.0+nvptx cuda/12.1 openmpi/4.1.4-gcc12.2.0 cmake
+module load cuda/11.8
+# module load cmake
 
 # modules for hpctoolkit
-module use /home/johnmc/modulefiles
-export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+# module use /home/johnmc/modulefiles
+export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2023.08.1/cuda11.8.0-rocm5.4.3"
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 # environment settings for this example
@@ -20,7 +21,7 @@ export HPCTOOLKIT_LAMMPS_RUN="sh"
 export HPCTOOLKIT_LAMMPS_RUN_PC="sh"
 export HPCTOOLKIT_LAMMPS_BUILD="sh"
 export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=1
-export HPCTOOLKIT_LAMMPS_LAUNCH="mpiexec -n 1"
+export HPCTOOLKIT_LAMMPS_LAUNCH="mpirun -np 4"
 
 # mark configuration for this example
 export HPCTOOLKIT_EXAMPLE=lammps
