@@ -1,8 +1,8 @@
 # load modules needed to build and run lammps
 module use /projects/modulefiles
 module use /usr/local/modules
-module load rocm/5.4.3
-# module load cmake
+module load rocm/5.7.1
+module load cmake
 
 # modules for hpctoolkit
 # module use /home/johnmc/modulefiles
