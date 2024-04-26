@@ -2,12 +2,15 @@ RDY=$(findstring ArborX,$(HPCTOOLKIT_EXAMPLE))
 avail:
 	@echo
 	@echo Specify one of the possible targets: 
-	@echo "	build: build quicksilver"
+	@echo "	all: build and run ArborX"
+	@echo "	build: build Arborx"
 	@echo "	run: use hpctoolkit to collect, analyze, and present both kernel and instruction-level information about gpu performance "
 	@echo "	view: use hpcviewer to inspect performance data gathered using 'run'"
 	@echo "	view-pc: use hpcviewer to inspect performance data gathered using 'run-pc'"
 	@echo "	clean: delete performance data and logs"
 	@echo "	veryclean: delete build, performance data, and logs"
+
+all: build run
 
 build:
 	READY=$(RDY) CMD="sh scripts/build.sh" sh scripts/check.sh sh
