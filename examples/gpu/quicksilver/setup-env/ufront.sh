@@ -2,6 +2,8 @@
 export HPCTOOLKIT_TUTORIAL_PROJECTID=default
 export HPCTOOLKIT_TUTORIAL_RESERVATION=default
 
+unset QA_TEST_VARIANT
+
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
