@@ -13,10 +13,10 @@ avail:
 all: build run
 
 build:
-	READY=$(RDY) CMD="sh scripts/build.sh" sh scripts/check.sh sh
+	READY=$(RDY) CMD="sh make-scripts/build.sh" sh make-scripts/check.sh sh
 
 run: 
-	READY=$(RDY) CMD="sbatch scripts/submit.sh" sh scripts/check.sh 
+	READY=$(RDY) CMD="sbatch make-scripts/submit.sh" sh make-scripts/check.sh 
 
 view:
 	hpcviewer arborx-md.d
@@ -28,7 +28,7 @@ clean:
 	rm -rf arborx-md* submit-done slurm*
 
 veryclean: clean
-	rm -rf ArborX build-done
+	rm -rf ArborX* build-done .build*
 
 distclean: veryclean
 	rm -rf hpcstruct-cache
