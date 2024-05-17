@@ -27,7 +27,10 @@ our experiments with these codes using only a single GPU.
 5. pelec -  a turbulent combustion code built using the ECP AMReX (AMR for Exascale) 
             adaptive mesh refinement framework  
 
-6. quicksilver - a LLNL proxy application for dynamic Monte Carlo particle transport
+6. arborx - an open-source library designed to provide performance portable algorithms 
+            for geometric search
+
+7. quicksilver - a LLNL proxy application for dynamic Monte Carlo particle transport
 
 Our experiments with these GPU-accelerated codes collect two kinds of measurement 
 data:

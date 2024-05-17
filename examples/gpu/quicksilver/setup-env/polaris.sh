@@ -1,3 +1,4 @@
+export HPCTOOLKIT_TUTORIAL_PROJECTID=gpu_hack
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
@@ -22,16 +23,17 @@ else
   fi
 
   # cleanse environment
-  module reset
+  #module reset
 
   # load modules needed to build and run quicksilver
-  module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/11.8.0
+  # module load PrgEnv-gnu cmake craype-x86-milan cudatoolkit-standalone/11.8.0
   unset CUDA_HOME NVHPC_CUDA_HOME
-  export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.8.0
+  export CUDA_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  export HPCTOOLKIT_MODULES_USE="module use /grand/gpu_hack/hpctoolkit/modulefiles"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
+  export HPCTOOLKIT_HPCSTRUCT_CACHE=$HOME/.hpctoolkit/hpcstruct-cache
   $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
