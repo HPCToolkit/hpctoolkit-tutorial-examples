@@ -1,8 +1,9 @@
 #!/bin/bash
 
 $HPCTOOLKIT_ARBORX_MODULES_BUILD
+# rm -f log.build$QA_TEST_VARIANT
 
-date > .build_start
+date
 rm -rf ArborX$QA_TEST_VARIANT
 
 mkdir ArborX$QA_TEST_VARIANT
@@ -140,5 +141,4 @@ fi
 echo "End arborx$QA_TEST_VARIANT build"
 cd ../../..
 pwd
-touch build-done
-date > .build_end
+date

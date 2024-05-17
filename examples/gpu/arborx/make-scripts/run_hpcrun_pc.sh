@@ -6,7 +6,7 @@ EXEC=${ARBORX_DIR}/$BINARY
 OUT=arborx-md$QA_TEST_VARIANT-pc
 
 # remove old files and directories
-CMD="rm -rf log.run-pc.done log.arborx $OUT.m $OUT.d"
+CMD="rm -rf log.arborx $OUT.m $OUT.d"
 echo $CMD
 $CMD
 
@@ -19,7 +19,7 @@ echo "on entry OMP_NUM_THREADS=$OMP_NUM_THREADS"
 # measure an execution of arborx
 export OMP_NUM_THREADS=$HPCTOOLKIT_ARBORX_OMP_NUM_THREADS
 echo "before run-pc OMP_NUM_THREADS=$OMP_NUM_THREADS"
-CMD="time ${HPCTOOLKIT_ARBORX_LAUNCH} hpcrun -o $OUT.m -e gpu=nvidia,pc $EXEC"
+CMD="time ${HPCTOOLKIT_ARBORX_LAUNCH} hpcrun -o $OUT.m -e gpu=${HPCTOOLKIT_GPU_PLATFORM_PC} -t $EXEC"
 echo $CMD
 $CMD
 
@@ -35,4 +35,4 @@ CMD="time hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
 
-touch log.run-pc.done
+# touch log.run-pc.done

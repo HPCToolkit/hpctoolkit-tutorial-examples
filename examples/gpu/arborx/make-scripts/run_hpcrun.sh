@@ -5,8 +5,8 @@ ARBORX_DIR=ArborX$QA_TEST_VARIANT/ArborX/build/examples/molecular_dynamics/
 EXEC=${ARBORX_DIR}/$BINARY
 OUT=arborx-md$QA_TEST_VARIANT
 
-echo rm -rf log.run.done log.arborx $OUT.m $OUT.d
-rm -rf log.run.done log.arborx $OUT.m $OUT.d
+echo rm -rf log.arborx $OUT.m $OUT.d
+rm -rf log.arborx $OUT.m $OUT.d
 
 $HPCTOOLKIT_ARBORX_MODULES_BUILD
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
@@ -28,5 +28,3 @@ $CMD
 CMD="time hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
-
-# touch log.run.done
