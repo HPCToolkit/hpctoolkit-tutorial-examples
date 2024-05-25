@@ -36,5 +36,5 @@ clean:
 	/bin/rm -rf hpctoolkit*
 	/bin/rm -rf log* .build*
 
-veryclean: clean
+distclean veryclean: clean
 	/bin/rm -rf LULESH tarfile 

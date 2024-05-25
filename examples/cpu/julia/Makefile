@@ -18,3 +18,5 @@ view:
 
 clean:
 	/bin/rm -rf julia* 
+
+distclean veryclean: clean

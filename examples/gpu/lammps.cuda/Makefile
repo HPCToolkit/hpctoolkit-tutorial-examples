@@ -1,11 +1,11 @@
-RDY=$(findstring luleshomp,$(HPCTOOLKIT_EXAMPLE))
+RDY=$(findstring lammps,$(HPCTOOLKIT_EXAMPLE))
 
-all: 
-	@echo 
+all:
+	@echo
 	@echo Specify one of the possible targets: 
-	@echo "	build: build lulesh2.0"
-	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
+	@echo "	build: build lammps"
 	@echo "	run: use hpctoolkit to collect and analyze kernel-level information about gpu performance "
+	@echo "	run-pc: use hpctoolkit to collect, analyze, and present instruction-level information about gpu performance "
 	@echo "	view: use hpcviewer to inspect performance data gathered using 'run'"
 	@echo "	view-pc: use hpcviewer to inspect performance data gathered using 'run-pc'"
 	@echo "	clean: delete performance data and logs"
@@ -13,24 +13,24 @@ all:
 	@echo
 
 build:
-	@READY=$(RDY) CMD="$(HPCTOOLKIT_LULESH_OMP_BUILD)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_BUILD)" \
 	      	sh make-scripts/check.sh make-scripts/build.sh
 
 
 run:
-	@READY=$(RDY) CMD="$(HPCTOOLKIT_LULESH_OMP_RUN)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN)" \
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh
 
 run-pc:
-	@READY=$(RDY) CMD="$(HPCTOOLKIT_LULESH_OMP_RUN_PC)" \
+	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN_PC)" \
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
 
 view:
-	@READY=$(RDY) CMD=sh DB="hpctoolkit-lulesh2.0-omp" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-lmp" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 view-pc:
-	@READY=$(RDY) CMD=sh DB="hpctoolkit-lulesh2.0-omp-pc" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-lmp-pc" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
@@ -38,4 +38,4 @@ clean:
 	/bin/rm -rf log* .build*
 
 distclean veryclean: clean
-	/bin/rm -rf LULESH tarfile 
+	/bin/rm -rf lammps*

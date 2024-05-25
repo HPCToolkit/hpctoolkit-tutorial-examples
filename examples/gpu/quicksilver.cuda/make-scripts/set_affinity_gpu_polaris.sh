@@ -1,0 +1,1 @@
+../../.common/set_affinity_gpu_polaris.sh

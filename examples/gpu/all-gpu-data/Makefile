@@ -13,3 +13,5 @@ download:
 
 clean: 
 	/bin/rm -rf tarfile hpctoolkit* 
+
+distclean veryclean: clean

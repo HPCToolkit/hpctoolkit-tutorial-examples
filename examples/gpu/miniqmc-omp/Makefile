@@ -36,5 +36,5 @@ view-pc:
 clean:
 	/bin/rm -rf hpctoolkit* *.hpcstruct info*.xml log*
 
-veryclean: clean
+distclean veryclean: clean
 	/bin/rm -rf miniqmc .build*
