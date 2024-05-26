@@ -20,7 +20,9 @@ git checkout tutorial
 
 echo "Running make config for laghos$QA_TEST_VARIANT"
 
+echo "make setup NPROC=16 MFEM_BUILD="pcuda CUDA_ARCH=$HPCTOOLKIT_CUDA_ARCH BASE_FLAGS='-std=c++11 -g'""
 make setup NPROC=16 MFEM_BUILD="pcuda CUDA_ARCH=$HPCTOOLKIT_CUDA_ARCH BASE_FLAGS='-std=c++11 -g'"
+
 echo "Running make for laghos$QA_TEST_VARIANT"
 make -j 8
 popd

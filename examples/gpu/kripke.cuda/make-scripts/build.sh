@@ -5,6 +5,8 @@ $HPCTOOLKIT_KRIPKE_MODULES_BUILD
 date
 module list
 
+export KRIPKE_ROOT=`pwd`
+
 echo "Removing previous build of Kripke$QA_TEST_VARIANT"
 rm -rf Kripke$QA_TEST_VARIANT
 
@@ -14,7 +16,7 @@ echo ""
 echo "====================================================="
 echo ""
 
-echo "Building kripke"
+echo "Building kripke$QA_TEST_VARIANT"
 
 # clone and build kripke
 echo "QA_TEST_VARIANT = $QA_TEST_VARIANT"
@@ -60,7 +62,7 @@ cd build
 echo ""
 
 echo "-----------"
-echo "Starting cmake of kripke"
+echo "Starting cmake of kripke$QA_TEST_VARIANT"
 pwd
 echo "kripke cmake \
     ${KRIPKE_CONFIG} \
@@ -68,10 +70,11 @@ echo "kripke cmake \
 echo "-----------"
 
 cmake \
+    -C $KRIPKE_ROOT/kripke.cuda.settings \
     ${KRIPKE_CONFIG} \
     ..
 
-echo "Starting make of kripke"
+echo "Starting make of kripke$QA_TEST_VARIANT"
 time make -j 16 > log.make.kripke$QA_TEST_VARIANT 2>&1
 makestatus=$?
 if [ "$makestatus" != "0" ]; then
