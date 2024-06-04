@@ -1,5 +1,0 @@
-1. Explore the trace. Thread 0 represents the main thread of an MPI process. Threads 4-12
-   are OpenMP workers. Threads 500-532 represent GPU streams.
-
-2. Look at the profile, especially the bottom-up view. Sort by exclusive CPU time and go
-   to the top of the column. Where do the CPU threads spend most of their time?
