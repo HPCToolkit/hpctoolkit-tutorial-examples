@@ -1,0 +1,17 @@
+#!/bin/bash
+#BSUB -W 5
+#BSUB -nnodes 1
+#BSUB -J AMG2013-PROFMPI
+#BSUB -o output.AMG2013-PROFMPI
+#BSUB -e error.AMG2013-PROFMPI
+
+
+hpcstruct -j 8 AMG2013/test/amg2013
+
+ranks=8
+
+jsrun -n $ranks -a 1 \
+    hpcprof-mpi -S amg2013.hpcstruct \
+		--metric-db yes \
+		-o hpctoolkit-amg2013.d \
+		hpctoolkit-amg2013.m

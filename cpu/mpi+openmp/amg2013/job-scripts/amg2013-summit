@@ -1,0 +1,22 @@
+#!/bin/bash
+#BSUB -W 5
+#BSUB -nnodes 2
+#BSUB -J AMG2013-RUN
+#BSUB -o output.AMG2013-RUN
+#BSUB -e error.AMG2013-RUN
+
+
+export OMP_PROC_BIND=true
+export OMP_NUM_THREADS=8
+
+export OMP_WAIT_POLICY=active
+
+
+export HPCRUN_ARGS="-o hpctoolkit-amg2013.m -e CPUTIME -t"
+export ranks=20
+
+
+refine=20
+
+jsrun -n $ranks -a 1 -c 4 -brs  \
+    hpcrun ${HPCRUN_ARGS} AMG2013/test/amg2013  -P 2 5 2  -r  $refine $refine $refine

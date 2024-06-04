@@ -1,0 +1,11 @@
+fnbounds: /projects/deploy/install/linux-rhel8-zen/gcc-8.5.0/hpctoolkit-2024.01.stable-ejghcgu6kwfkomxz3yfehumnptotweqc/libexec/hpctoolkit/hpcfnbounds
+MEMORY: segment size: 4.0 meg, num segments: 3, total allocation: 12.0 meg, reclaims: 0
+MEMORY: total freeable: 0.0 meg, total non-freeable: 4.4 meg, malloc failures: 0
+UNWIND ANOMALIES: total: 1489 errant: 0, total-frames: 10686, total-libunwind-fails: 0
+ACC SUMMARY:
+         accelerator trace records: 0 (processed: 0, dropped: 0)
+         accelerator samples: 0 (recorded: 0, dropped: 0)
+SAMPLE ANOMALIES: blocks: 0 (async: 0, dlopen: 0), errors: 0 (segv: 0, soft: 0)
+SUMMARY: samples: 1489 (recorded: 1489, blocked: 0, errant: 0, trolled: 0, yielded: 0),
+         frames: 10686 (trolled: 0)
+         intervals: 1018 (suspicious: 0)

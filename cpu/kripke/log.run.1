@@ -1,0 +1,167 @@
+   runqarun /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke     Mon May 27 14:45:05 CDT 2024     name = "run.1"
+Currently Loaded Modulefiles:
+ 1) studio/version12.6   9) meson/1.2.2                            17) gmake/4.4.1-gcc-11.4.0-3ejcrnh                  
+ 2) hpctoolkit/msi3     10) python/3.11.6                          18) ncurses/6.5-gcc-11.4.0-43soscc                  
+ 3) openjdk/17.0.8      11) glibc/2.28-gcc-11.4.0-kqxauf2          19) cmake/3.27.9-gcc-11.4.0-mozbnry                 
+ 4) hpcviewer/2024.05   12) gcc-runtime/11.4.0-gcc-11.4.0-tumbkdc  20) openmpi/4.1.5/cpu                               
+ 5) gcc/11.4.0          13) nghttp2/1.61.0-gcc-11.4.0-tom2xdr      21) QAHPCT/2024.03                                  
+ 6) gdb/11.2            14) zlib-ng/2.1.6-gcc-11.4.0-co3qboq       22) rocm/6.0.0                                      
+ 7) autotools           15) openssl/3.3.0-gcc-11.4.0-kz62fcd       23) rocm/5.6.0                                      
+ 8) py-pip/23.1.2       16) curl/8.7.1-gcc-11.4.0-l6pnvor          24) hpctoolkit/2024.01.stable/cuda11.8.0-rocm6.0.0  
+Begin QA runqarun run.1 in directory /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke
+   Target executable = Kripke/Kripke/build/kripke.exe    name="run.1" 
+ runqarun Launching timeout -s6 90  /usr/bin/time -f"timefmt" Kripke/Kripke/build/kripke.exe   >>log.run.1
+
+   _  __       _         _
+  | |/ /      (_)       | |
+  | ' /  _ __  _  _ __  | | __ ___
+  |  <  | '__|| || '_ \ | |/ // _ \ 
+  | . \ | |   | || |_) ||   <|  __/
+  |_|\_\|_|   |_|| .__/ |_|\_\\___|
+                 | |
+                 |_|        Version 1.2.5-dev
+
+LLNL-CODE-775068
+
+Copyright (c) 2014-23, Lawrence Livermore National Security, LLC
+
+Kripke is released under the BSD 3-Clause License, please see the
+LICENSE file for the full license
+
+This work was produced under the auspices of the U.S. Department of
+Energy by Lawrence Livermore National Laboratory under Contract
+DE-AC52-07NA27344.
+
+Author: Adam J. Kunen <kunen1@llnl.gov>
+
+Compilation Options:
+  Architecture:           Sequential
+  Compiler:               /opt/nvidia/hpc_sdk/Linux_x86_64/22.3/compilers/bin/nvc++
+  Compiler Flags:         "    "
+  Linker Flags:           " "
+  CHAI Enabled:           No
+  CUDA Enabled:           No
+  MPI Enabled:            No
+  OpenMP Enabled:         No
+  Caliper Enabled:        No
+
+Input Parameters
+================
+
+  Problem Size:
+    Zones:                 16 x 16 x 16  (4096 total)
+    Groups:                32
+    Legendre Order:        4
+    Quadrature Set:        Dummy S2 with 96 points
+
+  Physical Properties:
+    Total X-Sec:           sigt=[0.100000, 0.000100, 0.100000]
+    Scattering X-Sec:      sigs=[0.050000, 0.000050, 0.050000]
+
+  Solver Options:
+    Number iterations:     10
+
+  MPI Decomposition Options:
+    Total MPI tasks:       1
+    Spatial decomp:        1 x 1 x 1 MPI tasks
+    Block solve method:    Sweep
+
+  Per-Task Options:
+    DirSets/Directions:    8 sets, 12 directions/set
+    GroupSet/Groups:       2 sets, 16 groups/set
+    Zone Sets:             1 x 1 x 1
+    Architecture:          Sequential
+    Data Layout:           DGZ
+
+Generating Problem
+==================
+
+  Decomposition Space:   Procs:      Subdomains (local/global):
+  ---------------------  ----------  --------------------------
+  (P) Energy:            1           2 / 2
+  (Q) Direction:         1           8 / 8
+  (R) Space:             1           1 / 1
+  (Rx,Ry,Rz) R in XYZ:   1x1x1       1x1x1 / 1x1x1
+  (PQR) TOTAL:           1           16 / 16
+
+  Material Volumes=[8.789062e+03, 1.177734e+05, 2.753438e+06]
+
+  Memory breakdown of Field variables:
+  Field Variable            Num Elements    Megabytes
+  --------------            ------------    ---------
+  data/sigs                        15360        0.117
+  dx                                  16        0.000
+  dy                                  16        0.000
+  dz                                  16        0.000
+  ell                               2400        0.018
+  ell_plus                          2400        0.018
+  i_plane                         786432        6.000
+  j_plane                         786432        6.000
+  k_plane                         786432        6.000
+  mixelem_to_fraction               4352        0.033
+  phi                            3276800       25.000
+  phi_out                        3276800       25.000
+  psi                           12582912       96.000
+  quadrature/w                        96        0.001
+  quadrature/xcos                     96        0.001
+  quadrature/ycos                     96        0.001
+  quadrature/zcos                     96        0.001
+  rhs                           12582912       96.000
+  sigt_zonal                      131072        1.000
+  volume                            4096        0.031
+  --------                  ------------    ---------
+  TOTAL                         34238832      261.222
+
+  Generation Complete!
+
+Steady State Solve
+==================
+
+  iter 0: particle count=3.743744e+07, change=1.000000e+00
+  iter 1: particle count=5.629276e+07, change=3.349511e-01
+  iter 2: particle count=6.569619e+07, change=1.431351e-01
+  iter 3: particle count=7.036907e+07, change=6.640521e-02
+  iter 4: particle count=7.268400e+07, change=3.184924e-02
+  iter 5: particle count=7.382710e+07, change=1.548355e-02
+  iter 6: particle count=7.438973e+07, change=7.563193e-03
+  iter 7: particle count=7.466578e+07, change=3.697158e-03
+  iter 8: particle count=7.480083e+07, change=1.805479e-03
+  iter 9: particle count=7.486672e+07, change=8.801810e-04
+  Solver terminated
+
+Timers
+======
+
+  Timer                    Count       Seconds
+  ----------------  ------------  ------------
+  Generate                     1       0.00311
+  LPlusTimes                  10       0.80189
+  LTimes                      10       0.75970
+  Population                  10       0.11759
+  Scattering                  10       3.73211
+  Solve                        1       7.44897
+  Source                      10       0.00134
+  SweepSolver                 10       1.91254
+  SweepSubdomain             160       1.88545
+
+TIMER_NAMES:Generate,LPlusTimes,LTimes,Population,Scattering,Solve,Source,SweepSolver,SweepSubdomain
+TIMER_DATA:0.003113,0.801895,0.759700,0.117593,3.732111,7.448968,0.001344,1.912539,1.885454
+
+Figures of Merit
+================
+
+  Throughput:         1.689216e+07 [unknowns/(second/iteration)]
+  Grind time :        5.919908e-08 [(seconds/iteration)/unknowns]
+  Sweep efficiency :  98.58380 [100.0 * SweepSubdomain time / SweepSolver time]
+  Number of unknowns: 12582912
+
+END
+7.37s. user;  0.05s. system;  7.46s. elapsed;  99%%CPU (0avgtext+0avgdata 274600maxresident)k
+   -------------------------------------- Target run complete Mon May 27 14:45:13 CDT 2024 
+    Target-runtime= 8 s. = 0m.:8s.; log.run.1
+
+    No runtime errors found.
+   ==========================================================
+
+     TESTPASS; -- 8 s. = 0m.:8s. ; see /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/log.run.1
+Mon May 27 14:45:13 CDT 2024

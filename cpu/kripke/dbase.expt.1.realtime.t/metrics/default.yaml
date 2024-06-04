@@ -1,0 +1,29 @@
+version: 0
+inputs:
+  - &REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-execution
+    metric: REALTIME (sec)
+    scope: execution
+    formula: $$
+    combine: sum
+  - &REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-lex_aware
+    metric: REALTIME (sec)
+    scope: lex_aware
+    formula: $$
+    combine: sum
+  - &REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-function
+    metric: REALTIME (sec)
+    scope: function
+    formula: $$
+    combine: sum
+roots:
+  - name: REALTIME (sec)
+    description: REALTIME (sec)
+    variants:
+      Sum:
+        render: [number, percent]
+        formula:
+          inclusive:
+            standard: *REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-execution
+          exclusive:
+            custom: *REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-lex_aware
+            standard: *REALTIMEx20_x28_secx29_-sum-x5b_0x0x5d_-function

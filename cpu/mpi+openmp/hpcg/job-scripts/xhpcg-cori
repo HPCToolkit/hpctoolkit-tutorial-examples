@@ -1,0 +1,48 @@
+#!/bin/bash
+#SBATCH --qos=debug
+#SBATCH --time=10
+#SBATCH --nodes=2
+#SBATCH --tasks-per-node=8
+#SBATCH --cpus-per-task=8
+#SBATCH --constraint=knl
+#SBATCH -o log.run.out
+#SBATCH -e log.run.stderr
+
+#------------------------------------------------------------------------------
+# use LLVM OpenMP Tools support
+#------------------------------------------------------------------------------
+module use /global/common/software/m1759/hpctoolkit-install/2021.03/modules
+module load openmp/ompt
+
+#------------------------------------------------------------------------------
+# You can uncomment the export below to turn off use of OpenMP's OMPT
+# tool API, which helps HPCToolkit reconstruct logical call paths
+# from implementation-level call paths present in the execution. With
+# the export below uncommented, you will see the execution as it really
+# is rather than seeing HPCToolkit's reconstruction of logical call paths.
+#------------------------------------------------------------------------------
+
+# export OMP_TOOL=disabled
+
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+# export OMP_PROC_BIND=true
+# export OMP_PLACES=threads
+export OMP_NUM_THREADS=8
+
+export OMP_WAIT_POLICY=active
+
+module use /global/common/software/m3977/hpctoolkit/2021-11/modules
+module load hpctoolkit/2021.11-cpu
+
+export HPCRUN_ARGS="-o hpctoolkit-xhpcg.m -e CPUTIME -t"
+export ranks=16
+
+bind=--cpu-bind=cores 
+size=32
+
+srun -n $ranks $bind  \
+    hpcrun ${HPCRUN_ARGS} build/bin/xhpcg  --nx=$size --rt=30
+
+touch log.run.done

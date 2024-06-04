@@ -1,0 +1,16 @@
+#!/bin/bash
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J HPCG-PROFMPI
+#BSUB -o output.HPCG-PROFMPI
+#BSUB -e error.HPCG-PROFMPI
+
+hpcstruct -j 8 build/bin/xhpcg
+
+ranks=8
+
+jsrun -n $ranks -a 1 \
+    hpcprof-mpi -S xhpcg.hpcstruct \
+		--metric-db yes \
+		-o hpctoolkit-xhpcg.d \
+		hpctoolkit-xhpcg.m

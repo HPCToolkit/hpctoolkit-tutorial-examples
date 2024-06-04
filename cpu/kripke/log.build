@@ -1,0 +1,173 @@
+Sat May 25 15:33:20 CDT 2024
+Currently Loaded Modulefiles:
+ 1) studio/version12.6   9) meson/1.2.2                            17) gmake/4.4.1-gcc-11.4.0-3ejcrnh   
+ 2) hpctoolkit/msi3     10) python/3.11.6                          18) ncurses/6.5-gcc-11.4.0-43soscc   
+ 3) openjdk/17.0.8      11) glibc/2.28-gcc-11.4.0-kqxauf2          19) cmake/3.27.9-gcc-11.4.0-mozbnry  
+ 4) hpcviewer/2024.05   12) gcc-runtime/11.4.0-gcc-11.4.0-tumbkdc  20) openmpi/4.1.5/cpu                
+ 5) gcc/11.4.0          13) nghttp2/1.61.0-gcc-11.4.0-tom2xdr      21) QAHPCT/2024.03                   
+ 6) gdb/11.2            14) zlib-ng/2.1.6-gcc-11.4.0-co3qboq       22) rocm/6.0.0                       
+ 7) autotools           15) openssl/3.3.0-gcc-11.4.0-kz62fcd       23) cuda/11.8                        
+ 8) py-pip/23.1.2       16) curl/8.7.1-gcc-11.4.0-l6pnvor          24) nvhpc/22.3                       
+Removing previous build of Kripke
+/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke
+
+=====================================================
+
+Building kripke
+QA_TEST_VARIANT = 
+/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke
+Submodule path 'blt': checked out '9ff77344f0b2a6ee345e452bddd6bfd46cbbfa35'
+Submodule path 'scripts/radiuss-spack-configs': checked out '1ed8697e764798b6f38b2ee59389b24a0b66f10c'
+Submodule path 'tpl/caliper': checked out '1b7943f1854a5c285793c350339f31a9f2959bb0'
+Submodule path 'tpl/chai': checked out '31773a2f0d30f3f64c82939f60fc4da32cf33261'
+Submodule path 'tpl/chai/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/scripts/radiuss-spack-configs': checked out '12fd9cfd57c11ed0c961234833a4a8a89cefd491'
+Submodule path 'tpl/chai/scripts/uberenv': checked out '0d00dc8e19a889ba07ae433590b87533c4b5b3da'
+Submodule path 'tpl/chai/src/tpl/raja': checked out '82d1b926ada0fbb15a4a6e0adadc30c715cfda7b'
+Submodule path 'tpl/chai/src/tpl/raja/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/src/tpl/raja/scripts/radiuss-spack-configs': checked out 'a37c3e1906baef912c59f3ef52aa45ab71cab0be'
+Submodule path 'tpl/chai/src/tpl/raja/scripts/uberenv': checked out '4941c237eec514d6d68872243efb9f4af8843f4d'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/camp': checked out '03c80a6c6ab4f97e76a52639563daec71435a277'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/camp/extern/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/cub': checked out 'c3cceac115c072fb63df1836ff46d8c60d9eb304'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/desul': checked out 'afbd4486b2b39211e8ded3f04b12c2e0f3a25248'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/desul/external/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/src/tpl/raja/tpl/rocPRIM': checked out 'b85751baa8f216a16dfca4fdd85c74b2674b18b6'
+Submodule path 'tpl/chai/src/tpl/umpire': checked out '1db3fef913a70d8882ca510a4830c77c388873e0'
+Submodule path 'tpl/chai/src/tpl/umpire/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/src/tpl/umpire/scripts/radiuss-spack-configs': checked out '0fa1fca28e51c7ea17f2e06e506dff0f8c20bccf'
+Submodule path 'tpl/chai/src/tpl/umpire/scripts/uberenv': checked out '0d00dc8e19a889ba07ae433590b87533c4b5b3da'
+Submodule path 'tpl/chai/src/tpl/umpire/src/tpl/umpire/camp': checked out '03c80a6c6ab4f97e76a52639563daec71435a277'
+Submodule path 'tpl/chai/src/tpl/umpire/src/tpl/umpire/camp/extern/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/chai/src/tpl/umpire/src/tpl/umpire/fmt': checked out 'e69e5f977d458f2650bb346dadf2ad30c5320281'
+Submodule path 'tpl/googletest': checked out '72adf7a4155b6642da1e6761678fe546590c0269'
+Submodule path 'tpl/raja': checked out '3ada0950b0774ec907d30a9eceaf6af7478b833b'
+Submodule path 'tpl/raja/blt': checked out '9ff77344f0b2a6ee345e452bddd6bfd46cbbfa35'
+Submodule path 'tpl/raja/scripts/radiuss-spack-configs': checked out 'af75606a7fc0492e35cdd3860337c4e873f43124'
+Submodule path 'tpl/raja/scripts/uberenv': checked out '4941c237eec514d6d68872243efb9f4af8843f4d'
+Submodule path 'tpl/raja/tpl/camp': checked out '79c320fa09db987923b56884afdc9f82f4b70fc4'
+Submodule path 'tpl/raja/tpl/camp/extern/blt': checked out '9ff77344f0b2a6ee345e452bddd6bfd46cbbfa35'
+Submodule path 'tpl/raja/tpl/cub': checked out 'c3cceac115c072fb63df1836ff46d8c60d9eb304'
+Submodule path 'tpl/raja/tpl/desul': checked out 'afbd4486b2b39211e8ded3f04b12c2e0f3a25248'
+Submodule path 'tpl/raja/tpl/desul/external/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/raja/tpl/rocPRIM': checked out 'b85751baa8f216a16dfca4fdd85c74b2674b18b6'
+Submodule path 'tpl/umpire': checked out '1db3fef913a70d8882ca510a4830c77c388873e0'
+Submodule path 'tpl/umpire/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/umpire/scripts/radiuss-spack-configs': checked out '0fa1fca28e51c7ea17f2e06e506dff0f8c20bccf'
+Submodule path 'tpl/umpire/scripts/uberenv': checked out '0d00dc8e19a889ba07ae433590b87533c4b5b3da'
+Submodule path 'tpl/umpire/src/tpl/umpire/camp': checked out '03c80a6c6ab4f97e76a52639563daec71435a277'
+Submodule path 'tpl/umpire/src/tpl/umpire/camp/extern/blt': checked out '058b312f8a5ef305e12a4380deaa13d618eff54e'
+Submodule path 'tpl/umpire/src/tpl/umpire/fmt': checked out 'e69e5f977d458f2650bb346dadf2ad30c5320281'
+build KRIPKE_SRC = /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke
+KRIPKE_INSTALL_DIR = /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/install
+Kripke_DIR = 
+CMAKE_INSTALL_PREFIX = /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/install
+CMAKE_PREFIX_PATH = /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/install;
+GPUENABLE = 
+GPUCOMPILER = 
+KOKKOS_SRC = 
+KOKKOS_INSTALL_DIR = 
+KRIPKE_CONFIG = 
+
+/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/build
+contents of build's parent directory (/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/build/..):
+total 104
+drwxrwxr-x 10 msi3 users  4096 May 25 15:34 .
+drwxrwxr-x  3 msi3 users  4096 May 25 15:33 ..
+drwxrwxr-x 10 msi3 users  4096 May 25 15:33 blt
+drwxrwxr-x  2 msi3 users  4096 May 25 15:34 build
+-rw-rw-r--  1 msi3 users   727 May 25 15:33 CHANGELOG
+-rw-rw-r--  1 msi3 users 10235 May 25 15:33 CMakeLists.txt
+-rw-rw-r--  1 msi3 users  1561 May 25 15:33 COPYRIGHT
+drwxrwxr-x  9 msi3 users  4096 May 25 15:33 .git
+-rw-rw-r--  1 msi3 users    29 May 25 15:33 .gitignore
+drwxrwxr-x  2 msi3 users  4096 May 25 15:33 .gitlab
+-rw-rw-r--  1 msi3 users  4332 May 25 15:33 .gitlab-ci.yml
+-rw-rw-r--  1 msi3 users   679 May 25 15:33 .gitmodules
+drwxrwxr-x  2 msi3 users  4096 May 25 15:33 host-configs
+-rw-rw-r--  1 msi3 users  1545 May 25 15:33 LICENSE
+-rw-rw-r--  1 msi3 users  1168 May 25 15:33 NOTICE
+-rw-rw-r--  1 msi3 users 13355 May 25 15:33 README.md
+-rw-rw-r--  1 msi3 users   567 May 25 15:33 RELEASE
+drwxrwxr-x  5 msi3 users  4096 May 25 15:33 scripts
+drwxrwxr-x  3 msi3 users  4096 May 25 15:33 src
+drwxrwxr-x  7 msi3 users  4096 May 25 15:33 tpl
+
+-----------
+Starting cmake of kripke
+/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/build
+kripke cmake          .. 
+-----------
+-- The CXX compiler identification is NVHPC 22.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /opt/nvidia/hpc_sdk/Linux_x86_64/22.3/compilers/bin/nvc++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- BLT Version: 0.6.2
+-- CMake Version: 3.27.9
+-- CMake Build Type: 
+-- CMake Executable: /home/msi3/MYINSTALL/linux-rhel8-zen2/gcc-11.4.0/cmake-3.27.9-mozbnry4gxbix4cnyooyippun3uar6w7/bin/cmake
+-- Setting CMAKE_CXX_EXTENSIONS to OFF
+-- Standard C++14 selected
+-- BLT MPI support is OFF
+-- BLT OpenMP support is OFF
+-- BLT CUDA support is OFF
+-- BLT HIP support is OFF
+-- Found Git: /usr/bin/git (found version "2.39.3") 
+-- Git Support is ON
+-- Git Executable: /usr/bin/git
+-- Git Version: 2.39.3
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Sphinx support is ON
+-- Failed to locate Sphinx executable (missing: SPHINX_EXECUTABLE) 
+-- Valgrind support is ON
+-- Found Valgrind: /usr/bin/valgrind  
+-- AStyle support is OFF
+-- ClangFormat support is OFF
+-- Uncrustify support is OFF
+-- Yapf support is ON
+-- Failed to locate Yapf executable (missing: YAPF_EXECUTABLE) 
+-- CMakeFormat support is ON
+-- Failed to locate CMakeFormat executable (missing: CMAKEFORMAT_EXECUTABLE) 
+-- Cppcheck support is OFF
+-- ClangQuery support is OFF
+-- ClangTidy support is ON
+-- Found ClangTidy: /opt/rocm-6.0.0/llvm/bin/clang-tidy  
+-- ClangApplyReplacements support is ON
+-- Found ClangApplyReplacements: /opt/rocm-6.0.0/llvm/bin/clang-apply-replacements  
+-- C Compiler family not set!!!
+-- Adding optional BLT definitions and compiler flags
+-- Fortran support disabled.
+-- CMAKE_C_FLAGS flags are:  
+-- CMAKE_CXX_FLAGS flags are:     
+-- CMAKE_EXE_LINKER_FLAGS flags are:  
+-- CMake's C implicit link directories: 
+-- CMake's CXX implicit link directories: /scratch/opt/nvidia/hpc_sdk/Linux_x86_64/22.3/compilers/lib;/usr/lib64;/usr/lib/gcc/x86_64-redhat-linux/8
+-- CMake's C implicit link libraries: 
+-- CMake's CXX implicit link libraries: atomic;nvhpcatm;stdc++;nvomp;dl;nvhpcatm;atomic;pthread;nvcpumath;nsnvc;nvc;gcc;c;gcc_s;m
+-- The C compiler identification is NVHPC 22.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /opt/nvidia/hpc_sdk/Linux_x86_64/22.3/compilers/bin/nvc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Desul Atomics support is OFF
+-- Using RAJA CAMP submodule.
+-- Looking for posix_memalign
+-- Looking for posix_memalign - found
+-- Looking for std::aligned_alloc
+-- Looking for std::aligned_alloc - not found
+-- Looking for _mm_malloc
+-- Looking for _mm_malloc - not found
+-- Caliper support is 
+-- Kripke selected default architecture: 'Sequential'
+-- Kripke selected default layout:       'DGZ'
+-- Configuring done (1.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke/Kripke/Kripke/build
+Starting make of kripke
+make of kripke succeeded
+End kripke build
+/home/msi3/gits/hpctoolkit-tutorial-examples/examples/cpu/kripke
+Sat May 25 15:35:51 CDT 2024

@@ -1,0 +1,22 @@
+set(RAJA_COMPILER "RAJA_COMPILER_CLANG" CACHE STRING "")
+
+set(CMAKE_C_COMPILER   "mpicc" CACHE PATH "")
+set(CMAKE_CXX_COMPILER "mpic++" CACHE PATH "")
+
+set(CMAKE_CXX_FLAGS "" CACHE STRING "")
+# set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1" CACHE STRING "") 
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -g -ffast-math --gcc-toolchain=`which gcc`" CACHE STRING "") 
+# set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1" CACHE STRING "") 
+
+set(ENABLE_CHAI On CACHE BOOL "") 
+set(ENABLE_CUDA On CACHE BOOL "") 
+set(ENABLE_OPENMP Off CACHE BOOL "") 
+set(ENABLE_MPI On CACHE BOOL "") 
+
+set(CMAKE_CUDA_ARCHITECTURES "80" CACHE STRING "") 
+
+set(CMAKE_CUDA_FLAGS "-O3 -lineinfo --extended-lambda -gencode=arch=compute_80,code=sm_80 " CACHE STRING "")
+# set(CMAKE_CUDA_FLAGS_RELEASE "-O3 --expt-extended-lambda -Xcompiler=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1" CACHE STRING "")
+set(CMAKE_CUDA_FLAGS_RELWITHDEBINFO "-O3 -lineinfo --extended-lambda -Xcompiler=--gcc-toolchain=`which gcc`" CACHE STRING "")
+# set(CMAKE_CUDA_FLAGS_DEBUG "-O0 -g -G --expt-extended-lambda -Xcompiler=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1" CACHE STRING "")
+set(CMAKE_CUDA_HOST_COMPILER "${CMAKE_CXX_COMPILER}" CACHE STRING "")

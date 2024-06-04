@@ -1,0 +1,57 @@
+      Analyzing an execution of xhpcg - a benchmark code for 
+               high-performance conjugate gradient 
+---------------------------------------------------------------------
+
+1. Use the trace view to identify the main phases of the program. When
+   this version of hpcviewer brings up its trace view, it brings up a
+   view of the program execution at a depth greater than 1 (a bug that
+   will be fixed in the next release). Go to the top of the Call Path
+   Pane and set the initial depth to 1 and proceed with your analysis
+   of the performance top-down. You can select any point in the space
+   time view of a program to see its call path. (Note: the call path
+   pane on the right side of hpcviewer shows a call path with a color
+   for each procedure on the path. This is not a legend for the trace
+   view. If you want to see what procedure is associated with a color
+   anywhere in the trace view, select the point! You will see the 
+   call path at that point, which may have frames above and perhaps
+   below the procedure frame producing the color at the selected point)
+
+2. Is the program running efficiently? If not, what is wrong with it?
+   I recommend that you use the "max depth" button on the Call Path Pane
+   to show the call chains collected while the program executed at their
+   maximum depth. That shows where the program is really spending its
+   time. Using the "statistics button" in the Call Path Pane to have
+   the trace view show you where the time is spent for the region of
+   the trace you are looking at. (Initially, you will be looking at the
+   whole trace.)
+
+3. Switch to the profile view. Use the bottom up view to see where the
+   program spends most of its time. Sort the bottom up view by "exclusive
+   CPUTIME" (time spent in a routine itself and not in things it calls)
+   by clicking in the metric header of the column. When the triangle is
+   pointing down, the column is sorted in descenting order, with the
+   most costly routines at the top of the column.  When you sort by a
+   metric, you may need to use the scrollbar on the right edge of the
+   pane to scroll up to the top of the sorted column to see the most
+   costly routines.  Select the most costly routine (or placeholder)
+   and use the flame button to look up the call chain to see how the
+   program gets there.
+
+4. Experiment with halving the number of thread by changing
+   OMP_NUM_THREADS in the job-script for the platform.  how does that
+   affect the efficiency and the execution time?
+
+5. In the job script job-scripts/xhpcg-cori, you can follow the
+   instructions inside to adjust the script so you can see what happens
+   if you don't use support for the emerging OMPT tool API for OpenMP,
+   which helps tools reconstruct a logical view of a program's
+   calling contexts from an implementation-level view.  Create a
+   subdirectory ompt and save your original database hpctoolkit-xhpcg.d
+   into ompt/hpctoolkit-xhpcg.d. Edit the script (using the directions
+   within).  Measure the program execution again. How does your view of
+   the execution differ with and without the OpenMP tools interface.
+
+Note: The OMPT tool API for OpenMP is still emerging. Not all OpenMP
+runtime systems contain support for OMPT yet and for others, it is a
+work in progress. Rice and AMD are currently collaborating on OMPT 
+support for OpenMP offloading on AMD GPUs.
