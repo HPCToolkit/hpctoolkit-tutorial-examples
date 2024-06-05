@@ -2,7 +2,7 @@
 
 $HPCTOOLKIT_LAMMPS_MODULES_BUILD
 
-date > .build_start
+date
 
 rm -rf lammps$QA_TEST_VARIANT
 
@@ -19,5 +19,4 @@ eval cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON \
 time make -j 8
 cd ../../..
 
-touch log.build.done
-date > .build_end
+date

@@ -14,16 +14,17 @@ all:
 
 build:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_BUILD)" \
-	      	sh make-scripts/check.sh make-scripts/build.sh
+	      	sh make-scripts/check.sh make-scripts/build.sh | tee log.build$(QA_TEST_VARIANT)
 
 
 run:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN)" \
-	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh | tee log.hpcrun$(QA_TEST_VARIANT)
 
 run-pc:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_LAMMPS_RUN_PC)" \
-	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun_pc$(QA_    TEST_VARIANT)
+
 
 view:
 	@READY=$(RDY) CMD=sh DB="hpctoolkit-lmp" \
