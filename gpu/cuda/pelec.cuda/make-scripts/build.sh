@@ -5,10 +5,11 @@ $HPCTOOLKIT_PELEC_MODULES_BUILD
 date
 
 # Tested for GCC >= 6.4.0, cmake >= 3.3
+/bin/rm -rf PeleC${QA_TEST_VARIANT}
 
 # PeleC
-git clone --recursive https://github.com/AMReX-Combustion/PeleC.git
-cd PeleC
+git clone --recursive https://github.com/AMReX-Combustion/PeleC.git PeleC${QA_TEST_VARIANT}
+cd PeleC${QA_TEST_VARIANT}
 git apply ../make-scripts/tutorial.patch
 mkdir -p build
 pushd build

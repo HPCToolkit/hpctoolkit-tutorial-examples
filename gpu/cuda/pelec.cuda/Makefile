@@ -15,15 +15,15 @@ all:
 
 build:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_PELEC_BUILD)" \
-	      	sh make-scripts/check.sh make-scripts/build.sh | tee log.build
+	      	sh make-scripts/check.sh make-scripts/build.sh | tee log.build$(QA_TEST_VARIANT)
 
 run:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_PELEC_RUN)" \
-	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh | tee log.hpcrun
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh | tee log.hpcrun$(QA_TEST_VARIANT)
 
 run-pc:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_PELEC_RUN_PC)" \
-	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun-pc
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun-pc$(QA_TEST_VARIANT)
 
 view:
 	@READY=$(RDY) CMD=sh DB="hpctoolkit-$(EXEC)-gpu-{HPCTOOLKIT_PELEC_GPU_PLATFORM}" \
