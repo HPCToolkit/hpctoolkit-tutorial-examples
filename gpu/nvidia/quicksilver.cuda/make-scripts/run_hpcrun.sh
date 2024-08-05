@@ -27,3 +27,5 @@ $CMD
 CMD="time hpcprof -o $OUT.d $OUT.m"
 echo $CMD
 $CMD
+
+touch log.run.done

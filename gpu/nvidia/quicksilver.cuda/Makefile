@@ -39,4 +39,4 @@ clean:
 	/bin/rm -rf log.hpcrun*
 
 distclean veryclean: clean
-	/bin/rm -rf quicksilver* log.build*
+	/bin/rm -rf quicksilver* log.*
