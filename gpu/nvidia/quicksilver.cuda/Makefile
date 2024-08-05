@@ -27,11 +27,11 @@ run-pc:
 	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun$(QA_TEST_VARIANT)-pc
 
 view:
-	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 view-pc:
-	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-gpu-cuda-pc" \
+	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-pc" \
 	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:

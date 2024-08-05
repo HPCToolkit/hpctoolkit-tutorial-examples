@@ -29,16 +29,16 @@ OPTFLAGS="-O2 -lineinfo -g"
 
 CUDAFLAGS="-gencode=arch=compute_${HPCTOOLKIT_CUDA_ARCH},code=\\\"sm_${HPCTOOLKIT_CUDA_ARCH},compute_${HPCTOOLKIT_CUDA_ARCH}\\\""
 CPPFLAGS="-x cu -dc"
-CUDA_LDFLAGS="-L${CUDA_HOME}/lib64 -lcuda -lcudart"
+CUDA_LDFLAGS="-L${CUDA_HOME}/lib64 -lcuda"
 
 CXX="${CUDA_HOME}/bin/nvcc"
-# if [ -n "$HPCTOOLKIT_MPI_CXX" ]
-# then
-#   MPICXXFLAGS="-DHAVE_MPI --compiler-bindir=$(command -v $HPCTOOLKIT_MPI_CXX)"
-# fi
 
-# CXXFLAGS="${MPICXXFLAGS} -DHAVE_CUDA -std=c++11 ${OPTFLAGS} ${CUDAFLAGS}"
-CXXFLAGS="-DHAVE_CUDA -std=c++11 ${OPTFLAGS} ${CUDAFLAGS}"
+if [ -n "$HPCTOOLKIT_QS_MPI_CXX" ]
+then
+  MPICXXFLAGS="-DHAVE_MPI --compiler-bindir=$(command -v $HPCTOOLKIT_MPI_CXX)"
+fi
+
+CXXFLAGS="${MPICXXFLAGS} -DHAVE_CUDA -std=c++11 ${OPTFLAGS} ${CUDAFLAGS}"
 
 mkdir build
 cd build
@@ -50,8 +50,8 @@ time make -j 8  \
   CXXFLAGS="${CXXFLAGS}" \
   CUDA_LDFLAGS="${CUDA_LDFLAGS}" \
   CPPFLAGS="${CPPFLAGS}" \
-  LDFLAGS="${CUDA_LDFLAGS}" \
-  > log.quicksilver$QA_TEST_VARIANT 2>&1
+  LDFLAGS="${CUDA_LDFLAGS}" 2>&1 \
+  | tee log.quicksilver$QA_TEST_VARIANT
 
 makestatus=$?
 

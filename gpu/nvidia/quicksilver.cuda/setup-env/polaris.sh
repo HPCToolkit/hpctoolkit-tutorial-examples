@@ -1,12 +1,11 @@
-export HPCTOOLKIT_TUTORIAL_PROJECTID=gpu_hack
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
-  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate repository:"
-  echo "    'default' to run with your default repository, which won't let you use the reservation"
+  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate project:"
+  echo "    'default' to run with your default project, which won't let you use the reservation"
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-  echo "    'default' to run without the reservation"
+  echo "    'default' to run in the debug queue without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
@@ -31,7 +30,7 @@ else
   export CUDA_HOME=/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_USE="module use /grand/gpu_hack/hpctoolkit/modulefiles"
+  export HPCTOOLKIT_MODULES_USE="module use /soft/modulefiles"
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   export HPCTOOLKIT_HPCSTRUCT_CACHE=$HOME/.hpctoolkit/hpcstruct-cache
   $HPCTOOLKIT_MODULES_USE
