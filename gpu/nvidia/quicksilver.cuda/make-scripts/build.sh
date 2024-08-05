@@ -35,7 +35,7 @@ CXX="${CUDA_HOME}/bin/nvcc"
 
 if [ -n "$HPCTOOLKIT_QS_MPI_CXX" ]
 then
-  MPICXXFLAGS="-DHAVE_MPI --compiler-bindir=$(command -v $HPCTOOLKIT_MPI_CXX)"
+  MPICXXFLAGS="-DHAVE_MPI --compiler-bindir=$(command -v $HPCTOOLKIT_QS_MPI_CXX)"
 fi
 
 CXXFLAGS="${MPICXXFLAGS} -DHAVE_CUDA -std=c++11 ${OPTFLAGS} ${CUDAFLAGS}"

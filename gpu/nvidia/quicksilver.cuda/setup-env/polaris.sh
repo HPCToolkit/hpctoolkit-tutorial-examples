@@ -37,7 +37,7 @@ else
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # environment settings for this example
-  export HPCTOOLKIT_MPI_CXX=CC
+  export HPCTOOLKIT_QS_MPI_CXX=CC
   export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_QS_ROOT="$(pwd)"
   export HPCTOOLKIT_QS_MODULES_BUILD=""
