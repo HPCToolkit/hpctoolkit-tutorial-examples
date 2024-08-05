@@ -16,7 +16,7 @@ eval cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPKG_KOKKOS=ON \
       $HPCTOOLKIT_LAMMPS_GPU_ARCH $HPCTOOLKIT_LAMMPS_HOST_ARCH \
       -DKokkos_ENABLE_ROCTHRUST=OFF \
       $HPCTOOLKIT_LAMMPS_GPUFLAGS ../cmake
-time make -j 8
+time make -j 3
 cd ../../..
 
 date
