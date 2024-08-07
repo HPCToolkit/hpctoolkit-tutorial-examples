@@ -14,7 +14,7 @@ echo $CMD
 $CMD
 
 # measure an execution of ArborX_Example_MolecularDynamics.exe
-CMD="time ${HPCTOOLKIT_ARBORX_LAUNCH} ${HPCTOOLKIT_ARBORX_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
+CMD="time ${HPCTOOLKIT_ARBORX_LAUNCH} ${HPCTOOLKIT_ARBORX_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -tt ${EXEC}"
 echo $CMD
 eval $CMD
 

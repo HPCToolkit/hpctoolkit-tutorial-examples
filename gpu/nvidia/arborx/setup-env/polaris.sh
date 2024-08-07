@@ -50,7 +50,7 @@ else
   export HPCTOOLKIT_ARBORX_RUN="$HPCTOOLKIT_ARBORX_SUBMIT -N arborx-run -o log.run.out -e log.run.stderr"
   export HPCTOOLKIT_ARBORX_RUN_PC="$HPCTOOLKIT_ARBORX_SUBMIT -N arborx-run-pc -o log.run-pc.out -e log.run-pc.stderr"
   export HPCTOOLKIT_ARBORX_BUILD="sh"
-  export HPCTOOLKIT_ARBORX_LAUNCH="mpiexec -n 4 -ppn 4 --depth=8 --cpu-bind depth sh make-scripts/set_affinity_gpu_polaris.sh"
+  export HPCTOOLKIT_ARBORX_LAUNCH="mpiexec -n 4 --ppn 4 --depth=8 -env OMP_NUM_THREADS=2 --cpu-bind depth sh make-scripts/set_affinity_gpu_polaris.sh"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=ArborX
