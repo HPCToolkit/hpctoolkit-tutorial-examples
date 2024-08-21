@@ -1,11 +1,12 @@
 if [ -z "$HPCTOOLKIT_TUTORIAL_PROJECTID" ]
 then
-  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to your project id"
-  echo "    'default' to run with your default project id unset"
+  echo "Please set environment variable HPCTOOLKIT_TUTORIAL_PROJECTID to the apppropriate project:"
+  echo "    'default' to run with your default project, which won't let you use the reservation"
+
 elif [ -z "$HPCTOOLKIT_TUTORIAL_RESERVATION" ]
 then 
   echo "Please set environment variable HPCTOOLKIT_TUTORIAL_RESERVATION to an appropriate value:"
-  echo "    'default' to run without the reservation"
+  echo "    'default' to run in the debug queue without the reservation"
 else
   if test "$HPCTOOLKIT_TUTORIAL_PROJECTID" != "default"
   then
@@ -24,20 +25,12 @@ else
   # cleanse environment
   module reset
 
-  # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
-  $HPCTOOLKIT_MODULES_USE
-  $HPCTOOLKIT_MODULES_HPCTOOLKIT
-  
   # load modules needed to build and run lammps
-  module load PrgEnv-gnu cray-mpich cmake craype-x86-milan cudatoolkit-standalone/11.4.4
-  unset CUDA_HOME NVHPC_CUDA_HOME
-  export CUDA_HOME=/soft/compilers/cudatoolkit/cuda-11.4.4
+  module load craype-x86-milan
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_USE="module use /soft/perftools/hpctoolkit/polaris/modulefiles"
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/default"
+  export HPCTOOLKIT_MODULES_USE="module use /soft/modulefiles"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit"
   $HPCTOOLKIT_MODULES_USE
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
@@ -57,5 +50,4 @@ else
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=lammps
-
 fi
