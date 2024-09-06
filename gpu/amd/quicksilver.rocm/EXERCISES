@@ -1,0 +1,14 @@
+Quicksilver exercises
+
+Using a measurement database with traces that was collected *without*
+PC sampling enabled:
+
+1. Use the Filter menu to select Filter Execution Contexts. In the 
+   filtering menu, select "Uncheck all". Now, in the empty box preceded
+   by "Filter:", type "GPU" and then click "Check all". Select "OK". Now, the Trace View 
+   will show only trace lines for the GPUs. Is the work load balanced across
+   the GPUs? How can you tell?
+
+2. Bring up the filter menu again. Select "Uncheck all". Type in "RANK 3" in the
+   Filter box. Select thread 0 and the GPU context. Select "OK". What is thread 0 doing
+   when the GPU is idle?  Does this suggest any optimization opportunities? 
