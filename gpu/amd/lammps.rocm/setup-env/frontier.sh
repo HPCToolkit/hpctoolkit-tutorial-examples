@@ -24,7 +24,7 @@ else
   module purge
 
   # load modules needed to build and run lammps
-  module load PrgEnv-amd amd/5.4.3 cray-mpich cmake craype-x86-trento craype-accel-amd-gfx90a
+  module load Core PrgEnv-amd amd/5.7.1 rocm/5.7.1 cray-mpich cmake craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load ums ums023 hpctoolkit"
@@ -42,7 +42,7 @@ else
   export HPCTOOLKIT_LAMMPS_RUN_PC="sh make-scripts/unsupported-amd.sh"
   export HPCTOOLKIT_LAMMPS_BUILD="sh"
   export HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS=7
-  export HPCTOOLKIT_LAMMPS_LAUNCH="srun --ntasks-per-node=8 --gpus-per-task=1 --gpu-bind=closest -c 7"
+  export HPCTOOLKIT_LAMMPS_LAUNCH="srun --ntasks=8 --ntasks-per-node=8 --gpus-per-task=1 --gpu-bind=closest -c 7"
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=lammps
