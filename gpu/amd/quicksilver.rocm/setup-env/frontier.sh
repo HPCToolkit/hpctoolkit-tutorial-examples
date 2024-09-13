@@ -30,6 +30,13 @@ else
   export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load ums ums023 hpctoolkit"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
+  # compiler flags for this example
+  export HPCTOOLKIT_QS_CXX=mpicxx
+  export HPCTOOLKIT_QS_CXXFLAGS=-g
+  export HPCTOOLKIT_QS_CPPFLAGS="-DHAVE_MPI -DHAVE_HIP -x hip --offload-arch=gfx90a -fgpu-rdc -Wno-unused-result"
+  export HPCTOOLKIT_QS_ROCM_LDFLAGS="-fgpu-rdc --hip-link --offload-arch=gfx90a"
+
+
   # environment settings for this example
   export HPCTOOLKIT_GPU_PLATFORM=amd
   export HPCTOOLKIT_QS_ROOT="$(pwd)"

@@ -23,28 +23,25 @@ cd quicksilver
 export QS_SRC=`pwd`
 echo "QS_SRC = $QS_SRC"
 
-if [ -n "$HPCTOOLKIT_QS_MPI_CXX" ]
-then
-  MPICXXFLAGS="-DHAVE_MPI --compiler-bindir=$(command -v $HPCTOOLKIT_QS_MPI_CXX)"
-fi
-
-CXX=mpicxx
-CXXFLAGS=-g
-CPPFLAGS="-DHAVE_MPI -DHAVE_HIP -x hip --offload-arch=gfx90a -fgpu-rdc -Wno-unused-result"
-ROCM_LDFLAGS="-fgpu-rdc --hip-link --offload-arch=gfx90a"
-
-
 mkdir build
 cd build
 
-echo "Starting make -j8 -C ../src CXX=\"${CXX}\" CXXFLAGS=\"${CXXFLAGS}\" ROCM_LDFLAGS=\"${ROCM_LDFLAGS}\" CPPFLAGS=\"${CPPFLAGS}\" LDFLAGS=\"${ROCM_LDFLAGS}\""
+echo Starting make -j 8  \
+  -C ../src  \
+  CXX=${HPCTOOLKIT_QS_CXX} \
+  CXXFLAGS="${HPCTOOLKIT_QS_CXXFLAGS}" \
+  ROCM_LDFLAGS="${HPCTOOLKIT_QS_ROCM_LDFLAGS}" \
+  CPPFLAGS="${HPCTOOLKIT_QS_CPPFLAGS}" \
+  LDFLAGS="${HPCTOOLKIT_QS_ROCM_LDFLAGS}" 2>&1 \
+  | tee log.quicksilver$QA_TEST_VARIANT
+
 time make -j 8  \
   -C ../src  \
-  CXX=${CXX} \
-  CXXFLAGS="${CXXFLAGS}" \
-  ROCM_LDFLAGS="${ROCM_LDFLAGS}" \
-  CPPFLAGS="${CPPFLAGS}" \
-  LDFLAGS="${ROCM_LDFLAGS}" 2>&1 \
+  CXX=${HPCTOOLKIT_QS_CXX} \
+  CXXFLAGS="${HPCTOOLKIT_QS_CXXFLAGS}" \
+  ROCM_LDFLAGS="${HPCTOOLKIT_QS_ROCM_LDFLAGS}" \
+  CPPFLAGS="${HPCTOOLKIT_QS_CPPFLAGS}" \
+  LDFLAGS="${HPCTOOLKIT_QS_ROCM_LDFLAGS}" 2>&1 \
   | tee log.quicksilver$QA_TEST_VARIANT
 
 makestatus=$?
