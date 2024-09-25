@@ -14,7 +14,7 @@ cd "$HPCTOOLKIT_LAMMPS_ROOT"
 
 # measure an execution of lammps
 export OMP_NUM_THREADS=$HPCTOOLKIT_LAMMPS_OMP_NUM_THREADS
-CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -t $EXEC -k on g 1 -sf kk -in lammps/lammps/src/INTEL/TEST/in.intel.lj"
+CMD="time ${HPCTOOLKIT_LAMMPS_LAUNCH} hpcrun -o $OUT.m -e CPUTIME -e gpu=${HPCTOOLKIT_GPU_PLATFORM} -tt $EXEC -k on g 1 -sf kk -in lammps/lammps/src/INTEL/TEST/in.intel.lj"
 echo $CMD
 $CMD
 
