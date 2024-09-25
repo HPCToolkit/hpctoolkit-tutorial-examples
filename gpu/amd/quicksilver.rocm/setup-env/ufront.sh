@@ -33,14 +33,14 @@ else
   #module use /projects/modulefiles
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
+  # export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
 
 
   # load modules needed to build and run quicksilver
-  module load rocm/6.2.0
+  # module load rocm/6.2.0
 
   # modules for hpctoolkit
-  $HPCTOOLKIT_MODULES_HPCTOOLKIT
+  # $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # compiler flags for this example
   export HPCTOOLKIT_QS_CXX=hipcc
@@ -50,7 +50,7 @@ else
 
 
   # environment settings for this example
-  export HPCTOOLKIT_CUDA_ARCH=80
+  # export HPCTOOLKIT_CUDA_ARCH=80
   export HPCTOOLKIT_QS_MODULES_BUILD=
   export HPCTOOLKIT_QS_SUBMIT="sh"
   export HPCTOOLKIT_QS_RUN="sh"

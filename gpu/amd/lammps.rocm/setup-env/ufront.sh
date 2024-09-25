@@ -1,12 +1,12 @@
 # load modules needed to build and run lammps
 module use /projects/modulefiles
 module use /usr/local/modules
-module load rocm/5.6.0
+# module load rocm/5.6.0
 # module load cmake
 
 # modules for hpctoolkit
 # module use /home/johnmc/modulefiles
-export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
+# export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
 $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 # environment settings for this example

@@ -1,8 +1,9 @@
 # load modules needed to build and run arborx
 module use /projects/modulefiles
 module use /usr/local/modules
-# module load cuda/11.8
-# module load cmake
+# modules for hpctoolkit
+# export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
+# $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 export QA_TEST_VARIANT=".rocm"
 
@@ -28,11 +29,6 @@ export ARBORX_CONFIG=$ARBORX_CONFIG_ROCM
 
 export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
-
-
-# modules for hpctoolkit
-export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/msi3"
-$HPCTOOLKIT_MODULES_HPCTOOLKIT
 
 # environment settings for this example
 export HPCTOOLKIT_GPU_PLATFORM=amd
