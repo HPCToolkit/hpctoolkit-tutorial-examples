@@ -36,7 +36,7 @@ view-pc:
 
 clean:
 	/bin/rm -rf hpctoolkit*
-	/bin/rm -rf log.hpcrun*
+	/bin/rm -rf log.*
 
 distclean veryclean: clean
 	/bin/rm -rf quicksilver* log.*

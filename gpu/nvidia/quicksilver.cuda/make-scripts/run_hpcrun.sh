@@ -14,7 +14,7 @@ echo $CMD
 $CMD
 
 # measure an execution of quicksilver
-CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -t ${EXEC}"
+CMD="time ${HPCTOOLKIT_QS_LAUNCH} ${HPCTOOLKIT_QS_LAUNCH_ARGS} hpcrun -o $OUT.m -e REALTIME -e gpu=nvidia -tt ${EXEC}"
 echo $CMD
 eval $CMD
 
