@@ -1,22 +1,36 @@
 Quicksilver exercises
 
+---------------------------------------------------------------------------------------
 Using a measurement database with traces that was collected *without*
 PC sampling enabled:
+---------------------------------------------------------------------------------------
 
-1. Use the Filter menu to select Filter Execution Contexts. In the 
+1. Open the database with the kernel-level profiles and traces
+   hpcviewer hpctoolkit-qs.cuda.d
+
+2. Select the trace tab "trace: qs" that contains the trace for quicksilver
+
+3. Use the Filter menu to select Filter Execution Contexts. In the 
    filtering menu, select "Uncheck all". Now, in the empty box preceded
    by "Filter:", type "GPU" and then click "Check all". Select "OK". Now, the Trace View 
    will show only trace lines for the GPUs. Is the work load balanced across
    the GPUs? How can you tell?
 
-2. Bring up the filter menu again. Select "Uncheck all". Type in "RANK 3" in the
+4. Bring up the filter menu again. Select "Uncheck all". Type in "RANK 3" in the
    Filter box. Select thread 0 and the GPU context. Select "OK". What is thread 0 doing
    when the GPU is idle?  Does this suggest any optimization opportunities? 
 
+
+---------------------------------------------------------------------------------------
 Using a measurement database with traces that was collected *with*
 PC sampling enabled:
+---------------------------------------------------------------------------------------
 
-3. Use the bottom-up view in the profile to identify the GPU function or
+1. Open the database with the GPU instruction-level measurements
+
+   hpcviewer hpctoolkit-qs.cuda-pc.d 
+
+2. Use the bottom-up view in the profile to identify the GPU function or
 inlined function that causes the most instruction stalls. 
 
  a. What is the cause of these stalls (which stall kind)?  
@@ -26,6 +40,3 @@ inlined function that causes the most instruction stalls.
 
 4. What function causes the most GPU instruction stalls? Can you 
    envision a strategy that would reduce that?
-
-
-
