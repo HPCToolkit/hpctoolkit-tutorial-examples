@@ -1,0 +1,50 @@
+Quicksilver exercises
+
+---------------------------------------------------------------------------------------
+Using a measurement database with traces that was collected *without*
+PC sampling enabled:
+---------------------------------------------------------------------------------------
+
+1. Open the database with the kernel-level profiles and traces
+   hpcviewer hpctoolkit-arborx-md.d
+
+2. Select the trace tab "trace: ArborX_Example_MolecularDyamics.exe" that contains the
+   trace.
+
+3. Select a point in the second trace line. Notice that this trace line represents a 
+   thread in a thread pool, which doesn't do anything interesting. At any point in the
+   timeline, the thread is blocked in a system call waiting for something to do. Since 
+   this thread doesn't do anything interesting, you can hide it with the following
+   actions:
+    Open the Filter menu
+    Select Filter Execution Contexts 
+    In the "Filter" box in the dialog, type "thread 1", select "Uncheck All", select "OK"
+   
+3. Use the Filter menu to select Filter Execution Contexts. In the 
+   filtering menu, select "Uncheck all". Now, in the empty box preceded
+   by "Filter:", type "GPU" and then click "Check all". Select "OK". Now, the Trace View 
+   will show only trace lines for the GPUs. You will see that there are two separate
+   GPU streams. The first stream per rank only includes <gpu copy>> operations. The 
+   second stream includes both computation and data movement.
+   You will see that the GPU operations only occur at the very end of the timeline for
+   this short example. 
+
+
+---------------------------------------------------------------------------------------
+Using a measurement database with traces that was collected *with*
+PC sampling enabled:
+---------------------------------------------------------------------------------------
+
+1. Open the database with the GPU instruction-level measurements
+
+   hpcviewer hpctoolkit-arborx-md-pc.d
+
+2. Select the column "GINS" (GPU instructions) in the metric pane.
+
+3. Select the line marked <program root> in the navigation pane.
+
+4. Select the Flame (hot path) button to drill into the kernel where the majority of the
+   GPU instructions are being executed. Explore the code. Each call has two selections
+   available. If you select the number to the left of the ">>" icon, you will see the
+   call site for a function or inlined function. A selection to the right of ">>" shows
+   the callee. You can also select loops or source lines as you explore.
