@@ -24,10 +24,10 @@ else
   module purge
 
   # load modules needed to build and run quicksilver
-  module load Core PrgEnv-amd amd/5.7.1 rocm/5.7.1 cray-mpich cmake craype-x86-trento craype-accel-amd-gfx90a
+  module load Core/24.07 PrgEnv-amd amd/5.7.1 rocm/5.7.1 cray-mpich cmake craype-x86-trento craype-accel-amd-gfx90a
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load ums ums023 hpctoolkit"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load Core/24.07 hpctoolkit"
   $HPCTOOLKIT_MODULES_HPCTOOLKIT
 
   # compiler flags for this example
