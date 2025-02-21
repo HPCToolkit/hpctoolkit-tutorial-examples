@@ -3,7 +3,7 @@
 $HPCTOOLKIT_QS_MODULES_BUILD
 
 date
-module list
+# module list
 
 if [ -n "$CUDA_PATH" ]; then CUDA_HOME=$CUDA_PATH; fi
 if [ -z "$CUDA_HOME" ]

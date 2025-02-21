@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$READY" ]
 then
   echo
