@@ -15,24 +15,24 @@ all:
 
 build:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_BUILD)" \
-	      	bash make-scripts/check.sh make-scripts/build.sh | tee log.build$(QA_TEST_VARIANT)
+	      	sh make-scripts/check.sh make-scripts/build.sh | tee log.build$(QA_TEST_VARIANT)
 
 
 run:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN)" \
-	      	bash make-scripts/check.sh make-scripts/run_hpcrun.sh | tee log.hpcrun$(QA_TEST_VARIANT)
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun.sh | tee log.hpcrun$(QA_TEST_VARIANT)
 
 run-pc:
 	@READY=$(RDY) CMD="$(HPCTOOLKIT_QS_RUN_PC)" \
-	      	bash make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun$(QA_TEST_VARIANT)-pc
+	      	sh make-scripts/check.sh make-scripts/run_hpcrun_pc.sh | tee log.hpcrun$(QA_TEST_VARIANT)-pc
 
 view:
 	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs${QA_TEST_VARIANT}" \
-	      	bash make-scripts/check.sh make-scripts/view.sh
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 view-pc:
 	@READY=$(RDY) CMD=sh DB="hpctoolkit-qs-pc${QA_TEST_VARIANT}" \
-	      	bash make-scripts/check.sh make-scripts/view.sh
+	      	sh make-scripts/check.sh make-scripts/view.sh
 
 clean:
 	/bin/rm -rf hpctoolkit*
