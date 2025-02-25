@@ -28,12 +28,10 @@ else
   fi
 
   module load cuda/12.2.0-ayvf4gp
-
-  module use $HOME/modulefiles
-  module load hpctoolkit/2024.01
+  module load hpctoolkit/2024.01.1-cuda
 
   # modules for hpctoolkit
-  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module use $HOME/modulefiles; module load hpctoolkit/2024.01"
+  export HPCTOOLKIT_MODULES_HPCTOOLKIT="module load hpctoolkit/2024.01.1-cuda"
 
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=75
@@ -44,6 +42,7 @@ else
   export HPCTOOLKIT_QS_BUILD="bash"
   export HPCTOOLKIT_QS_LAUNCH="mpiexec "
   export HPCTOOLKIT_QS_ROOT=$PWD
+  export HPCTOOLKIT_QS_MPI_CXX=mpicxx
 
   # mark configuration for this example
   export HPCTOOLKIT_EXAMPLE=quicksilver
