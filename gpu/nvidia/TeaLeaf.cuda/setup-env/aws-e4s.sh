@@ -39,7 +39,7 @@ else
   export HPCTOOLKIT_CUDA_ARCH=75
   export HPCTOOLKIT_TEA_MODULES_BUILD="source /usr/share/modules/init/sh"
   export HPCTOOLKIT_TEA_SUBMIT="qsub -V -l nodes=2:ppn=2,walltime=10:00"
-  export HPCTOOLKIT_TEA_RUN="$HPCTOOLKIT_TEA_SUBMIT -o ../log.run.out -e ../log.run.stderr"
+  export HPCTOOLKIT_TEA_RUN="$HPCTOOLKIT_TEA_SUBMIT -o log.run.out -e log.run.stderr"
   export HPCTOOLKIT_TEA_RUN_PC="bash"
   export HPCTOOLKIT_TEA_BUILD="bash"
   export HPCTOOLKIT_TEA_LAUNCH="mpiexec "
