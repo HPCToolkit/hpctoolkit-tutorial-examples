@@ -36,7 +36,7 @@ else
   # environment settings for this example
   export HPCTOOLKIT_CUDA_ARCH=75
   export HPCTOOLKIT_QS_MODULES_BUILD="source /usr/share/modules/init/sh"
-  export HPCTOOLKIT_QS_SUBMIT="qsub -V -l nodes=2:ppn=2,walltime=5:00"
+  export HPCTOOLKIT_QS_SUBMIT="qsub -V -l naccesspolicy=singlejob -l nodes=2:ppn=2,walltime=5:00"
   export HPCTOOLKIT_QS_RUN="$HPCTOOLKIT_QS_SUBMIT -o log.run.out -e log.run.stderr"
   export HPCTOOLKIT_QS_RUN_PC="bash"
   export HPCTOOLKIT_QS_BUILD="bash"
